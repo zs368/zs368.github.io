@@ -6,10 +6,19 @@
     <description>Recent content in Posts on z</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 29 May 2020 17:38:25 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2020 18:18:42 +0800</lastBuildDate>
     
 	<atom:link href="https://zs368.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sql</title>
+      <link>https://zs368.github.io/post/sql/</link>
+      <pubDate>Fri, 29 May 2020 18:18:42 +0800</pubDate>
+      
+      <guid>https://zs368.github.io/post/sql/</guid>
+      <description>一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 +----+------+------+-----+ | id |SName |ClsNo |Score| +----+------+------+-----+ 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&amp;lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&amp;lt;2 order by a.ClsNo,a.Score desc 方法二</description>
+    </item>
     
     <item>
       <title>Git常用命令</title>
@@ -18,15 +27,6 @@
       
       <guid>https://zs368.github.io/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>Git常见命令 初始化 Git仓库，使用git init命令。 添加文件到Git仓库，分两步： 使用命令git add &amp;lt;file&amp;gt; ，注意，可反复多次使用，添加多个文件</description>
-    </item>
-    
-    <item>
-      <title>Some Content</title>
-      <link>https://zs368.github.io/post/some-content/</link>
-      <pubDate>Fri, 29 May 2020 17:08:40 +0800</pubDate>
-      
-      <guid>https://zs368.github.io/post/some-content/</guid>
-      <description></description>
     </item>
     
   </channel>

@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://zs368.github.io/" />
-<meta property="og:updated_time" content="2020-05-29T17:38:25+08:00" />
+<meta property="og:updated_time" content="2020-05-29T18:18:42+08:00" />
 <meta itemprop="name" content="z">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="z"/>
@@ -112,6 +112,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/sql/">Sql</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-29 </span>
+      <div class="post-category">
+          <a href="/categories/sql/"> sql </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 +----+------+------+-----+ | id |SName |ClsNo |Score| +----+------+------+-----+ 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&lt;2 order by a.ClsNo,a.Score desc 方法二
+    </div>
+    <div class="read-more">
+      <a href="/post/sql/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git常用命令</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-05-29 </span>
@@ -128,25 +149,6 @@
     </div>
     <div class="read-more">
       <a href="/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/some-content/">Some Content</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-05-29 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      
-    </div>
-    <div class="read-more">
-      <a href="/post/some-content/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
