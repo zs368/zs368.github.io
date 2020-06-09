@@ -3,14 +3,56 @@
   
   <url>
     <loc>https://zs368.github.io/categories/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/post/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/tp/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/post/tp5.0/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-06-09T16:47:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,27 +66,6 @@
   
   <url>
     <loc>https://zs368.github.io/tags/sql/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/categories/sql/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/tags/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/</loc>
     <lastmod>2020-05-29T18:18:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -65,13 +86,6 @@
   </url>
   
   <url>
-    <loc>https://zs368.github.io/categories/git/</loc>
-    <lastmod>2020-05-29T17:38:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://zs368.github.io/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2020-05-29T17:38:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -80,13 +94,6 @@
   
   <url>
     <loc>https://zs368.github.io/tags/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2020-05-29T17:38:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/categories/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2020-05-29T17:38:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
