@@ -49,7 +49,7 @@
 <meta itemprop="description" content="特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变">
 <meta itemprop="datePublished" content="2020-06-14T16:35:01&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-14T16:35:01&#43;08:00" />
-<meta itemprop="wordCount" content="2667">
+<meta itemprop="wordCount" content="3070">
 
 
 
@@ -125,8 +125,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 2667 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 3070 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -144,6 +144,7 @@
         <li><a href="#生成器generator">生成器(Generator)</a></li>
         <li><a href="#闭包和匿名函数">闭包和匿名函数</a></li>
         <li><a href="#selfstaticthis">self、static、$this</a></li>
+        <li><a href="#魔术方法">魔术方法</a></li>
       </ul>
     </li>
     <li><a href="#最佳实践">最佳实践</a>
@@ -330,6 +331,23 @@ foreach (makeRange(1000000) as $i) {
 <li>self 可以用于访问类的静态属性、静态方法和常量，但 self 指向的是当前定义所在的类，这是 self 的限制。</li>
 <li>$this 指向的对象所属的类和 static 指向的类相同。</li>
 <li>static 可以用于静态或非静态方法中，也可以访问类的静态属性、静态方法、常量和<strong>非静态方法</strong>，但不能访问非静态属性。</li>
+</ul>
+<h3 id="魔术方法">魔术方法</h3>
+<ul>
+<li><code>__construct()</code>，类的构造函数</li>
+<li><code>__destruct()</code>，类的析构函数</li>
+<li><code>__call()</code>，在对象中调用一个不可访问方法时调用</li>
+<li><code>__callStatic()</code>，用静态方式中调用一个不可访问方法时调用</li>
+<li><code>__get()</code>，获得一个类的成员变量时调用</li>
+<li><code>__set()</code>，设置一个类的成员变量时调用</li>
+<li><code>__isset()</code>，当对不可访问属性调用<code>isset()</code>或<code>empty()</code>时调用</li>
+<li><code>__unset()</code>，当对不可访问属性调用<code>unset()</code>时被调用。</li>
+<li><code>__sleep()</code>，执行<code>serialize()</code>时，先会调用这个函数</li>
+<li><code>__wakeup()</code>，执行<code>unserialize()</code>时，先会调用这个函数</li>
+<li><code>__toString()</code>，类被当成字符串时的回应方法</li>
+<li><code>__invoke()</code>，调用函数的方式调用一个对象时的回应方法</li>
+<li><code>__set_state()</code>，调用<code>var_export()</code>导出类时，此静态方法会被调用。</li>
+<li><code>__clone()</code>，当对象复制完成时调用</li>
 </ul>
 <h2 id="最佳实践">最佳实践</h2>
 <h3 id="composer">Composer</h3>
