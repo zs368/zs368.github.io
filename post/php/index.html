@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>PHP - OxO</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="zs" /><meta name="description" content="特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变" /><meta name="keywords" content="php" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://zs368.github.io/post/php/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="PHP" />
+<meta property="og:description" content="特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zs368.github.io/post/php/" />
+<meta property="article:published_time" content="2020-06-14T16:35:01+08:00" />
+<meta property="article:modified_time" content="2020-06-14T16:35:01+08:00" />
+<meta itemprop="name" content="PHP">
+<meta itemprop="description" content="特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变">
+<meta itemprop="datePublished" content="2020-06-14T16:35:01&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-14T16:35:01&#43;08:00" />
+<meta itemprop="wordCount" content="2667">
+
+
+
+<meta itemprop="keywords" content="php,语言," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PHP"/>
+<meta name="twitter:description" content="特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">zs368</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">zs368</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">PHP</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+            </div>
+          <span class="more-meta"> 2667 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#特性">特性</a>
+      <ul>
+        <li><a href="#面向对象内容">面向对象内容</a></li>
+        <li><a href="#命名空间">命名空间</a></li>
+        <li><a href="#抽象类接口trait">抽象类、接口、Trait</a></li>
+        <li><a href="#生成器generator">生成器(Generator)</a></li>
+        <li><a href="#闭包和匿名函数">闭包和匿名函数</a></li>
+        <li><a href="#selfstaticthis">self、static、$this</a></li>
+      </ul>
+    </li>
+    <li><a href="#最佳实践">最佳实践</a>
+      <ul>
+        <li><a href="#composer">Composer</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="特性">特性</h2>
+<h3 id="面向对象内容">面向对象内容</h3>
+<ul>
+<li><strong>类</strong> − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。</li>
+<li><strong>对象</strong> − 是类的实例。</li>
+<li><strong>成员变量</strong> − 定义在类内部的变量。该变量的值对外是不可见的，但是可以通过成员函数访问，在类被实例化为对象后，该变量即可称为对象的属性。</li>
+<li><strong>成员函数</strong> − 定义在类的内部，可用于访问对象的数据。</li>
+<li><strong>继承</strong> − 继承性是子类自动共享父类数据结构和方法的机制，这是类之间的一种关系。在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，把这个已经存在的类所定义的内容作为自己的内容，并加入若干新的内容。</li>
+<li><strong>父类</strong> − 一个类被其他类继承，可将该类称为父类，或基类，或超类。</li>
+<li><strong>子类</strong> − 一个类继承其他类称为子类，也可称为派生类。</li>
+<li><strong>多态</strong> − 多态性是指相同的函数或方法可作用于多种类型的对象上并获得不同的结果。不同的对象，收到同一消息可以产生不同的结果，这种现象称为多态性。</li>
+<li><strong>重载</strong> − 简单说，就是函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</li>
+<li><strong>抽象性</strong> − 抽象性是指将具有一致的数据结构（属性）和行为（操作）的对象抽象成类。一个类就是这样一种抽象，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</li>
+<li><strong>封装</strong> − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</li>
+<li><strong>构造函数</strong> − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</li>
+<li><strong>析构函数</strong> − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做&quot;清理善后&rdquo; 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</li>
+</ul>
+<h3 id="命名空间">命名空间</h3>
+<blockquote>
+<p>命名空间是现代PHP组件生态的基础，现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突</p>
+</blockquote>
+<h3 id="抽象类接口trait">抽象类、接口、Trait</h3>
+<ul>
+<li>
+<p>抽象类(Abstraction)</p>
+<ul>
+<li>抽象类，只能用于继承，而无法实例化对象。</li>
+<li>抽象类不一定含有抽象方法，但抽象方法一定存在于抽象类中。抽象方法在子类中必须被重写。</li>
+<li>只要方法没有用abstract声明，在其子类中就不用实现。而且在子类中该方法为公共方法。</li>
+<li>抽象是编程解决问题的基础，越复杂的问题，越需要一开始就对问题进行抽象，而不是直接写代码。</li>
+</ul>
+</li>
+<li>
+<p>接口(Interface)</p>
+<ul>
+<li>PHP 类是单继承，也就是不支持多继承，当一个类需要多个类的功能时，继承就无能为力了，为此 PHP 引入了类的接口技术</li>
+<li>接口是类的一个模板，其中的所有方法都要求是抽象方法，抽象方法在子类中必须被重写，</li>
+</ul>
+</li>
+<li>
+<p>Trait</p>
+<ul>
+<li>trait看上去更像是为了代码的复用而写的一个小插件，它类似于include，可以用use放在类中间，让trait里面定义的方法作为class的一部分，本身不能直接实例化</li>
+<li>从基类继承的成员会被 trait 插入的成员所覆盖。优先顺序是来自当前类的成员覆盖了 trait 的方法，而 trait 则覆盖了被继承的方法</li>
+</ul>
+</li>
+</ul>
+<p>区别</p>
+<ol>
+<li>对接口的使用方式是通过关键字implements来实现的，而对于抽象类的操作是使用类继承的关键字exotends实现的，使用时要特别注意。</li>
+<li>接口没有数据成员，但是抽象类有数据成员，抽象类可以实现数据的封装。</li>
+<li>接口没有构造函数，抽象类可以有构造函数。</li>
+<li><code>接口中的方法都是public类型</code>，而抽象类中的方法可以使用private、protected或public来修饰。</li>
+<li>一个类可以同时实现多个接口，但是只能实现一个抽象类。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">interface</span> <span class="nx">接口名称</span><span class="p">{</span> <span class="c1">//使用interface关键字声明接口
+</span><span class="c1"></span><span class="nx">常量成员</span> <span class="c1">//接口中的成员属性只能是常量，不能是变量
+</span><span class="c1"></span><span class="nx">抽象方法</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">();</span> <span class="c1">//接口中的所有方法必须是抽象方法(没有方法体)
+</span><span class="c1"></span><span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="生成器generator">生成器(Generator)</h3>
+<blockquote>
+<p>如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。此时我们可以使用生成器，即时计算并产出后续值，不占用宝贵的内存空间</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">//会报错，提示超出单个PHP进程内存限制
+function makeRange($length) {
+    $dataSet = [];
+    for ($i=0; $i<span class="err">&lt;</span>$length; $i++) {
+        $dataSet[] = $i;
+    }
+    return $dataSet;
+}
+foreach (makeRange(1000000) as $i) {
+    echo $i . PHP_EOL;
+}
+//使用生成器实现
+function makeRange($length) {
+    for ($i=0; $i<span class="err">&lt;</span>$length; $i++) {
+        yield $i;
+    }
+}
+foreach (makeRange(1000000) as $i) {
+    echo $i . PHP_EOL;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="闭包和匿名函数">闭包和匿名函数</h3>
+<blockquote>
+<p>闭包是指在创建时封装周围状态的函数，即使闭包所在的环境的不存在了，闭包中封装的状态依然存在。</p>
+<p>匿名函数其实就是没有名称的函数，匿名函数可以赋值给变量，还能像其他任何PHP函数对象那样传递。不过匿名函数仍然是函数，因此可以调用，还可以传入参数，适合作为函数或方法的回调。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+<span class="nv">$numberPlusOne</span> <span class="o">=</span> <span class="nx">array_map</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$number</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">},</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+
+<span class="nx">print_r</span><span class="p">(</span><span class="nv">$numberPlusOne</span><span class="p">);</span>
+<span class="c1">//手动调用闭包对象的bindTo方法或使用use关键字把父作用域的变量及状态附加到PHP闭包中。
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">forceFill</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arrtibutes</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">unguarded</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="nv">$arrtibutes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">fill</span><span class="p">(</span><span class="nv">$arrtibutes</span><span class="p">);</span>
+    <span class="p">});</span>			
+<span class="p">}</span>
+<span class="c1">//bind — 复制一个闭包，绑定指定的$this对象和类作用域。
+</span><span class="c1">//bindTo — 复制当前闭包对象，绑定指定的$this对象和类作用域。
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="selfstaticthis">self、static、$this</h3>
+<ul>
+<li><code>self</code> 和 <code>__CLASS__</code>，都是对当前类的静态引用，取决于定义当前方法所在的类。也就是说，self 写在哪个类里面， 它引用的就是谁。</li>
+<li>$this 指向的是实际调用时的对象，也就是说，实际运行过程中，谁调用了类的属性或方法，$this 指向的就是哪个对象。但 $this 不能访问类的静态属性和常量，且 $this 不能存在于静态方法中。</li>
+<li>static 关键字除了可以声明类的静态成员（属性和方法）外，还有一个非常重要的作用就是<strong>后期静态绑定</strong>，帮助实现多态。</li>
+<li>self 可以用于访问类的静态属性、静态方法和常量，但 self 指向的是当前定义所在的类，这是 self 的限制。</li>
+<li>$this 指向的对象所属的类和 static 指向的类相同。</li>
+<li>static 可以用于静态或非静态方法中，也可以访问类的静态属性、静态方法、常量和<strong>非静态方法</strong>，但不能访问非静态属性。</li>
+</ul>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="composer">Composer</h3>
+<ul>
+<li>
+<p>在项目最顶层运行命令<code>composer require ...</code></p>
+<ul>
+<li>或先在 <code>composer.json</code> 文件，指明所需要的依赖，然后再运行命令<code>composer install ...</code></li>
+</ul>
+</li>
+<li>
+<p>Composer会将依赖安装到根目录的<code>vendor</code>目录下，安装完成后，会在根目录下生成<code>composer.json</code>和<code>composer.lock</code>文件</p>
+<ul>
+<li><code>composer.lock</code>文件中会列出项目使用的所有PHP组件，以及组件的具体版本号</li>
+</ul>
+</li>
+<li>
+<p>接下来我们来编写应用代码，该文件顶部使用<code>require 'vendor/autoload.php';</code></p>
+<ul>
+<li>Composer下载各个PHP组件时，会检查每个组件的<code>composer.json</code>文件，确定如何加载该组件，然后会在本地为该组件创建一个符合PSR标准的自动加载器<code>autoload.php</code></li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/php/">php</a>
+          <a href="/tags/%E8%AF%AD%E8%A8%80/">语言</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tp6.0/">
+            <span class="next-text nav-default">Tp6.0</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/zs368/" class="iconfont icon-github" title="github"></a>
+      <a href="http://bilibili.com" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://zs368.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
