@@ -17,7 +17,7 @@
       <pubDate>Sun, 14 Jun 2020 16:35:01 +0800</pubDate>
       
       <guid>https://zs368.github.io/post/php/</guid>
-      <description>特性 面向对象内容 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 成员变量 − 定义在类内部的变量。该变</description>
+      <description>面向对象 核心概念 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 对象就是数据，对象本身不包括方法。</description>
     </item>
     
   </channel>
