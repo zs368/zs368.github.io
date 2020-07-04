@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.72.0 with theme even" />
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/" />
@@ -80,8 +80,8 @@
         <li class="mobile-menu-item">Archives</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
       </a>
   </ul>
 </nav>
@@ -100,7 +100,7 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/info/">Info</a>
       </li>
   </ul>
 </nav>
@@ -118,8 +118,8 @@
       <div class="post-category">
           <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
           </div>
-        <span class="more-meta"> 3308 words </span>
-        <span class="more-meta"> 7 mins read </span>
+        <span class="more-meta"> 4656 words </span>
+        <span class="more-meta"> 10 mins read </span>
     </div>
   </header>
   
@@ -204,20 +204,20 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/sql/">Sql</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/sql/">SQL</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-05-29 </span>
       <div class="post-category">
           <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
           </div>
-        <span class="more-meta"> 121 words </span>
-        <span class="more-meta"> 1 min read </span>
+        <span class="more-meta"> 906 words </span>
+        <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 +----+------+------+-----+ | id |SName |ClsNo |Score| +----+------+------+-----+ 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&lt;2 order by a.ClsNo,a.Score desc 方法二
+      SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中
     </div>
     <div class="read-more">
       <a href="/post/sql/" class="read-more-link">Read more...</a>
@@ -261,7 +261,6 @@
 
   <span class="copyright-year">
     &copy; 
-    2017 - 
     2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Sql - OxO</title>
+  <title>SQL - OxO</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="zs" /><meta name="description" content="一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 &#43;----&#43;------&#43;------&#43;-----&#43; | id |SName |ClsNo |Score| &#43;----&#43;------&#43;------&#43;-----&#43; 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&amp;lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&amp;lt;2 order by a.ClsNo,a.Score desc 方法二" /><meta name="keywords" content="sql" />
+<meta name="author" content="zs" /><meta name="description" content="SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中" /><meta name="keywords" content="sql" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.72.0 with theme even" />
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/sql/" />
@@ -39,23 +39,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Sql" />
-<meta property="og:description" content="一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 &#43;----&#43;------&#43;------&#43;-----&#43; | id |SName |ClsNo |Score| &#43;----&#43;------&#43;------&#43;-----&#43; 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&lt;2 order by a.ClsNo,a.Score desc 方法二" />
+<meta property="og:title" content="SQL" />
+<meta property="og:description" content="SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zs368.github.io/post/sql/" />
 <meta property="article:published_time" content="2020-05-29T18:18:42+08:00" />
 <meta property="article:modified_time" content="2020-05-29T18:18:42+08:00" />
-<meta itemprop="name" content="Sql">
-<meta itemprop="description" content="一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 &#43;----&#43;------&#43;------&#43;-----&#43; | id |SName |ClsNo |Score| &#43;----&#43;------&#43;------&#43;-----&#43; 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&lt;2 order by a.ClsNo,a.Score desc 方法二">
+<meta itemprop="name" content="SQL">
+<meta itemprop="description" content="SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中">
 <meta itemprop="datePublished" content="2020-05-29T18:18:42&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-29T18:18:42&#43;08:00" />
-<meta itemprop="wordCount" content="121">
+<meta itemprop="wordCount" content="906">
 
 
 
 <meta itemprop="keywords" content="sql,技巧," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Sql"/>
-<meta name="twitter:description" content="一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 &#43;----&#43;------&#43;------&#43;-----&#43; | id |SName |ClsNo |Score| &#43;----&#43;------&#43;------&#43;-----&#43; 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&lt;2 order by a.ClsNo,a.Score desc 方法二"/>
+<meta name="twitter:title" content="SQL"/>
+<meta name="twitter:description" content="SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -86,8 +86,8 @@
         <li class="mobile-menu-item">Archives</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
       </a>
   </ul>
 </nav>
@@ -106,7 +106,7 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/info/">Info</a>
       </li>
   </ul>
 </nav>
@@ -118,15 +118,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Sql</h1>
+      <h1 class="post-title">SQL</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-05-29 </span>
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 121 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 906 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -136,9 +136,20 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#sql基础">SQL基础</a>
       <ul>
-        <li><a href="#一些小技巧">一些小技巧</a></li>
+        <li><a href="#join连接">Join连接</a></li>
+      </ul>
+    </li>
+    <li><a href="#sql高级">SQL高级</a>
+      <ul>
+        <li><a href="#锁">锁</a></li>
+        <li><a href="#事务">事务</a></li>
+      </ul>
+    </li>
+    <li><a href="#小技巧">小技巧</a>
+      <ul>
+        <li><a href="#分组取前n条记录">分组取前N条记录</a></li>
       </ul>
     </li>
   </ul>
@@ -146,8 +157,89 @@
   </div>
 </div>
     <div class="post-content">
-      <h3 id="一些小技巧">一些小技巧</h3>
-<h4 id="分组取前n条记录">分组取前N条记录</h4>
+      <h2 id="sql基础">SQL基础</h2>
+<h3 id="join连接">Join连接</h3>
+<ul>
+<li><strong>INNER JOIN</strong>：如果表中有至少一个匹配，则返回行</li>
+<li><strong>LEFT JOIN</strong>：即使右表中没有匹配，也从左表返回所有的行</li>
+<li><strong>RIGHT JOIN</strong>：即使左表中没有匹配，也从右表返回所有的行</li>
+<li><strong>FULL JOIN</strong>：只要其中一个表中存在匹配，则返回行</li>
+<li><strong>SELF JOIN</strong>：用于将表连接到自己，就好像该表是两个表一样，临时重命名了SQL语句中的至少一个表</li>
+<li><strong>CARTESIAN JOIN</strong>：从两个或多个连接表返回记录集的笛卡儿积</li>
+</ul>
+<h2 id="sql高级">SQL高级</h2>
+<h3 id="锁">锁</h3>
+<ul>
+<li>悲观锁 – 当事务A对某行数据加了锁，只有当事务A把锁释放后，其它事务才能执行与该锁冲突的操作。</li>
+<li>乐观锁 – 假设多用户并发的事务在处理时互不影响，各事务能在不产生锁的情况下进行处理各自影响的那部分数据，在提交数据更新前检查该事务读取数据后其它事务有没有修改数据，如果有，当前事务进行回滚。</li>
+</ul>
+<p><img src="/img/InnoDB%E9%94%81%E7%B1%BB%E5%9E%8B.png" alt="这里写图片描述"></p>
+<h3 id="事务">事务</h3>
+<blockquote>
+<p>原子性是基础，隔离性是手段，一致性和持久性是目标。</p>
+</blockquote>
+<ul>
+<li>Atomic（原子性）– 事务中的操作被视为一个逻辑单元，要么全部成功，要么全部失败。</li>
+<li>Consistency（一致性）– 只有合法的数据可以被写入数据库，否则事务应该将其回滚到最初状态。</li>
+<li>Isolation（隔离性）– 事务允许多个用户对同一个数据进行并发访问，而不破坏数据的正确性和完整性。同时，并行事务的修改必须与其他的并行事务的修改相互独立。</li>
+<li>Durability（持久性）– 事务完成后之，它对数据库的影响是永久的。即使出现致命的系统故障也将一直保存。</li>
+</ul>
+<p>隔离级别由低到高：Read Uncommitted &lt; Read Committed &lt; Repeatable Read &lt; Serializable</p>
+<ul>
+<li>脏读 – 事务A读取了事务B未提交的数据，并在这个数据基础上又做了其他操作。
+<ul>
+<li>一般是事务未隔离造成的</li>
+</ul>
+</li>
+<li>不可重复读 – 事务A读取了事务B已提交的更改数据。
+<ul>
+<li>重复读取的数据不一样</li>
+</ul>
+</li>
+<li>幻读 – 事务A读取了事务B已提交的新增数据。
+<ul>
+<li>重复读取的数据不一样，可能读取了其他事务的新增数据。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>事务隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ_UNCOMMITTED</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>READ_COMMITED</td>
+<td>禁止</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>REPEATABLE_READ（默认）</td>
+<td>禁止</td>
+<td>禁止</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>禁止</td>
+<td>禁止</td>
+<td>禁止</td>
+</tr>
+</tbody>
+</table>
+<h2 id="小技巧">小技巧</h2>
+<h3 id="分组取前n条记录">分组取前N条记录</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -172,26 +264,26 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">+----+------+------+-----+
-| id |SName |ClsNo |Score|
-+----+------+------+-----+
-方法一：
-select a.id,a.SName,a.ClsNo,a.Score
-from Table1 a left join Table1 b on a.ClsNo=b.ClsNo 
-and a.Score&lt;b.Score
-group by a.id,a.SName,a.ClsNo,a.Score 
-having count (b.id)&lt;2
-order by a.ClsNo,a.Score desc
-方法二：
-select *
-from Table1 a
-where (select count (*) from Table1 b where b.ClsNo=a.ClsNo and b.Score&gt;a.Score)&lt;2
-order by a.ClsNo,a.Score desc
-方法三：
-select *
-from Table1 a
-where id in (select  id from Table1 b where b.ClsNo=a.ClsNo order by b.Score desc limit 2 )
-order by a.ClsNo,a.Score desc
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">+</span><span class="c1">----+------+------+-----+
+</span><span class="c1"></span><span class="o">|</span> <span class="n">id</span> <span class="o">|</span><span class="n">SName</span> <span class="o">|</span><span class="n">ClsNo</span> <span class="o">|</span><span class="n">Score</span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+------+-----+
+</span><span class="c1"></span><span class="err">方法一：</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">SName</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span>
+<span class="k">from</span> <span class="n">Table1</span> <span class="n">a</span> <span class="k">left</span> <span class="k">join</span> <span class="n">Table1</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">ClsNo</span> 
+<span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">Score</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">Score</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">SName</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span> 
+<span class="k">having</span> <span class="k">count</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span> <span class="k">desc</span>
+<span class="err">方法二：</span>
+<span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">Table1</span> <span class="n">a</span>
+<span class="k">where</span> <span class="p">(</span><span class="k">select</span> <span class="k">count</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">Table1</span> <span class="n">b</span> <span class="k">where</span> <span class="n">b</span><span class="p">.</span><span class="n">ClsNo</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">Score</span><span class="o">&gt;</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span> <span class="k">desc</span>
+<span class="err">方法三：</span>
+<span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">Table1</span> <span class="n">a</span>
+<span class="k">where</span> <span class="n">id</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span>  <span class="n">id</span> <span class="k">from</span> <span class="n">Table1</span> <span class="n">b</span> <span class="k">where</span> <span class="n">b</span><span class="p">.</span><span class="n">ClsNo</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span> <span class="k">order</span> <span class="k">by</span> <span class="n">b</span><span class="p">.</span><span class="n">Score</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">2</span> <span class="p">)</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">ClsNo</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span> <span class="k">desc</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -244,7 +336,6 @@ order by a.ClsNo,a.Score desc
 
   <span class="copyright-year">
     &copy; 
-    2017 - 
     2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>

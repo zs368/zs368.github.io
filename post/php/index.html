@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.72.0 with theme even" />
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/php/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="面向对象 核心概念 类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。 对象 − 是类的实例。 对象就是数据，对象本身不包括方法。">
 <meta itemprop="datePublished" content="2020-06-14T16:35:01&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-14T16:35:01&#43;08:00" />
-<meta itemprop="wordCount" content="3308">
+<meta itemprop="wordCount" content="4656">
 
 
 
@@ -86,8 +86,8 @@
         <li class="mobile-menu-item">Archives</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
       </a>
   </ul>
 </nav>
@@ -106,7 +106,7 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/info/">Info</a>
       </li>
   </ul>
 </nav>
@@ -125,8 +125,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 3308 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 4656 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -142,18 +142,21 @@
         <li><a href="#设计原则">设计原则</a></li>
       </ul>
     </li>
-    <li><a href="#特性">特性</a>
+    <li><a href="#特性实践">特性、实践</a>
       <ul>
-        <li><a href="#抽象类接口trait">抽象类、接口、Trait</a></li>
-        <li><a href="#生成器generator">生成器(Generator)</a></li>
-        <li><a href="#闭包和匿名函数">闭包和匿名函数</a></li>
         <li><a href="#selfstaticthis">self、static、$this</a></li>
         <li><a href="#魔术方法">魔术方法</a></li>
+        <li><a href="#闭包和匿名函数">闭包和匿名函数</a></li>
+        <li><a href="#流stream">流（Stream）</a></li>
+        <li><a href="#生成器generator">生成器（Generator）</a></li>
+        <li><a href="#抽象类接口trait">抽象类、接口、Trait</a></li>
       </ul>
     </li>
-    <li><a href="#最佳实践">最佳实践</a>
+    <li><a href="#常用工具">常用工具</a>
       <ul>
-        <li><a href="#composer">Composer</a></li>
+        <li><a href="#composer">composer</a></li>
+        <li><a href="#swoole">swoole</a></li>
+        <li><a href="#redis">redis</a></li>
       </ul>
     </li>
   </ul>
@@ -195,19 +198,370 @@
 </ul>
 <h3 id="设计原则">设计原则</h3>
 <ul>
-<li><strong>单一职责原则</strong>（SRP）
+<li><strong>单一职责原则</strong>（Single Pesponsibilility Principle,SRP）
 <ul>
 <li>避免相同的职责分配到不同的类中</li>
 <li>避免一个类承担太多指责</li>
 </ul>
 </li>
-<li><strong>接口隔离原则</strong></li>
-<li><strong>开放 − 封闭原则</strong></li>
-<li><strong>替换原则</strong></li>
-<li><strong>依赖倒置原则</strong></li>
+<li><strong>接口隔离原则</strong>（Interface Segregation Principle,ISP）
+<ul>
+<li>一个类对另一个类的依赖性应当是建立在最小的接口上的</li>
+<li>客户端程序不应该依赖它不需要的接口方法</li>
 </ul>
-<h2 id="特性">特性</h2>
-<h3 id="抽象类接口trait">抽象类、接口、Trait</h3>
+</li>
+<li><strong>开放 − 封闭原则</strong>（Open–Close Principle,OCP）
+<ul>
+<li>Open – 模块的行为必须是开放的、支持扩展的，而不是僵化的</li>
+<li>Closed – 在对模块的功能进行扩展时，不应该影响或者大规模影响已有的程序模块</li>
+</ul>
+</li>
+<li><strong>替换原则</strong>（Liskov Substitution Priciple,LSP）
+<ul>
+<li>子类型必须能够替换掉他们的父类型、并出现在父类能够出现的任何地方</li>
+</ul>
+</li>
+<li><strong>依赖倒置原则</strong>（Dependence Inversion Principle,DIP）
+<ul>
+<li>上册模块不应该依赖于下层模块，它们共同依赖于一个抽象（父类不能依赖于子类，它们都要依赖与抽象类）</li>
+<li>抽象不能依赖于具体，具体应该依赖于抽象。</li>
+</ul>
+</li>
+</ul>
+<h2 id="特性实践">特性、实践</h2>
+<h3 id="selfstaticthis">self、static、$this</h3>
+<ul>
+<li>
+<p>self 可以用于静态或非静态方法中，也可以用于访问类的静态属性、静态方法和常量。<code>self</code>只能引用当前类中的方法，就是说在子类中还是会调用父类的方法。</p>
+</li>
+<li>
+<p>static 可以用于静态或非静态方法中，也可以访问类的静态属性、静态方法、常量和<strong>非静态方法</strong>，但不能访问非静态属性。<code>static</code>关键字允许函数能够在运行时动态绑定类中的方法（<strong>后期静态绑定</strong>），帮助实现多态。</p>
+</li>
+<li>
+<p>this  <strong>不能</strong>存在于静态方法中，<strong>不能</strong>访问类的静态属性和常量。指向的是实际调用时的对象，也就是说，实际运行过程中，谁调用了类的属性或方法，$this 指向的就是哪个对象。</p>
+</li>
+</ul>
+<p>个人认为静态方法本质上是面向对象过程中对面向过程编程的一种妥协，不具真正的面向对象思想。</p>
+<h3 id="魔术方法">魔术方法</h3>
+<ul>
+<li><code>__construct()</code>，类的构造函数——在每次创建新对象时先调用此方法</li>
+<li><code>__destruct()</code>，类的析构函数——在到某个对象的所有引用都被删除或者当对象被显式销毁时执行</li>
+<li><code>__call()</code>，在对象中调用一个不可访问方法时调用</li>
+<li><code>__callStatic()</code>，用静态方式中调用一个不可访问方法时调用</li>
+<li><code>__get()</code>，获得一个类的成员变量时调用</li>
+<li><code>__set()</code>，设置一个类的成员变量时调用</li>
+<li><code>__isset()</code>，当对不可访问属性调用<code>isset()</code>或<code>empty()</code>时调用</li>
+<li><code>__unset()</code>，当对不可访问属性调用<code>unset()</code>时被调用。</li>
+<li><code>__sleep()</code>，执行<code>serialize()</code>时，先会调用这个函数</li>
+<li><code>__wakeup()</code>，执行<code>unserialize()</code>时，先会调用这个函数</li>
+<li><code>__toString()</code>，类被当成字符串时的回应方法， <code>echo</code>时调用</li>
+<li><code>__debugInfo</code>，用在<code>var_dump()</code>和<code>print_r()</code>时控制输出的值</li>
+<li><code>__invoke()</code>，调用函数的方式调用一个对象时的回应方法</li>
+<li><code>__set_state()</code>，调用<code>var_export()</code>导出类时，此静态方法会被调用。</li>
+<li><code>__clone()</code>，当对象复制完成时调用</li>
+</ul>
+<h3 id="闭包和匿名函数">闭包和匿名函数</h3>
+<blockquote>
+<p>闭包是指在创建时封装周围状态的函数，即使闭包所在的环境的不存在了，闭包中封装的状态依然存在。</p>
+<p>匿名函数其实就是没有名称的函数，匿名函数可以赋值给变量，还能像其他任何PHP函数对象那样传递。不过匿名函数仍然是函数，因此可以调用，还可以传入参数，适合作为函数或方法的回调。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+<span class="c1">//使用use关键字把父作用域的变量及状态附加到PHP闭包中。
+</span><span class="c1"></span><span class="nv">$id</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">];</span>
+<span class="nx">UserBankCard</span><span class="o">::</span><span class="na">destroy</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;=&#39;</span><span class="p">,</span><span class="nv">$id</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">//bindTo — 复制当前闭包对象，绑定指定的$this对象和类作用域。
+</span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">App</span>
+<span class="p">{</span>
+  <span class="k">protected</span> <span class="nv">$routes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+  <span class="k">protected</span> <span class="nv">$responseBody</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">addRoute</span><span class="p">(</span><span class="nv">$routePath</span><span class="p">,</span><span class="nv">$routeCallback</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">routes</span><span class="p">[</span><span class="nv">$roitePath</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$routeCallback</span><span class="o">-&gt;</span><span class="na">bindTo</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span><span class="no">__CLASS__</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+  <span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">App</span><span class="p">();</span>
+	<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoute</span><span class="p">(</span><span class="s1">&#39;/users/josh&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">responseBody</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="c1">//把路由回调绑定到了当前的App实例上，就能在回调函数中处理App实例的状态。
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="流stream">流（Stream）</h3>
+<blockquote>
+<p>流的作用是提供统一的公共函数来处理文件、网络和数据压缩等操作。简单而言，流是具有流式行为的资源对象，也就是说，流可以线性读写，并且可以通过 fseek() 之类的函数定位到流中的任何位置。</p>
+</blockquote>
+<ul>
+<li>http://流封装协议
+<ul>
+<li>file_get_contents( &lsquo;<a href="http://api.flickr.com/services/feeds/photos_public.gne?format=json'">http://api.flickr.com/services/feeds/photos_public.gne?format=json'</a>)</li>
+</ul>
+</li>
+<li>file://流封装协议
+<ul>
+<li>fopen(&lsquo;file:///etc/hosts&rsquo;, &lsquo;rb&rsquo;)</li>
+</ul>
+</li>
+<li>php://流封装协议
+<ul>
+<li><code>php://stdin</code>：这是个只读 PHP 流，其中的数据来自标准输入。PHP 脚本可以使用这个流接收命令行传入脚本的信息；</li>
+<li><code>php://stdout</code>：把数据写入当前的输出缓冲区，这个流只能写，无法读或寻址；</li>
+<li><code>php://memory</code>：从系统内存中读取数据，或者把数据写入系统内存。缺点是系统内存有限，所有使用 <code>php://temp</code> 更安全；</li>
+<li><code>php://temp</code>：和 <code>php://memory</code> 类似，不过，没有可用内存时，PHP 会把数据写入这个临时文件。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//在日志中统计过去三十天访问某个站点的访问数据
+</span><span class="c1"></span><span class="nv">$dateStart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">();</span>
+<span class="nv">$dateInterval</span> <span class="o">=</span> <span class="nx">\DateInterval</span><span class="o">::</span><span class="na">createFromDateString</span><span class="p">(</span><span class="s1">&#39;-1 day&#39;</span><span class="p">);</span>
+<span class="nv">$datePeriod</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DatePeriod</span><span class="p">(</span><span class="nv">$dateStart</span><span class="p">,</span> <span class="nv">$dateInterval</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$datePeriod</span> <span class="k">as</span> <span class="nv">$date</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$file</span> <span class="o">=</span> <span class="s1">&#39;sftp://USER:PASS@rsync.net/&#39;</span> <span class="o">.</span> <span class="nv">$date</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;.log.bz2&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">file_exists</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$handle</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">);</span>
+        <span class="nx">stream_filter_append</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="s1">&#39;bzip2.decompress&#39;</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">feof</span><span class="p">(</span><span class="nv">$handle</span><span class="p">)</span> <span class="o">!==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$line</span> <span class="o">=</span> <span class="nx">fgets</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">strpos</span><span class="p">(</span><span class="nv">$line</span><span class="p">,</span> <span class="s1">&#39;www.example.com&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="nv">$line</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">fclose</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//自定义一个流过滤器 DirtyWordsFilter，把流数据读入内存时审查其中的脏字
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">DirtyWordsFilter</span> <span class="k">extends</span> <span class="k">php_user_filter</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * @param resource $in 流入的桶队列
+</span><span class="sd">     * @param resource $out 流出的桶队列
+</span><span class="sd">     * @param int $consumed 处理的字节数
+</span><span class="sd">     * @param bool $closing 是否是流中最后一个桶队列
+</span><span class="sd">     * @return int
+</span><span class="sd">     * 接收、处理再转运桶中的流数据，在该方法中，我们迭代桶队列对象，把脏字替换成审查后的值
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">filter</span><span class="p">(</span><span class="nv">$in</span><span class="p">,</span> <span class="nv">$out</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$consumed</span><span class="p">,</span> <span class="nv">$closing</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grime&#39;</span><span class="p">,</span> <span class="s1">&#39;dirt&#39;</span><span class="p">,</span> <span class="s1">&#39;fuck&#39;</span><span class="p">];</span>
+        <span class="nv">$wordData</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$words</span> <span class="k">as</span> <span class="nv">$word</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$replacement</span> <span class="o">=</span> <span class="nx">array_fill</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">mb_strlen</span><span class="p">(</span><span class="nv">$word</span><span class="p">),</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
+            <span class="nv">$wordData</span><span class="p">[</span><span class="nv">$word</span><span class="p">]</span> <span class="o">=</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$replacement</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$bad</span> <span class="o">=</span> <span class="nx">array_keys</span><span class="p">(</span><span class="nv">$wordData</span><span class="p">);</span>
+        <span class="nv">$good</span> <span class="o">=</span> <span class="nx">array_values</span><span class="p">(</span><span class="nv">$wordData</span><span class="p">);</span>
+
+        <span class="c1">// 迭代桶队列中的每个桶
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="nv">$bucket</span> <span class="o">=</span> <span class="nx">stream_bucket_make_writeable</span><span class="p">(</span><span class="nv">$in</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// 审查桶对象中的脏字
+</span><span class="c1"></span>            <span class="nv">$bucket</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="nv">$bad</span><span class="p">,</span> <span class="nv">$good</span><span class="p">,</span> <span class="nv">$bucket</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+            <span class="c1">// 增加已处理的数据量
+</span><span class="c1"></span>            <span class="nv">$consumed</span> <span class="o">+=</span> <span class="nv">$bucket</span><span class="o">-&gt;</span><span class="na">datalen</span><span class="p">;</span>
+            <span class="c1">// 把桶放入流向下游的队列中
+</span><span class="c1"></span>            <span class="nx">stream_bucket_append</span><span class="p">(</span><span class="nv">$out</span><span class="p">,</span> <span class="nv">$bucket</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">PSFS_PASS_ON</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="c1">//然后，必须使用 stream_filter_register() 函数注册这个自定义的 DirtyWordsFilter 流过滤器
+</span><span class="c1"></span><span class="nx">stream_filter_register</span><span class="p">(</span><span class="s1">&#39;dirty_words_filter&#39;</span><span class="p">,</span> <span class="s1">&#39;DirtyWordsFilter&#39;</span><span class="p">);</span>
+<span class="c1">//使用这个自定义的流过滤器
+</span><span class="c1"></span><span class="nv">$handle</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s1">&#39;fuck!.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">);</span>
+<span class="nx">stream_filter_append</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="s1">&#39;dirty_words_filter&#39;</span><span class="p">);</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">feof</span><span class="p">(</span><span class="nv">$handle</span><span class="p">)</span> <span class="o">!==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nx">fgets</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">fclose</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="生成器generator">生成器（Generator）</h3>
+<blockquote>
+<p>如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。此时我们可以使用生成器，即时计算并产出后续值，不占用宝贵的内存空间</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//使用生成器实现
+</span><span class="c1"></span><span class="k">function</span> <span class="nf">makeRange</span><span class="p">(</span><span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$length</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">yield</span> <span class="nv">$i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nx">makeRange</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$i</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="c1">//导入百万行级别的数据到Excel
+</span><span class="c1"></span><span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">query_use_result</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$sql</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">foreach</span> <span class="p">(</span><span class="nx">Db</span><span class="o">::</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$row</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">yield</span> <span class="nv">$row</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nf">output2excel</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$sql</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nv">$filename</span> <span class="o">=</span> <span class="s2">&#34;订单详情&#34;</span><span class="p">;</span><span class="c1">//文件名
+</span><span class="c1"></span>  <span class="nx">set_time_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c1">//不限制超时时间
+</span><span class="c1"></span>  <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/vnd.ms-excel;charset=utf-8&#39;</span><span class="p">);</span>
+  <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition: attachment;filename=&#34;&#39;</span> <span class="o">.</span><span class="nv">$filename</span><span class="o">.</span> <span class="s1">&#39;.csv&#34;&#39;</span><span class="p">);</span>
+  <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Cache-Control: max-age=0&#39;</span><span class="p">);</span>
+  <span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s1">&#39;php://output&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">);</span>
+  <span class="nx">fprintf</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span> <span class="nx">chr</span><span class="p">(</span><span class="mh">0xEF</span><span class="p">)</span><span class="o">.</span><span class="nx">chr</span><span class="p">(</span><span class="mh">0xBB</span><span class="p">)</span><span class="o">.</span><span class="nx">chr</span><span class="p">(</span><span class="mh">0xBF</span><span class="p">));</span>
+  <span class="k">foreach</span> <span class="p">(</span> <span class="k">static</span><span class="o">::</span><span class="na">query_use_result</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$row</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">fputcsv</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span> <span class="nv">$row</span><span class="p">);</span><span class="c1">//逐行写入csv文件
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span><span class="c1">//关闭文件
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="抽象类接口trait">抽象类、接口、Trait</h3>
 <ul>
 <li>
 <p>抽象类(Abstraction)</p>
@@ -260,10 +614,25 @@
 <span class="cp">?&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="生成器generator">生成器(Generator)</h3>
+</div><h2 id="常用工具">常用工具</h2>
+<h3 id="composer">composer</h3>
+<h4 id="composerjson">composer.json</h4>
 <blockquote>
-<p>如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。此时我们可以使用生成器，即时计算并产出后续值，不占用宝贵的内存空间</p>
+<p>Composer会使用这个文件中的信息查找、安装和自动加载PHP组件。</p>
 </blockquote>
+<ul>
+<li>name：组件的厂商名和包名</li>
+<li>description：简要说明组件</li>
+<li>keywords：几个描述组件的关键字</li>
+<li>homepage：组件网站的URL</li>
+<li>license：组件所采取的软件许可证</li>
+<li>authors：这是一个数组，包含每个作者的信息。</li>
+<li>support：组件的用户获取支持的方式</li>
+<li>require：列出组件自身所依赖的组件。还可以列出组件所依赖的最低PHP版本。</li>
+<li>require–dev：和require属性类似，不过列出的是<em><strong>开发</strong></em>这个组件所需的依赖。</li>
+<li>suggest：和require属性类似，不过只是建议安装的组件，以防与其他组合合作时需要。</li>
+<li>autoload：告诉Composer的自动加载器如何自动加载这个组件。在PSR–4属性中，我们要把组件的命名空间前缀与相对组件根目录的文件系统路径对应起来（命名空间要以两个反斜线结尾）。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -287,126 +656,45 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
-<span class="c1">//会报错，提示超出单个PHP进程内存限制
-</span><span class="c1"></span><span class="k">function</span> <span class="nf">makeRange</span><span class="p">(</span><span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$dataSet</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$length</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$dataSet</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$i</span><span class="p">;</span>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;qiniu/php-sdk&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;library&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Qiniu Resource (Cloud) Storage SDK for PHP&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;keywords&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;qiniu&#34;</span><span class="p">,</span> <span class="s2">&#34;storage&#34;</span><span class="p">,</span> <span class="s2">&#34;sdk&#34;</span><span class="p">,</span> <span class="s2">&#34;cloud&#34;</span><span class="p">],</span>
+    <span class="nt">&#34;homepage&#34;</span><span class="p">:</span> <span class="s2">&#34;http://developer.qiniu.com/&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;license&#34;</span><span class="p">:</span> <span class="s2">&#34;MIT&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;authors&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Qiniu&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;sdk@qiniu.com&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;homepage&#34;</span><span class="p">:</span> <span class="s2">&#34;http://www.qiniu.com&#34;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&#34;require&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;&gt;=5.3.3&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;require-dev&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;phpunit/phpunit&#34;</span><span class="p">:</span> <span class="s2">&#34;~4.0&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;squizlabs/php_codesniffer&#34;</span><span class="p">:</span> <span class="s2">&#34;~2.3&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;autoload&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;psr-4&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;Qiniu\\&#34;</span><span class="p">:</span> <span class="s2">&#34;src/Qiniu&#34;</span><span class="p">},</span>
+        <span class="nt">&#34;files&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;src/Qiniu/functions.php&#34;</span><span class="p">]</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nv">$dataSet</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="k">foreach</span> <span class="p">(</span><span class="nx">makeRange</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$i</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c1">//使用生成器实现
-</span><span class="c1"></span><span class="k">function</span> <span class="nf">makeRange</span><span class="p">(</span><span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$length</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">yield</span> <span class="nv">$i</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="k">foreach</span> <span class="p">(</span><span class="nx">makeRange</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$i</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
-<span class="p">}</span>
+
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="闭包和匿名函数">闭包和匿名函数</h3>
-<blockquote>
-<p>闭包是指在创建时封装周围状态的函数，即使闭包所在的环境的不存在了，闭包中封装的状态依然存在。</p>
-<p>匿名函数其实就是没有名称的函数，匿名函数可以赋值给变量，还能像其他任何PHP函数对象那样传递。不过匿名函数仍然是函数，因此可以调用，还可以传入参数，适合作为函数或方法的回调。</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
-<span class="nv">$numberPlusOne</span> <span class="o">=</span> <span class="nx">array_map</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$number</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$number</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">},</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
-
-<span class="nx">print_r</span><span class="p">(</span><span class="nv">$numberPlusOne</span><span class="p">);</span>
-<span class="c1">//手动调用闭包对象的bindTo方法或使用use关键字把父作用域的变量及状态附加到PHP闭包中。
-</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">forceFill</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arrtibutes</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">unguarded</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="nv">$arrtibutes</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">fill</span><span class="p">(</span><span class="nv">$arrtibutes</span><span class="p">);</span>
-    <span class="p">});</span>			
-<span class="p">}</span>
-<span class="c1">//bind — 复制一个闭包，绑定指定的$this对象和类作用域。
-</span><span class="c1">//bindTo — 复制当前闭包对象，绑定指定的$this对象和类作用域。
-</span></code></pre></td></tr></table>
-</div>
-</div><h3 id="selfstaticthis">self、static、$this</h3>
-<ul>
-<li><code>self</code> 和 <code>__CLASS__</code>，都是对当前类的静态引用，取决于定义当前方法所在的类。也就是说，self 写在哪个类里面， 它引用的就是谁。</li>
-<li>$this 指向的是实际调用时的对象，也就是说，实际运行过程中，谁调用了类的属性或方法，$this 指向的就是哪个对象。但 $this 不能访问类的静态属性和常量，且 $this 不能存在于静态方法中。</li>
-<li>static 关键字除了可以声明类的静态成员（属性和方法）外，还有一个非常重要的作用就是<strong>后期静态绑定</strong>，帮助实现多态。</li>
-<li>self 可以用于访问类的静态属性、静态方法和常量，但 self 指向的是当前定义所在的类，这是 self 的限制。</li>
-<li>$this 指向的对象所属的类和 static 指向的类相同。</li>
-<li>static 可以用于静态或非静态方法中，也可以访问类的静态属性、静态方法、常量和<strong>非静态方法</strong>，但不能访问非静态属性。</li>
-</ul>
-<h3 id="魔术方法">魔术方法</h3>
-<ul>
-<li><code>__construct()</code>，类的构造函数——在每次创建新对象时先调用此方法</li>
-<li><code>__destruct()</code>，类的析构函数——在到某个对象的所有引用都被删除或者当对象被显式销毁时执行</li>
-<li><code>__call()</code>，在对象中调用一个不可访问方法时调用</li>
-<li><code>__callStatic()</code>，用静态方式中调用一个不可访问方法时调用</li>
-<li><code>__get()</code>，获得一个类的成员变量时调用</li>
-<li><code>__set()</code>，设置一个类的成员变量时调用</li>
-<li><code>__isset()</code>，当对不可访问属性调用<code>isset()</code>或<code>empty()</code>时调用</li>
-<li><code>__unset()</code>，当对不可访问属性调用<code>unset()</code>时被调用。</li>
-<li><code>__sleep()</code>，执行<code>serialize()</code>时，先会调用这个函数</li>
-<li><code>__wakeup()</code>，执行<code>unserialize()</code>时，先会调用这个函数</li>
-<li><code>__toString()</code>，类被当成字符串时的回应方法， <code>echo</code>时调用</li>
-<li><code>__debugInfo</code>，用在<code>var_dump()</code>和<code>print_r()</code>时控制输出的值</li>
-<li><code>__invoke()</code>，调用函数的方式调用一个对象时的回应方法</li>
-<li><code>__set_state()</code>，调用<code>var_export()</code>导出类时，此静态方法会被调用。</li>
-<li><code>__clone()</code>，当对象复制完成时调用</li>
-</ul>
-<h2 id="最佳实践">最佳实践</h2>
-<h3 id="composer">Composer</h3>
-<ul>
-<li>
-<p>在项目最顶层运行命令<code>composer require ...</code></p>
-<ul>
-<li>或先在 <code>composer.json</code> 文件，指明所需要的依赖，然后再运行命令<code>composer install ...</code></li>
-</ul>
-</li>
-<li>
-<p>Composer会将依赖安装到根目录的<code>vendor</code>目录下，安装完成后，会在根目录下生成<code>composer.json</code>和<code>composer.lock</code>文件</p>
-<ul>
-<li><code>composer.lock</code>文件中会列出项目使用的所有PHP组件，以及组件的具体版本号</li>
-</ul>
-</li>
-<li>
-<p>接下来我们来编写应用代码，该文件顶部使用<code>require 'vendor/autoload.php';</code></p>
-<ul>
-<li>Composer下载各个PHP组件时，会检查每个组件的<code>composer.json</code>文件，确定如何加载该组件，然后会在本地为该组件创建一个符合PSR标准的自动加载器<code>autoload.php</code></li>
-</ul>
-</li>
-<li>
-<p>构建自己的组件：https://xueyuanjun.com/post/4545</p>
-</li>
-</ul>
+</div><h3 id="swoole">swoole</h3>
+<h3 id="redis">redis</h3>
 
     </div>
 
@@ -453,7 +741,6 @@
 
   <span class="copyright-year">
     &copy; 
-    2017 - 
     2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>

@@ -48,12 +48,12 @@
     </item>
     
     <item>
-      <title>Sql</title>
+      <title>SQL</title>
       <link>https://zs368.github.io/post/sql/</link>
       <pubDate>Fri, 29 May 2020 18:18:42 +0800</pubDate>
       
       <guid>https://zs368.github.io/post/sql/</guid>
-      <description>一些小技巧 分组取前N条记录 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 +----+------+------+-----+ | id |SName |ClsNo |Score| +----+------+------+-----+ 方法一： select a.id,a.SName,a.ClsNo,a.Score from Table1 a left join Table1 b on a.ClsNo=b.ClsNo and a.Score&amp;lt;b.Score group by a.id,a.SName,a.ClsNo,a.Score having count (b.id)&amp;lt;2 order by a.ClsNo,a.Score desc 方法二</description>
+      <description>SQL基础 Join连接 INNER JOIN：如果表中有至少一个匹配，则返回行 LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行 RIGHT JOIN：即使左表中</description>
     </item>
     
     <item>
