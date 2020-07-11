@@ -3,48 +3,62 @@
   
   <url>
     <loc>https://zs368.github.io/categories/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/post/php/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/tags/php/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/post/php%E5%87%BD%E6%95%B0%E5%8F%82%E8%80%83/</loc>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/post/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/tags/</loc>
-    <lastmod>2020-06-14T16:35:01+08:00</lastmod>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-07-11T12:12:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/post/php/</loc>
     <lastmod>2020-06-14T16:35:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
