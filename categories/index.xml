@@ -6,10 +6,19 @@
     <description>Recent content in Categories on OxO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 18 Jul 2020 10:31:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2020 14:38:19 +0800</lastBuildDate>
     
 	<atom:link href="https://zs368.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>编程</title>
+      <link>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 20 Jul 2020 14:38:19 +0800</pubDate>
+      
+      <guid>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>php</title>
@@ -26,15 +35,6 @@
       <pubDate>Sat, 18 Jul 2020 10:31:09 +0800</pubDate>
       
       <guid>https://zs368.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>编程</title>
-      <link>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Tue, 14 Jul 2020 14:40:33 +0800</pubDate>
-      
-      <guid>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
