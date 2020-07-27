@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tp6.0源码分析_c - OxO</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="zs" /><meta name="description" content="" /><meta name="keywords" content="tp" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_c/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Tp6.0源码分析_c" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_c/" />
+<meta property="article:published_time" content="2020-07-27T10:40:21+08:00" />
+<meta property="article:modified_time" content="2020-07-27T10:40:21+08:00" />
+<meta itemprop="name" content="Tp6.0源码分析_c">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2020-07-27T10:40:21+08:00" />
+<meta itemprop="dateModified" content="2020-07-27T10:40:21+08:00" />
+<meta itemprop="wordCount" content="7652">
+
+
+
+<meta itemprop="keywords" content="php,tp,手册," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tp6.0源码分析_c"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">zs368</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">zs368</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/info/">Info</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Tp6.0源码分析_c</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-27 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+            </div>
+          <span class="more-meta"> 7652 words </span>
+          <span class="more-meta"> 16 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#事件机制">事件机制</a>
+      <ul>
+        <li><a href="#事件配置文件的载入">事件配置文件的载入</a></li>
+        <li><a href="#定义事件">定义事件</a></li>
+        <li><a href="#事件监听">事件监听</a></li>
+        <li><a href="#事件订阅">事件订阅</a></li>
+        <li><a href="#关于观察者模式">关于观察者模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#facade模式">Facade模式</a>
+      <ul>
+        <li><a href="#说明">说明</a></li>
+        <li><a href="#facade的原理">Facade的原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#系统服务">系统服务</a>
+      <ul>
+        <li><a href="#说明-1">说明</a></li>
+        <li><a href="#内置服务">内置服务</a></li>
+        <li><a href="#自定义系统服务">自定义系统服务</a></li>
+        <li><a href="#在composer扩展包中使用服务">在Composer扩展包中使用服务</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://www.kancloud.cn/hubqin/thinkphp/1361597">ThinkPHP 6.0 核心分析</a></p>
+</blockquote>
+<h2 id="事件机制">事件机制</h2>
+<h3 id="事件配置文件的载入">事件配置文件的载入</h3>
+<p>项目根目录命令行运行：<code>php think make:listen ShowAppInit</code>创建一个监听器，这将在<code>app\listener</code>目录下生成一个<code>ShowAppInit.php</code>文件（如果没有<code>listener</code>目录则创建之）。接着简单修改<code>ShowAppInit.php</code>文件的代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">app\listener</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">ShowAppInit</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&#34;App 初始化啦&#34;</span> <span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>    
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>监听器创建完成后，将其添加到<code>app</code>目录下的<code>event.php</code>文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">return [
+    &#39;bind&#39;      =&gt; [
+    ],
+
+    &#39;listen&#39;    =&gt; [
+        &#39;AppInit&#39;  =&gt; [ &#39;app\listener\ShowAppInit&#39; ], //添加在这里
+        &#39;HttpRun&#39;  =&gt; [],
+        &#39;HttpEnd&#39;  =&gt; [],
+        &#39;LogLevel&#39; =&gt; [],
+        &#39;LogWrite&#39; =&gt; [],
+    ],
+
+    &#39;subscribe&#39; =&gt; [
+    ],
+];
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就绑定了一个监听器（观察者）到<code>AppInit</code>事件，一旦该事件被触发，监听器将开始工作——执行其<code>handle</code>方法下的代码。一个请求的生命周期：Http::run()→Http::runWithRequest()→Http::initialize()→App::initialize() →App::load() 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">protected function load(): void
+{
+  ...
+	if (is_file($appPath . &#39;event.php&#39;)) {
+		$this-&gt;loadEvent(include $appPath . &#39;event.php&#39;);
+	}
+  ...
+}
+public function loadEvent(array $event): void
+{
+	if (isset($event[&#39;bind&#39;])) {
+		// 将事件标识到事件的映射合并到「Event」类「$bing」成员变量中
+		// 比如 &#39;UserLogin&#39; =&gt; &#39;app\event\UserLogin&#39;,
+		$this-&gt;event-&gt;bind($event[&#39;bind&#39;]);
+	}
+
+	if (isset($event[&#39;listen&#39;])) {
+		$this-&gt;event-&gt;listenEvents($event[&#39;listen&#39;]);
+	}
+
+	if (isset($event[&#39;subscribe&#39;])) {
+		$this-&gt;event-&gt;subscribe($event[&#39;subscribe&#39;]);
+	}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>最终得到的<code>Event</code>类对象大概如下：</p>
+<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_11.png)</p>
+<h3 id="定义事件">定义事件</h3>
+<h3 id="事件监听">事件监听</h3>
+<p>事件监听器绑定到事件之后，框架在初始化过程中，将这些配置加载到<code>Event</code>类的对象（当然也可以在程序中手动绑定监听器），接下来就可以决定在何时触发事件。<code>AppInit</code>事件是在<code>App::initialize()</code>方法中触发的，其代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">$this-&gt;event-&gt;trigger(AppInit::class);
+</code></pre></td></tr></table>
+</div>
+</div><p>接着，我们看看<code>trigger</code>方法是如何触发事件的（如何调用监听器的<code>handle</code>方法）——其代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function trigger($event, $params = null, bool $once = false)
+{
+	// 如果是一个对象，解析出对象的类
+	if (is_object($event)) {
+		$params = $event;
+		$event  = get_class($event);
+	}
+	// 根据事件标识解析出实际的事件
+	if (isset($this-&gt;bind[$event])) {
+		$event = $this-&gt;bind[$event];
+	}
+
+	$result    = [];
+	// 解析出事件的监听者（可多个）
+	$listeners = $this-&gt;listener[$event] ?? [];
+	$listeners = array_unique($listeners, SORT_REGULAR);
+  
+	foreach ($listeners as $key =&gt; $listener) {
+    // 执行监听器的操作
+    $result[$key] = $this-&gt;dispatch($listener, $params);
+    // 如果返回false，或者没有返回值且 $once 为 true，直接中断，不再执行后面的监听器
+    if (false === $result[$key] || (!is_null($result[$key]) <span class="err">&amp;&amp;</span> $once)) {
+      break;
+    }
+  }
+  // 是否返回多个监听器的结果,$once 为 false 则返回最后一个监听器的结果
+  return $once ? end($result) : $result;
+}
+
+protected function dispatch($event, $params = null)
+{
+	if (!is_string($event)) {
+		$call = $event;
+	} elseif (strpos($event, &#39;::&#39;)) {
+		$call = $event;
+	} else {
+		$obj  = $this-&gt;app-&gt;make($event);
+		$call = [$obj, &#39;handle&#39;];
+	}
+	 return $this-&gt;app-&gt;invoke($call, [$params]);
+}
+
+public function invoke($callable, array $vars = [], bool $accessible = false)
+{
+  if ($callable instanceof Closure) {
+    return $this-&gt;invokeFunction($callable, $vars);
+  } elseif (is_string($callable) <span class="err">&amp;&amp;</span> false === strpos($callable, &#39;::&#39;)) {
+    return $this-&gt;invokeFunction($callable, $vars);
+  } else {
+    return $this-&gt;invokeMethod($callable, $vars, $accessible);
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>注意到监听器的<code>handle</code>方法还可以接收一个参数，从上面的分析可知，<code>trigger</code>方法的第二个参数最终将传给<code>handle</code>方法。</p>
+<p>那么，在什么情况下需要用到这个参数呢？举个例子，假如要监听一个用户登录，我们可以新建一个监听器，绑定事件标识，在<code>handle</code>方法中实现业务逻辑——例如，输出：「有用户登录啦」，然后在登录代码的后面<code>trigger</code>这个事件标识。但如果我们又要知道是谁登录的话，这时我们可以把用户名作为<code>trigger</code>的第二个参数传入，在监听器的<code>handle</code>方法可以这样使用：<code>echo $event . 用户登录啦</code>。当然，这里的<code>$event</code>也可以是一个事件类对象。</p>
+<h3 id="事件订阅">事件订阅</h3>
+<blockquote>
+<p>这里的订阅，本质上一种「复合」的监听器，比如，小明同时要监听小花跑、跳、吃饭、睡觉，这时，就可以把小明要针对这些动作做出的反应都放在一个类里面，方便管理。</p>
+</blockquote>
+<ul>
+<li>在<code>app</code>目录下的<code>event.php</code>文件中的<code>listen</code>键添加两个事件标识，如下所示：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">&#39;listen&#39;    =&gt; [
+        &#39;UserLogin&#39;    =&gt; [],
+        &#39;UserLogout&#39;   =&gt; [],
+    ],
+</code></pre></td></tr></table>
+</div>
+</div><p>如果没有这两个事件标识，订阅类的方法将无法被添加到<code>Event</code>类的<code>$listener</code> 数组，导致最后无法执行到订阅类的方法的。</p>
+<ul>
+<li>创建一个订阅类
+项目根目录下，命令行运行：<code>php think make:subscribe User</code>，会在<code>app/subscribe</code>目录下创建一个订阅类，在该类中添加以下方法（如代码所示）：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">class User
+{
+    public function onUserLogin(){
+        echo &#39;我知道用户登录了，因为我订阅了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#39;;
+    }
+    public function onUserLogout(){
+        echo &#39;我知道用户退出了，因为我订阅了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#39;;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建控制器
+在<code>app/controller</code>目录下创建一个<code>User</code>控制器，添加代码如下：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">class User
+{
+    public function __construct(){
+        //添加一个订阅类
+        Event::subscribe(\app\subscribe\User::class);
+    }
+    public function login(){
+        echo &#34;用户登录了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>   &#34;;
+        Event::trigger(&#39;UserLogin&#39;);
+    }
+    public function logout(){
+        echo &#34;用户退出了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>   &#34;;
+        Event::trigger(&#39;UserLogout&#39;);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>假如访问<code>User</code>控制器的<code>login</code>操作，调试运行代码到<code>Event::subscrible()</code>方法，该方法代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function subscribe($subscriber)
+{
+	$subscribers = (array) $subscriber;
+
+	foreach ($subscribers as $subscriber) {
+		if (is_string($subscriber)) {
+			//实例化事件订阅类
+			$subscriber = $this-&gt;app-&gt;make($subscriber);
+		}
+
+		if (method_exists($subscriber, &#39;subscribe&#39;)) {
+			// 手动订阅
+			$subscriber-&gt;subscribe($this);
+		} else {
+			// 智能订阅
+			$this-&gt;observe($subscriber);
+		}
+	}
+
+	return $this;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里关键看<code>observe</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function observe($observer, string $prefix = &#39;&#39;)
+{
+	if (!$this-&gt;withEvent) {
+		return $this;
+	}
+
+	if (is_string($observer)) {
+		$observer = $this-&gt;app-&gt;make($observer);
+	}
+
+	$reflect = new ReflectionClass($observer);
+	$methods = $reflect-&gt;getMethods(ReflectionMethod::IS_PUBLIC);
+	// 支持订阅类中的方法指定前缀
+	if (empty($prefix) <span class="err">&amp;&amp;</span> $reflect-&gt;hasProperty(&#39;eventPrefix&#39;)) {
+		$reflectProperty = $reflect-&gt;getProperty(&#39;eventPrefix&#39;);
+
+		$reflectProperty-&gt;setAccessible(true);
+		$prefix = $reflectProperty-&gt;getValue($observer);
+	}
+
+	foreach ($methods as $method) {
+		$name = $method-&gt;getName();
+		if (0 === strpos($name, &#39;on&#39;)) {
+			// 自动将订阅类的方法添加到监听器
+			$this-&gt;listen($prefix . substr($name, 2), [$observer, $name]);
+		}
+	}
+
+	return $this;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>运行过程见上面的注释。最后的结果大概是这样的：</p>
+<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_12.png)</p>
+<p>在<code>UserLogin</code>和<code>UserLogout</code>事件标识下，分别添加了对应的监听器，分别是事件订阅类<code>app\subscribe\User</code>的<code>onUserLogin</code>和<code>onUserLogout</code>。</p>
+<p>监听器添加完成后，接着是等待事件触发。<code>login</code>操作中，执行了<code>Event::trigger('UserLogin');</code>，这将执行<code>app\subscribe\User</code>的<code>onUserLogin</code>，其执行过程跟前面分析的执行事件监听器是一样的，结果输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用户登录了
+我知道用户登录了，因为我订阅了
+</code></pre></td></tr></table>
+</div>
+</div><p>同理，访问<code>User</code>控制器的<code>logout</code>操作，得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">用户退出了
+我知道用户退出了，因为我订阅了
+</code></pre></td></tr></table>
+</div>
+</div><p>事件订阅分析完毕。总结一下，事件订阅就是一种「复合」的监听器，可以同时监听多个事件。从其实现过程来看，本质和事件监听器是一样的，个人认为，使用事件订阅的好处是仅仅集中管理代码，把对某个对象(被观察者)的多个动作的监听，都写在一个事件订阅类里面，因而就不用另外写相应多个动作的监听器类。</p>
+<h3 id="关于观察者模式">关于观察者模式</h3>
+<p>事件的实现机制，实际上是使用观察者模式实现的。观察者模式的好处是实现类的松耦合，被观察者不需要知道观察者到底做了什么，只需要触发事件就够了；另外，观察者的数量可以灵活地增加、减少，而不用修改被观察者。深入理解观察者模式，可以参考这篇：<a href="https://segmentfault.com/a/1190000009459014">学好事件，先学学观察者模式</a></p>
+<h2 id="facade模式">Facade模式</h2>
+<h3 id="说明">说明</h3>
+<p>上一篇的例子中，<code>User</code>控制器引入了命名空间<code>think\facade\Event</code>，接着这样调用<code>think\facade\Event::subscribe()</code>，可打开<code>think\facade\Event</code>类的文件一看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">class Event extends Facade
+{
+    /**
+     * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
+     * @access protected
+     * @return string
+     */
+    protected static function getFacadeClass()
+    {
+        return &#39;event&#39;;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>该类中只定义了一个<code>getFacadeClass</code>方法，是不存在<code>subscribe</code>方法的。程序实际调用的是<code>think\Event</code>类的<code>subscribe</code>方法，而且该方法也不是静态方法，在这里却是静态调用。这是如何做到的呢？</p>
+<h3 id="facade的原理">Facade的原理</h3>
+<p>Facade模式，中文一般翻译为「门面」模式，是指为一堆零散的风格不一的子系统设计一个统一的调用接口，这个接口就像是一个「门面」。Facade模式在这里的用处是把动态类方法转换为可静态调用的方法。接着，我们看看具体的实现过程。</p>
+<p><code>think\facade\Event</code>类继承了<code>think\Facade</code>类。查看<code>think\Facade</code>类，注意到其定义了一个魔术方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public static function __callStatic($method, $params)
+{
+	return call_user_func_array([static::createFacade(), $method], $params);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在PHP中，当一个类静态调用一个不存在的方法，将会触发该魔术方法，所以<strong><code>think\facade\Event::subscribe()</code></strong>这样调用的时候，首先是执行该<code>__callStatic</code>方法。
+在这个例子中，该方法<code>$method</code>参数传入的值是<code>subscribe</code>，<code>$params</code>传入的值是<code>app\subscribe\User</code>。
+先看看这其中的<code>static::createFacade()</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">protected static function createFacade(string $class = &#39;&#39;, array $args = [], bool $newInstance = false)
+{
+	// 如果$class为空，那么$class就等于当前的类（think\facade\Event）
+	$class = $class ?: static::class;
+	// 解析出该Facade类实际要代理的类
+	$facadeClass = static::getFacadeClass();
+
+	if ($facadeClass) {
+		$class = $facadeClass;
+	}
+	// 是否要一直新建实例（否则就是单例模式）
+	if (static::$alwaysNewInstance) {
+		$newInstance = true;
+	}
+	// 使用PHP的反射类实例化该类（比如，实例化think\Event）
+	return Container::getInstance()-&gt;make($class, $args, $newInstance);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>具体分析见注释。最后一个<code>$newInstance</code>参数可以设置是否使用单例模式。该方法最后返回一个类的对象（Facade类所代理的类），在本例子中是<code>think\Event</code>类的对象。</p>
+<p>最后，程序执行<code>call_user_func_array([static::createFacade(), $method], $params)</code>，在这个例子中，就等于执行：<code>$obj-&gt;subscribe('app\subscribe\User')</code>(其中，<code>$obj</code>是<code>think\Event</code>类的一个对象)。</p>
+<h2 id="系统服务">系统服务</h2>
+<h3 id="说明-1">说明</h3>
+<p>什么是系统服务？系统服务是对于程序要用到的类在使用前先进行类的标识的绑定，以便容器能够对其进行解析（通过服务类的<code>register</code>方法），还有就是初始化一些参数、注册路由等（不限于这些操作，主要是看一个类在使用之前的需要，进行一些配置，使用的是服务类的<code>boot</code>方法）。以下面要介绍到的<code>ModelService</code>为例，<code>ModelService</code>类提供服务，<code>ModelService</code>类主要对<code>Model</code>类的一些成员变量进行初始化（在<code>boot</code>方法中），为后面<code>Model</code>类的「出场」布置好「舞台」。</p>
+<p>下面先来看看系统自带的服务，看看服务是怎么实现的。</p>
+<h3 id="内置服务">内置服务</h3>
+<p>系统内置的服务有：<code>ModelService</code>、<code>PaginatorService</code>和<code>ValidateService</code>类，我们来看看它们是怎么被注册和初始化的。</p>
+<p>在<code>App::initialize()</code>有这么一段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">foreach ($this-&gt;initializers as $initializer) {
+	$this-&gt;make($initializer)-&gt;init($this);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里通过循环<code>App::initializers</code>的值，并使用容器类的<code>make</code>方法获取每个<code>$initializer</code>的实例，然后调用实例对应的<code>init</code>方法。<code>App::initializers</code>成员变量的值为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">protected $initializers = [
+	Error::class,
+	RegisterService::class,
+	BootService::class,
+];
+</code></pre></td></tr></table>
+</div>
+</div><p>这里重点关注后面两个：服务注册和服务初始化。</p>
+<h4 id="服务注册">服务注册</h4>
+<p>执行<code>$this-&gt;make($initializer)-&gt;init($this)</code>，<code>$initializer</code>等于<code>RegisterService::class</code>时，调用该类中的<code>init</code>方法，该方法代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function init(App $app)
+{
+	// 加载扩展包的服务
+	$file = $app-&gt;getRootPath() . &#39;vendor/services.php&#39;;
+
+	$services = $this-&gt;services;
+
+	//合并，得到所有需要注册的服务
+	if (is_file($file)) {
+		$services = array_merge($services, include $file);
+	}
+	// 逐个注册服务
+	foreach ($services as $service) {
+		if (class_exists($service)) {
+			$app-&gt;register($service);
+		}
+	}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>服务注册类中，定义了系统内置服务的值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">protected $services = [
+	PaginatorService::class,
+	ValidateService::class,
+	ModelService::class,
+];
+</code></pre></td></tr></table>
+</div>
+</div><p>这三个服务和扩展包定义的服务将逐一被注册，其注册的方法<code>register</code>代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function register($service, bool $force = false)
+{
+	// 比如 think\service\PaginatorService
+	// getService方法判断服务的实例是否存在于App::$services成员变量中
+	// 如果是则直接返回该实例
+	$registered = $this-&gt;getService($service);
+	// 如果服务已注册且不强制重新注册，直接返回服务实例
+	if ($registered &amp;&amp; !$force) {
+		return $registered;
+	}
+	// 实例化该服务
+	// 比如 think\service\PaginatorService，
+	// 该类没有构造函数，其父类Service类有构造函数，需要传入一个App类的实例
+	// 所以这里传入$this（App类的实例）进行实例化
+	if (is_string($service)) {
+		$service = new $service($this);
+	}
+	// 如果存在「register」方法，则调用之
+	if (method_exists($service, &#39;register&#39;)) {
+		$service-&gt;register();
+	}
+	// 如果存在「bind」属性，添加容器标识绑定
+	if (property_exists($service, &#39;bind&#39;)) {
+		$this-&gt;bind($service-&gt;bind);
+	}
+	// 保存服务实例
+	$this-&gt;services[] = $service;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>详细分析见代码注释。如果服务类定义了<code>register</code>方法，在服务注册的时候会被执行，该方法通常是用于将服务绑定到容器；此外，也可以通过定义<code>bind</code>属性的值来将服务绑定到容器。</p>
+<p>服务逐个注册之后，得到<code>App::services</code>的值大概是这样的：</p>
+<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_13.png)</p>
+<p>每个服务的实例都包含一个<code>App</code>类的实例。</p>
+<h4 id="服务初始化">服务初始化</h4>
+<p>执行<code>$this-&gt;make($initializer)-&gt;init($this)</code>，<code>$initializer</code>等于<code>BootService::class</code>时，调用该类中的<code>init</code>方法，该方法代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function init(App $app)
+{
+	$app-&gt;boot();
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>实际上是执行<code>App::boot()</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function boot(): void
+{
+	array_walk($this-&gt;services, function ($service) {
+		$this-&gt;bootService($service);
+	});
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里是将每个服务实例传入bootService方法中。重点关注<code>bootService</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function bootService($service)
+{
+	if (method_exists($service, &#39;boot&#39;)) {
+		return $this-&gt;invoke([$service, &#39;boot&#39;]);
+	}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里调用服务实例对应的<code>boot</code>方法。接下来，我们以<code>ModelService</code>的<code>boot</code>方法为例，看看<code>boot</code>方法大概可以做哪些工作。<code>ModelService</code>的<code>boot</code>方法代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function boot()
+{
+	// 设置Db对象
+	Model::setDb($this-&gt;app-&gt;db);
+	// 设置Event对象
+	Model::setEvent($this-&gt;app-&gt;event);
+	// 设置容器对象的依赖注入方法
+	Model::setInvoker([$this-&gt;app, &#39;invoke&#39;]);
+	// 保存闭包到Model::maker
+	Model::maker(function (Model $model) {
+		//保存db对象
+		$db     = $this-&gt;app-&gt;db;
+		//保存$config对象
+		$config = $this-&gt;app-&gt;config;
+		// 是否需要自动写入时间戳 如果设置为字符串 则表示时间字段的类型
+		$isAutoWriteTimestamp = $model-&gt;getAutoWriteTimestamp();
+
+		if (is_null($isAutoWriteTimestamp)) {
+			// 自动写入时间戳 （从配置文件获取）
+			$model-&gt;isAutoWriteTimestamp($config-&gt;get(&#39;database.auto_timestamp&#39;, &#39;timestamp&#39;));
+		}
+		// 时间字段显示格式
+		$dateFormat = $model-&gt;getDateFormat();
+
+		if (is_null($dateFormat)) {
+			// 设置时间戳格式 （从配置文件获取）
+			$model-&gt;setDateFormat($config-&gt;get(&#39;database.datetime_format&#39;, &#39;Y-m-d H:i:s&#39;));
+		}
+
+	});
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看出，这里都是对<code>Model</code>类的静态成员进行初始化。这些静态成员变量的访问属性为<code>protected</code>，所以，可以在<code>Model</code>类的子类中使用这些值。</p>
+<h3 id="自定义系统服务">自定义系统服务</h3>
+<p>接着，我们自己动手来写一个简单的系统服务。</p>
+<ul>
+<li>
+<p>定义被服务的对象（类）</p>
+<p>创建一个文件：<code>app\common\MyServiceDemo.php</code>，写入代码如下：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;?php
+namespace app\common;
+class MyServiceDemo
+{
+		//定义一个静态成员变量
+		protected static $myStaticVar = &#39;123&#39;;
+		// 设置该变量的值
+		public static function setVar($value){
+			self::$myStaticVar = $value;
+		}
+		//用于显示该变量
+		public function showVar()
+		{
+			var_dump(self::$myStaticVar);
+		}
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>定义服务提供者</p>
+<p>在项目根目录，命令行执行<code>php think make:service MyService</code>，将会生成一个<code>app\service\MyService.php</code>文件，在其中写入代码：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;?php
+namespace app\service;
+use think\Service;
+use app\common\MyServiceDemo;
+class MyService  extends Service
+{
+		// 系统服务注册的时候，执行register方法
+		public function register()
+		{
+			// 将绑定标识到对应的类
+			$this-&gt;app-&gt;bind(&#39;my_service&#39;, MyServiceDemo::class);
+		}
+		// 系统服务注册之后，执行boot方法
+		public function boot()
+		{
+			// 将被服务类的一个静态成员设置为另一个值
+			MyServiceDemo::setVar(&#39;456&#39;);
+		}
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>配置系统服务</p>
+<p>在<code>app\service.php</code>文件（如果没有该文件则创建之），写入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;?php
+  return [
+      &#39;\app\service\MyService&#39;
+  ];
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在控制器中调用
+创建一个控制器文件<code>app\controller\Demo.php</code>，写入代码：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;?php
+namespace app\controller;
+use app\BaseController;
+use app\common\MyServiceDemo;
+class Demo extends BaseController
+{
+		public function testService(MyServiceDemo $demo){
+			// 因为在服务提供类app\service\MyService的boot方法中设置了$myStaticVar=‘456’\
+			// 所以这里输出&#39;456&#39;
+			$demo-&gt;showVar();
+		}
+
+		public function testServiceDi(){
+			// 因为在服务提供类的register方法已经绑定了类标识到被服务类的映射
+			// 所以这里可以使用容器类的实例来访问该标识，从而获取被服务类的实例
+			// 这里也输出‘456’
+			$this-&gt;app-&gt;my_service-&gt;showVar();
+		}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>执行原理和分析见代码注释。另外说说自定义的服务配置是怎么加载的：<code>App::initialize()</code>中调用了<code>App::load()</code>方法，该方法结尾有这么一段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if (is_file($appPath . &#39;service.php&#39;)) {
+		$services = include $appPath . &#39;service.php&#39;;
+		foreach ($services as $service) {
+			$this-&gt;register($service);
+		}
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>正是在这里将我们自定义的服务加载进来并且注册。</p>
+<h3 id="在composer扩展包中使用服务">在Composer扩展包中使用服务</h3>
+<p>这里以<code>think-captcha</code>扩展包为例，该扩展使用了系统服务，其中，服务提供者为<code>think\captcha\CaptchaService</code>类，被服务的类为<code>think\captcha\Captcha</code>。</p>
+<p>首先，项目根目录先运行<code>composer require topthink/think-captcha</code>安装扩展包；安装完成后，我们查看<code>vendor\services.php</code>文件，发现新增一行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">return array (
+  0 =&gt; &#39;think\\captcha\\CaptchaService&#39;,  //新增
+);
+</code></pre></td></tr></table>
+</div>
+</div><p>这是怎么做到的呢？这是因为在<code>vendor\topthink\think-captcha\composer.json</code>文件配置了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&#34;extra&#34;: {
+	&#34;think&#34;: {
+		&#34;services&#34;: [
+			&#34;think\\captcha\\CaptchaService&#34;
+		]
+	}
+},
+</code></pre></td></tr></table>
+</div>
+</div><p>而在项目根目录下的<code>composer.json</code>，有这样的配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&#34;scripts&#34;: {
+	&#34;post-autoload-dump&#34;: [
+		&#34;@php think service:discover&#34;,
+		&#34;@php think vendor:publish&#34;
+	]
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>扩展包安装后，会执行这里的脚本，其中，跟这里的添加系统服务配置相关的是：<code>php think service:discover</code>。该指令执行的代码在<code>vendor\topthink\framework\src\think\console\command\ServiceDiscover.php</code>，相关的代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">foreach ($packages as $package) {
+	if (!empty($package[&#39;extra&#39;][&#39;think&#39;][&#39;services&#39;])) {
+		$services = array_merge($services, (array) $package[&#39;extra&#39;][&#39;think&#39;][&#39;services&#39;]);
+	}
+}
+
+$header = &#39;// This file is automatically generated at:&#39; . date(&#39;Y-m-d H:i:s&#39;) . PHP_EOL . &#39;declare (strict_types = 1);&#39; . PHP_EOL;
+
+$content = &#39;&lt;?php &#39; . PHP_EOL . $header . &#34;return &#34; . var_export($services, true) . &#39;;&#39;;
+
+file_put_contents($this-&gt;app-&gt;getRootPath() . &#39;vendor/services.php&#39;, $content);
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看出，扩展包如果有配置<code>['extra']['think']['services']</code>，也就是系统服务配置，都会被写入到<code>vendor\services.php</code>文件，最终，所有服务在系统初始化的时候被加载、注册和初始化。</p>
+<p>分析完了扩展包中服务配置的实现和原理，接着我们看看<code>CaptchaService</code>服务提供类做了哪些初始化工作。该类只有一个<code>boot</code>方法，其代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public function boot(Route $route)
+{
+	// 配置路由
+	$route-&gt;get(&#39;captcha/[:config]&#39;, &#34;\\think\\captcha\\CaptchaController@index&#34;);
+	// 添加一个验证器
+	Validate::maker(function ($validate) {
+		$validate-&gt;extend(&#39;captcha&#39;, function ($value) {
+			return captcha_check($value);
+		}, &#39;:attribute错误!&#39;);
+	});
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>有了以上的先行配置，我们就可以愉快地使用<code>Captcha</code>类了。</p>
+<h3 id="总结">总结</h3>
+<p>使用系统服务有大大的好处和避免了直接修改类的坏处。从以上分析来看，个人觉得，使用系统服务，可以对一个类进行非入侵式的「配置」，如果哪天一个类的某些设定需要修改，我们不用直接修改这个类，只需要修改服务提供类就好了。对于扩展包来说，系统服务使其可以在扩展中灵活配置程序，达到开箱即用的效果。不过，有个缺点是系统服务类都要在程序初始化是进行实例化，如果一个系统的服务类很多，势必影响程序的性能。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/php/">php</a>
+          <a href="/tags/tp/">tp</a>
+          <a href="/tags/%E6%89%8B%E5%86%8C/">手册</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_b/">
+            <span class="next-text nav-default">Tp6.0源码分析_b</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/zs368/" class="iconfont icon-github" title="github"></a>
+      <a href="http://bilibili.com" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://zs368.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

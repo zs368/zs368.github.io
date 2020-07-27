@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tp6.0源码分析_a - OxO</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="zs" /><meta name="description" content="" /><meta name="keywords" content="tp" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_a/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Tp6.0源码分析_a" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_a/" />
+<meta property="article:published_time" content="2020-07-20T14:38:19+08:00" />
+<meta property="article:modified_time" content="2020-07-20T14:38:19+08:00" />
+<meta itemprop="name" content="Tp6.0源码分析_a">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2020-07-20T14:38:19+08:00" />
+<meta itemprop="dateModified" content="2020-07-20T14:38:19+08:00" />
+<meta itemprop="wordCount" content="6196">
+
+
+
+<meta itemprop="keywords" content="php,tp,手册," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tp6.0源码分析_a"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">zs368</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">zs368</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/info/">Info</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Tp6.0源码分析_a</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-20 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+            </div>
+          <span class="more-meta"> 6196 words </span>
+          <span class="more-meta"> 13 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#自动加载原理">自动加载原理</a>
+      <ul>
+        <li><a href="#从入口文件出发">从入口文件出发</a></li>
+        <li><a href="#getloader-方法">getLoader 方法</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#依赖注入原理">依赖注入原理</a>
+      <ul>
+        <li><a href="#再次从入口文件出发">再次从入口文件出发</a></li>
+        <li><a href="#app实例化">App实例化</a></li>
+        <li><a href="#http类的实例化以及依赖注入原理">Http类的实例化以及依赖注入原理</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://www.kancloud.cn/hubqin/thinkphp/1361597">ThinkPHP 6.0 核心分析</a></p>
+</blockquote>
+<h2 id="自动加载原理">自动加载原理</h2>
+<blockquote>
+<p>可以参照Lonicera，都是使用composer。</p>
+</blockquote>
+<h3 id="从入口文件出发">从入口文件出发</h3>
+<p>入口文件<code>public/index.php</code>开头有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">require __DIR__ . &#39;/../vendor/autoload.php&#39;;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>autoload.php</code> 中的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">require_once __DIR__ . &#39;/composer/autoload_real.php&#39;;
+
+return ComposerAutoloaderInitxxx::getLoader();
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>由于原类名较长，让我们约定，类名后面有一长串 hash 字串的，都以‘xxx’代替，所以这里将类名标记为<code>ComposerAutoloaderInitxxx</code>。</p>
+</blockquote>
+<p>第一行引入了 <code>autoload_real.php</code> 文件, 它里面定义了<code>ComposerAutoloaderInitxxx</code> 类，以及该类的若干静态方法。我们从第二行语句展开分析。</p>
+<h3 id="getloader-方法">getLoader 方法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public static function getLoader()
+{
+    // 单例模式，检查$loaders是否有值，有则直接返回
+    if (null !== self::$loader) {
+        return self::$loader;
+    }
+	/*
+	|---------------------------------------------------------
+	| 将 `ComposerAutoloaderInitxxx` 类的`loadClassLoader`方法注册为一个
+	| `__autoload`函数的实现，无法注册成功则抛出错误，且添加到自动加载函数队
+	| 列前面（即使用的类找不到时，自动调用`loadClassLoader`方法实现自动加载，
+	| 具体实现见后面该方法分析）
+	|---------------------------------------------------------
+	*/
+    spl_autoload_register(array(&#39;ComposerAutoloaderInitxxx&#39;, &#39;loadClassLoader&#39;), true, true);
+    
+  /*
+	|---------------------------------------------------------
+	| 这里实例化一个ClassLoader类，并赋值到$loader成员。
+	| \Composer\Autoload\ClassLoader()按照字面的路径是找不到该类的，
+	| 所以会触发`loadClassLoader`方法实现自动加载。
+  |  `loadClassLoader`方法的代码如下：
+  |   public static function loadClassLoader($class)
+  |   {
+  |      if (&#39;Composer\Autoload\ClassLoader&#39; === $class) {
+  |         require __DIR__ . &#39;/ClassLoader.php&#39;;
+  |      }
+  |    }
+  | 所以这里成功将ClassLoader.php文件加载进来
+	|---------------------------------------------------------
+	*/
+    self::$loader = $loader = new \Composer\Autoload\ClassLoader();
+
+    // 得到 $loader 之后去掉前面注册的自动加载实现
+    spl_autoload_unregister(array(&#39;ComposerAutoloaderInitxxx&#39;, &#39;loadClassLoader&#39;));
+
+    // 静态初始化只支持 PHP5.6 以上版本并且不支持 HHVM 虚拟机
+    $useStaticLoader = PHP_VERSION_ID &gt;= 50600 <span class="err">&amp;&amp;</span> !defined(&#39;HHVM_VERSION&#39;) 
+		<span class="err">&amp;&amp;</span> (!function_exists(&#39;zend_loader_file_encoded&#39;) || !zend_loader_file_encoded());
+
+    // 一般 $useStaticLoader == true
+    if ($useStaticLoader) {
+        // 加载 autoload_static.php 文件
+        require_once __DIR__ . &#39;/autoload_static.php&#39;;
+
+        // 调用上一步加载的文件中的类的 getInitializer 方法
+        //  getInitializer 方法的分析见后面的（A）部分
+        call_user_func(\Composer\Autoload\ComposerStaticInitxxx::getInitializer($loader));
+    } else {
+        //使用“非静态”的初始化方式，结果和前面分支的静态初始化方法是一样的
+        $map = require __DIR__ . &#39;/autoload_namespaces.php&#39;;
+        foreach ($map as $namespace =&gt; $path) {
+            $loader-&gt;set($namespace, $path);
+        }
+
+        $map = require __DIR__ . &#39;/autoload_psr4.php&#39;;
+        foreach ($map as $namespace =&gt; $path) {
+            $loader-&gt;setPsr4($namespace, $path);
+        }
+
+        $classMap = require __DIR__ . &#39;/autoload_classmap.php&#39;;
+        if ($classMap) {
+            $loader-&gt;addClassMap($classMap);
+        }
+    }
+
+    // register 方法将 classLoader 方法加入自动加载函数队列
+    // 只要程序遇到不认识的类，就会使用该队列中的函数去查找类对应的文件
+    // 最后将找到的文件 require 加载进来
+    // 查找不到会做一个标记，下次查找时就可以直接识别该类的文件是找不到的，直接返回false。
+  	// 后面展开分析该函数，在（B）部分
+    $loader-&gt;register(true);
+    
+    // 加载全局函数（分静态加载和非静态加载，结果是一样的）
+    // 一般全局助手函数都在这里加载
+    // $files成员变量是一个数组，包含&#39;文件标识（哈希值）=&gt;文件路径&#39;的键值对
+    if ($useStaticLoader) {
+        $includeFiles = Composer\Autoload\ComposerStaticInitxxx::$files;
+    } else {
+        $includeFiles = require __DIR__ . &#39;/autoload_files.php&#39;;
+    }
+    foreach ($includeFiles as $fileIdentifier =&gt; $file) {
+        // 注意到 composerRequirexxx 方法定义在本类的之外，封装了require函数，
+	    // require进来的文件里面的变量，其作用域被包裹在`composerRequirexxx`中，
+	    // 防止require进来的文件含有$this或self而产生调用混淆或错误，
+	    // 而且该函数实现了require_once的效果，效率更高。分析见（C）部分。
+        composerRequirexxx($fileIdentifier, $file);
+    }
+
+    return $loader; 
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="agetinitializer-方法分析">（A）getInitializer 方法分析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public static function getInitializer(ClassLoader $loader)
+{
+    return \Closure::bind(function () use ($loader) {
+        $loader-&gt;prefixLengthsPsr4 = ComposerStaticInitxxx::$prefixLengthsPsr4;
+        $loader-&gt;prefixDirsPsr4 = ComposerStaticInitxxx::$prefixDirsPsr4;
+        $loader-&gt;fallbackDirsPsr0 = ComposerStaticInitxxx::$fallbackDirsPsr0;
+    }, null, ClassLoader::class);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在PHP中，Closure类的摘要如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">Closure {
+    __construct ( void )
+    public static bind ( Closure $closure , object $newthis [, mixed $newscope = &#39;static&#39; ] ) : Closure
+    public bindTo ( object $newthis [, mixed $newscope = &#39;static&#39; ] ) : Closure
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，<code>bind</code>方法的做作用是：复制一个闭包，绑定指定的$this对象和类作用域。这里将一个闭包绑定到<code>ClassLoader</code>类，使得该类的私有成员变量可以被赋值，从而将<code>ComposerStaticInitxxx</code>类定义的有关空间命名映射的几个变量（包括：prefixLengthsPsr4、prefixDirsPsr4、fallbackDirsPsr0）搬到<code>ClassLoader</code>类中。 该函数执行后得到的结果：</p>
+<p><!-- raw HTML omitted --></p>
+<p><code>ClassLoader</code>的成员变量实现了初始化，即它们保存了各种形式的命名空间到文件夹路径的映射。</p>
+<h4 id="b-register-方法分析">（B） register 方法分析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function register($prepend = false)
+{
+    spl_autoload_register(array($this, &#39;loadClass&#39;), true, $prepend);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>该方法将<code>loadClass</code>方法加入自动加载函数队列，也就是当使用的类找不到时，触发该方法去查找相应的类，注意到上面的第二个参数为<code>true</code>，说明是优先使用该方法作为自动加载的方法。那么，类的文件是如何被加载的，我们要到<code>loadClass</code>方法去寻找答案。<code>loadClass</code>方法代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function loadClass($class)
+{
+    // 如果查找到文件
+    if ($file = $this-&gt;findFile($class)) {
+        // 将文件加载进来
+        includeFile($file);
+        return true;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>实际上，答案在 <code>findFile</code> 方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function findFile($class)
+{
+    // class map lookup
+    // 如果classMap中有该类的文件映射，则直接返回对应的文件
+    if (isset($this-&gt;classMap[$class])) {
+        return $this-&gt;classMap[$class];
+    }
+
+    // 如果这个类已经被标为没有授权或者找不到，则直接返回false
+    if ($this-&gt;classMapAuthoritative || isset($this-&gt;missingClasses[$class])) {
+        return false;
+    }
+    // 如果有APCU缓存文件
+    if (null !== $this-&gt;apcuPrefix) {
+        $file = apcu_fetch($this-&gt;apcuPrefix.$class, $hit);
+        if ($hit) {
+            return $file;
+        }
+    }
+    //使用psr4、psr0标准查找，**后面着重分析该方法**
+    $file = $this-&gt;findFileWithExtension($class, &#39;.php&#39;);
+
+    // Search for Hack files if we are running on HHVM
+    if (false === $file <span class="err">&amp;&amp;</span> defined(&#39;HHVM_VERSION&#39;)) {
+        $file = $this-&gt;findFileWithExtension($class, &#39;.hh&#39;);
+    }
+
+    if (null !== $this-&gt;apcuPrefix) {
+        apcu_add($this-&gt;apcuPrefix.$class, $file);
+    }
+
+    if (false === $file) {
+        // Remember that this class does not exist.
+        $this-&gt;missingClasses[$class] = true;
+    }
+
+    return $file;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="findfilewithextension-方法">findFileWithExtension 方法</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">private function findFileWithExtension($class, $ext)
+{
+    // PSR-4 lookup
+    // 将‘\’转为‘/’并加上后缀
+    // 以下分析，假设$class = app\Request 
+    // 即要查找app\Request类对应的文件
+    // 假设系统的DIRECTORY_SEPARATOR == ‘/’
+    // 则app\Request被转为 app/Request.php
+    $logicalPathPsr4 = strtr($class, &#39;\\&#39;, DIRECTORY_SEPARATOR) . $ext;
+
+    $first = $class[0];  // 开头为 a
+
+    // prefixLengthsPsr4数组中，有&#39;a&#39; =&gt; [ &#39;app\&#39; =&gt; 4]
+    // 这时，该条件为true（php数组key不区分大小写）
+
+    // （ prefixLengthsPsr4将命名空间用首字母归类，相当于建了一个索引，
+    //  可以实现快速查找，如，这里如果没有找到‘a’作为开头的
+    //  就可以不用继续查找，而是换别的查找方法。）
+    if (isset($this-&gt;prefixLengthsPsr4[$first])) {
+        $subPath = $class; // app\Request
+
+        // 计算字符串中最后一个‘\’的位置，并赋值给$lastPos，并判断是否存在‘\’
+	    // 对于 app\Request，$lastPos = 3
+        while (false !== $lastPos = strrpos($subPath, &#39;\\&#39;)) {
+            // 从字符串开头算起，取$lastPos个字符
+	        // 这里得到$subPath=app&#39;
+            $subPath = substr($subPath, 0, $lastPos);
+            //  $search == &#39;app\&#39;
+            $search = $subPath . &#39;\\&#39;;
+            // 查找prefixDirsPsr4数组对应key是否有值，其key-value值如下：
+            /*
+                &#39;app\&#39; =&gt; [
+                     [0] =&gt; your-project-dir\vendor\composer/../../app 
+                ]
+            */
+            // 也就是说app\ 对应项目根目录的app文件夹
+            if (isset($this-&gt;prefixDirsPsr4[$search])) {
+                // $pathEnd == &#39;\Request.php&#39;
+                $pathEnd = DIRECTORY_SEPARATOR . substr($logicalPathPsr4, $lastPos + 1);
+                // 逐个检查prefixDirsPsr4[&#39;app\&#39;]下的文件路径是否包含需要的文件
+                foreach ($this-&gt;prefixDirsPsr4[$search] as $dir) {
+                    if (file_exists($file = $dir . $pathEnd)) {
+                        // \vendor\composer/../../app\Request.php
+                        // 也就是得到app目录下的Request.php文件
+                        return $file;
+                    }
+                }
+            }
+        }
+    }
+
+    // 原理类似，其他类型不再展开分析
+    // PSR-4 fallback dirs
+    foreach ($this-&gt;fallbackDirsPsr4 as $dir) {
+        if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $logicalPathPsr4)) {
+            return $file;
+        }
+    }
+
+    // PSR-0 lookup
+    if (false !== $pos = strrpos($class, &#39;\\&#39;)) {
+        // namespaced class name
+        $logicalPathPsr0 = substr($logicalPathPsr4, 0, $pos + 1)
+            . strtr(substr($logicalPathPsr4, $pos + 1), &#39;_&#39;, DIRECTORY_SEPARATOR);
+    } else {
+        // PEAR-like class name
+        $logicalPathPsr0 = strtr($class, &#39;_&#39;, DIRECTORY_SEPARATOR) . $ext;
+    }
+
+    if (isset($this-&gt;prefixesPsr0[$first])) {
+        foreach ($this-&gt;prefixesPsr0[$first] as $prefix =&gt; $dirs) {
+            if (0 === strpos($class, $prefix)) {
+                foreach ($dirs as $dir) {
+                    if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $logicalPathPsr0)) {
+                        return $file;
+                    }
+                }
+            }
+        }
+    }
+
+    // PSR-0 fallback dirs
+    foreach ($this-&gt;fallbackDirsPsr0 as $dir) {
+        if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $logicalPathPsr0)) {
+            return $file;
+        }
+    }
+
+    // PSR-0 include paths.
+    if ($this-&gt;useIncludePath <span class="err">&amp;&amp;</span> $file = stream_resolve_include_path($logicalPathPsr0)) {
+        return $file;
+    }
+
+    return false;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，如果能找到类对应的文件，则返回文件路径，在<code>loadClass</code>方法中执行<code>includeFile($file)</code>将文件加载进来。</p>
+<h4 id="ccomposerrequirexxx-方法分析">（C）composerRequirexxx 方法分析</h4>
+<p>在 <code>autoload_real.php</code> 文件中，有一个方法是定义在类的外部的，该方法代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">function composerRequirexxx($fileIdentifier, $file)
+{
+    //文件标识为空才加载文件，实现了require_once的效果
+    if (empty($GLOBALS[&#39;__composer_autoload_files&#39;][$fileIdentifier])) {
+        //`$file`里面的变量，其作用域被包裹在 `composerRequirexxx`
+        // 避免$file里面的$this,self等变量穿透到外部
+        require $file;
+        // 将文件标识为已加载过的
+        // 下次需要加载到该文件时，如果该文件已经加载过，就不用再加载
+        $GLOBALS[&#39;__composer_autoload_files&#39;][$fileIdentifier] = true;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="小结">小结</h3>
+<p>自动加载所完成的工作有：</p>
+<ul>
+<li>实例化<code>ClassLoader</code>类，并初始化其成员变量</li>
+<li>将<code>loadClass</code>方法加入自动加载函数队列，且该方法实现了classMap，psr4，psr0等方式的文件路径查找。当程序遇到不认识的类时，会调用该方法进行文件的加载</li>
+<li>实现全局函数的加载</li>
+</ul>
+<p>总的来说，自动加载一方面接管了我们手动写一堆 require 或 include 的工作（想像一下，要require或include几千个文件会是什么样的情形），大大提高了开发效率和简洁代码；另一方面，自动加载是使用到了类的时候才去查找并加载类的文件，实现了按需加载，节约程序开销，提高了程序的性能。</p>
+<h2 id="依赖注入原理">依赖注入原理</h2>
+<blockquote>
+<p>分析<code>App</code>，<code>Http</code> 类的实例化过程，同时了解类是如何实现自动实例化的，即依赖注入是怎么实现的。</p>
+</blockquote>
+<h3 id="再次从入口文件出发">再次从入口文件出发</h3>
+<p>当访问一个ThinkPHP搭建的站点，框架最先是从入口文件开始的，然后才是应用初始化、路由解析、控制器调用和响应输出等操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">// 引入自动加载器，实现类的自动加载功能（PSR4标准）
+// 具体参见上一节分析
+require __DIR__ . &#39;/../vendor/autoload.php&#39;;
+
+// 这一句可分为两部分分析，App的实例化和调用「http」，具体见下文分析
+$http = (new App())-&gt;http;
+$response = $http-&gt;run();
+$response-&gt;send();
+$http-&gt;end($response);
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="app实例化">App实例化</h3>
+<p>执行 <code>new App()</code> 实例化时，首先会调用它的构造函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function __construct(string $rootPath = &#39;&#39;)
+{
+	$this-&gt;thinkPath   = dirname(__DIR__) . DIRECTORY_SEPARATOR;
+  $this-&gt;rootPath    = $rootPath ? rtrim($rootPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : $this-&gt;getDefaultRootPath();
+	$this-&gt;appPath     = $this-&gt;rootPath . &#39;app&#39; . DIRECTORY_SEPARATOR;
+	$this-&gt;runtimePath = $this-&gt;rootPath . &#39;runtime&#39; . DIRECTORY_SEPARATOR;
+
+	if (is_file($this-&gt;appPath . &#39;provider.php&#39;)) {
+		// 将文件里的所有映射合并到容器的「$bind」成员变量中
+		$this-&gt;bind(include $this-&gt;appPath . &#39;provider.php&#39;);
+	}
+
+	// 将当前容器实例保存到成员变量「$instance」中，也就是容器自己保存自己的一个实例
+	static::setInstance($this);
+	
+	// 保存绑定的实例到「$instances」数组中，见对应分析
+	$this-&gt;instance(&#39;app&#39;, $this);
+	$this-&gt;instance(&#39;think\Container&#39;, $this);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><code>$bind</code>的值是一组类的标识到类的映射。从这个实现也可以看出，<strong>我们不仅可以在<code>provider.php</code>文件中添加标识到类的映射，而且可以覆盖其原有的映射，也就是将某些核心类替换成自己定义的类</strong>。</p>
+<p><code>static::setInstance($this)</code>实现的作用</p>
+<p>如图所示：</p>
+<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_3.png)</p>
+<p><code>think\App</code>类的<code>$instance</code>成员变量指向<code>think\App</code>类的一个实例，也就是类自己保存自己的一个实例。</p>
+<p><code>instance()</code>方法的实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function instance(string $abstract, $instance)
+{
+  //检查「$bind」中是否保存了名称到实际类的映射，有的话，通过传入名称，就可以找到实际的类
+	$abstract = $this-&gt;getAlias($abstract);
+	//保存绑定的实例到「$instances」数组中，$this-&gt;instances[&#34;think\App&#34;] = $instance;
+	$this-&gt;instances[$abstract] = $instance;
+	return $this;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="http类的实例化以及依赖注入原理">Http类的实例化以及依赖注入原理</h3>
+<p>这里，<code>$http = (new App())-&gt;http</code>，前半部分好理解，后半部分乍一看有点让人摸不着头脑，<code>App</code>类并不存在<code>http</code>成员变量，这里何以大胆调用了一个不存在的东东呢？
+原来，<code>App</code>类继承自<code>Container</code>类，而<code>Container</code>类实现了<code>__get()</code> 魔术方法，在PHP中，当访问到的变量不存在，就会触发<code>__get()</code>魔术方法。该方法的实现如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function __get($name)
+{
+	return $this-&gt;get($name);
+}
+public function get($abstract)
+{
+	//先检查是否有绑定实际的类或者是否实例已存在
+	//比如，$abstract = &#39;http&#39;
+	if ($this-&gt;has($abstract)) {
+		return $this-&gt;make($abstract);
+	}
+	// 找不到类则抛出类找不到的错误
+	throw new ClassNotFoundException(&#39;class not exists: &#39; . $abstract, $abstract);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>然而，实际上，主要是<code>make()</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function make(string $abstract, array $vars = [], bool $newInstance = false)
+{
+	$abstract = $this-&gt;getAlias($abstract);
+	//如果已经存在实例，且不强制创建新的实例，直接返回已存在的实例
+	if (isset($this-&gt;instances[$abstract]) <span class="err">&amp;&amp;</span> !$newInstance) {
+		return $this-&gt;instances[$abstract];
+	}
+	//如果有绑定，且绑定的是闭包
+	if (isset($this-&gt;bind[$abstract]) <span class="err">&amp;&amp;</span> $this-&gt;bind[$abstract] instanceof Closure) {
+		//通过反射实执行方法
+		$object = $this-&gt;invokeFunction($this-&gt;bind[$abstract], $vars);
+	} else {
+		//通过反射实例化需要的类，比如&#39;think\Http&#39;
+		$object = $this-&gt;invokeClass($abstract, $vars);
+	}
+
+	if (!$newInstance) {
+		$this-&gt;instances[$abstract] = $object;
+	}
+
+	return $object;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>然而，<code>make()</code>方法主要靠<code>invokeClass()</code>来实现类的实例化（如果绑定的是闭包的话，则靠invokeFunction方法）。该方法具体分析：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">public function invokeClass(string $class, array $vars = [])
+{
+	try {
+		//通过反射实例化类
+		$reflect = new ReflectionClass($class);
+	} catch (ReflectionException $e) {
+		throw new ClassNotFoundException(&#39;class not exists: &#39; . $class, $class, $e);
+	}
+
+	if ($reflect-&gt;hasMethod(&#39;__make&#39;)) {
+		//返回的$method包含&#39;__make&#39;的各种信息，如公有/私有
+		$method = $reflect-&gt;getMethod(&#39;__make&#39;);
+		//检查是否是公有方法且是静态方法
+		if ($method-&gt;isPublic() <span class="err">&amp;&amp;</span> $method-&gt;isStatic()) {
+			//绑定参数
+			$args = $this-&gt;bindParams($method, $vars);
+			//调用该方法（__make），因为是静态的，所以第一个参数是null  
+			//因此，可得知，一个类中，如果有__make方法，在类实例化之前会首先被调用
+			return $method-&gt;invokeArgs(null, $args);
+		}
+	}
+	//获取类的构造函数
+	$constructor = $reflect-&gt;getConstructor();
+	//有构造函数则绑定其参数
+	$args = $constructor ? $this-&gt;bindParams($constructor, $vars) : [];
+	//根据传入的参数，通过反射，实例化类
+	$object = $reflect-&gt;newInstanceArgs($args);
+	// 执行容器回调
+	$this-&gt;invokeAfter($class, $object);
+
+	return $object;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>以上代码可看出，在一个类中，添加<code>__make()</code>方法，在类实例化时，会最先被调用。以上最值得一提的是<code>bindParams()</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">protected function bindParams(ReflectionFunctionAbstract $reflect, array $vars = []): array
+{
+	//如果参数个数为0，直接返回
+	if ($reflect-&gt;getNumberOfParameters() == 0) {
+		return [];
+	}
+
+	// 判断数组类型 数字数组时按顺序绑定参数
+	reset($vars);
+	$type   = key($vars) === 0 ? 1 : 0;
+	//通过反射获取函数的参数，比如，获取Http类构造函数的参数，为「App $app」
+	$params = $reflect-&gt;getParameters();
+	$args   = [];
+
+	foreach ($params as $param) {
+		$name      = $param-&gt;getName();
+		$lowerName = Str::snake($name);
+		$class     = $param-&gt;getClass();
+
+		//如果参数是一个类
+		if ($class) {
+			//将类型提示的参数实例化
+			$args[] = $this-&gt;getObjectParam($class-&gt;getName(), $vars);
+			// 如果参数是普通数组
+		} elseif (1 == $type <span class="err">&amp;&amp;</span> !empty($vars)) {
+			$args[] = array_shift($vars);
+			// 如果参数是关联数组
+		} elseif (0 == $type <span class="err">&amp;&amp;</span> isset($vars[$name])) {
+			$args[] = $vars[$name];
+		} elseif (0 == $type <span class="err">&amp;&amp;</span> isset($vars[$lowerName])) {
+			$args[] = $vars[$lowerName];
+			// 如果参数有默认值
+		} elseif ($param-&gt;isDefaultValueAvailable()) {
+			$args[] = $param-&gt;getDefaultValue();
+		} else {
+			throw new InvalidArgumentException(&#39;method param miss:&#39; . $name);
+		}
+	}
+
+	return $args;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>而这之中，又最值得一提的是<code>getObjectParam()</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">protected function getObjectParam(string $className, array <span class="err">&amp;</span>$vars)
+{
+	$array = $vars;
+	$value = array_shift($array);
+	// 如果传入的值已经是一个实例，直接返回
+	if ($value instanceof $className) {
+		$result = $value;
+		array_shift($vars);
+	} else {
+		//实例化传入的类
+		$result = $this-&gt;make($className);
+	}
+
+	return $result;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><code>getObjectParam()</code>方法再一次光荣地调用<code>make()</code>方法，实例化一个类，而这个类，正是从<code>Http</code>的构造函数提取的参数，而这个参数又恰恰是一个类的实例——<code>App</code>类的实例。到这里，程序不仅通过PHP的反射类实例化了<code>Http</code>类，而且实例化了<code>Http</code>类的依赖<code>App</code>类。假如<code>App</code>类又依赖<code>C</code>类，<code>C</code>类又依赖<code>D类</code>……不管多少层，整个依赖链条依赖的类都可以实现实例化。</p>
+<p>总的来说，整个过程大概是这样的：需要实例化<code>Http</code>类 &gt; 提取构造函数发现其依赖<code>App</code>类 ==&gt; 开始实例化<code>App</code>类（如果发现还有依赖，则一直提取下去，直到天荒地老）&gt; 将实例化好的依赖（App类的实例）传入<code>Http</code>类来实例化<code>Http</code>类。</p>
+<p>这个过程，起个装逼的名字就叫做「依赖注入」，起个摸不着头脑的名字，就叫做「控制反转」。</p>
+<p>这个过程，如果退回远古时代，要实例化<code>Http</code>类，大概是这样实现的（假如有很多层依赖）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">$e = new E();
+$d = new D($e);
+$c = new C($d);
+$app = new App($c);
+$http = new Http($app);
+</code></pre></td></tr></table>
+</div>
+</div><p>这得有多累人。而现代PHP，交给「容器」就好了。</p>
+<p>另外，需要提的一点是<code>make</code>方法的<code>$vars</code>参数，它的形式可以是普通数组、关联数组，而且数组中元素的值可以是一个类的实例。<code>$vars</code>参数的值最终将传递给要实例化的类的构造函数或者<code>__make</code>方法中对应的参数。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/php/">php</a>
+          <a href="/tags/tp/">tp</a>
+          <a href="/tags/%E6%89%8B%E5%86%8C/">手册</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_b/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Tp6.0源码分析_b</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8Aphp%E5%AE%9E%E7%8E%B0/">
+            <span class="next-text nav-default">设计模式及PHP实现</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/zs368/" class="iconfont icon-github" title="github"></a>
+      <a href="http://bilibili.com" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://zs368.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
