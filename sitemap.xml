@@ -3,35 +3,56 @@
   
   <url>
     <loc>https://zs368.github.io/categories/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/tags/php/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/post/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/tags/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/post/%E7%AE%97%E6%B3%95%E5%8F%8Aphp%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-07-30T12:03:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -52,13 +73,6 @@
   
   <url>
     <loc>https://zs368.github.io/tags/%E6%89%8B%E5%86%8C/</loc>
-    <lastmod>2020-07-27T10:40:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-07-27T10:40:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
