@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-18T10:31:09+08:00" />
 <meta itemprop="dateModified" content="2020-07-18T10:31:09+08:00" />
-<meta itemprop="wordCount" content="1939">
+<meta itemprop="wordCount" content="7448">
 
 
 
@@ -127,8 +127,8 @@
             <a href="/categories/php/"> php </a>
             <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"> 设计模式 </a>
             </div>
-          <span class="more-meta"> 1939 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 7448 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -173,6 +173,9 @@
     <div class="post-content">
       <blockquote>
 <p>《深入PHP 面向对象、模式与实践》</p>
+<p><a href="https://github.com/guanguans/design-patterns-for-humans-cn">design-patterns-for-humans-cn</a></p>
+<p><a href="https://learnku.com/articles/27556">超全的设计模式简介（45 种）</a></p>
+<p><a href="https://www.kancloud.cn/a173512/php_note/1231245">PHP笔记</a></p>
 </blockquote>
 <h2 id="用于生成对象的模式">用于生成对象的模式</h2>
 <h3 id="单例模式">单例模式</h3>
@@ -469,6 +472,7 @@ echo $ForeignDog-&gt;getDog(); // 哈士奇
 </div><h3 id="原型模式">原型模式</h3>
 <blockquote>
 <p>（Prototype）通过克隆生成对象</p>
+<p>用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象</p>
 </blockquote>
 <ul>
 <li>多用于创建复杂的或者耗时的实例；或者创建值相等，只是命名不一样的同类数据</li>
@@ -630,45 +634,2060 @@ class ServiceLocator implements ServiceLocatorInterface
 </div><h3 id="依赖注入">依赖注入</h3>
 <blockquote>
 <p>（Dependency Injection）让系统给我们对象</p>
+<p>可以看一下tp6.0源码分析中的依赖注入原理</p>
+<p><a href="https://learnku.com/articles/4977/laravel-service-container-implementation-princip">Laravel 服务容器实现原理</a></p>
 </blockquote>
-<h2 id="使面向对象编程更加灵活的模式">使面向对象编程更加灵活的模式</h2>
+<ul>
+<li>容器就是一个对象，它知道怎样初始化并配置对象及其依赖的所有对象</li>
+<li>注册会用到一个依赖关系名称和一个依赖关系的定义</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Bim</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="no">__METHOD__</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Bar</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$bim</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Bim</span> <span class="nv">$bim</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bim</span> <span class="o">=</span> <span class="nv">$bim</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bim</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="no">__METHOD__</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$bar</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Bar</span> <span class="nv">$bar</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span> <span class="o">=</span> <span class="nv">$bar</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="no">__METHOD__</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Container</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$s</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__set</span><span class="p">(</span><span class="nv">$k</span><span class="p">,</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">s</span><span class="p">[</span><span class="nv">$k</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$c</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__get</span><span class="p">(</span><span class="nv">$k</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// return $this-&gt;s[$k]($this);
+</span><span class="c1"></span>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">s</span><span class="p">[</span><span class="nv">$k</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//自动绑定（Autowiring）自动解析（Automatic Resolution）
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">build</span><span class="p">(</span><span class="nv">$className</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 如果是匿名函数（Anonymous functions），也叫闭包函数（closures）
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nv">$className</span> <span class="nx">instanceof</span> <span class="nx">Closure</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 执行闭包函数，并将结果
+</span><span class="c1"></span>            <span class="k">return</span> <span class="nv">$className</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="sd">/** @var ReflectionClass $reflector */</span>
+        <span class="nv">$reflector</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionClass</span><span class="p">(</span><span class="nv">$className</span><span class="p">);</span>
+
+        <span class="c1">// 检查类是否可实例化, 排除抽象类abstract和对象接口interface
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$reflector</span><span class="o">-&gt;</span><span class="na">isInstantiable</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;Can&#39;t instantiate this.&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="sd">/** @var ReflectionMethod $constructor 获取类的构造函数 */</span>
+        <span class="nv">$constructor</span> <span class="o">=</span> <span class="nv">$reflector</span><span class="o">-&gt;</span><span class="na">getConstructor</span><span class="p">();</span>
+
+        <span class="c1">// 若无构造函数，直接实例化并返回
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$constructor</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nv">$className</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 取构造函数参数,通过 ReflectionParameter 数组返回参数列表
+</span><span class="c1"></span>        <span class="nv">$parameters</span> <span class="o">=</span> <span class="nv">$constructor</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">();</span>
+
+        <span class="c1">// 递归解析构造函数的参数
+</span><span class="c1"></span>        <span class="nv">$dependencies</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDependencies</span><span class="p">(</span><span class="nv">$parameters</span><span class="p">);</span>
+
+        <span class="c1">// 创建一个类的新实例，给出的参数将传递到类的构造函数。
+</span><span class="c1"></span>        <span class="k">return</span> <span class="nv">$reflector</span><span class="o">-&gt;</span><span class="na">newInstanceArgs</span><span class="p">(</span><span class="nv">$dependencies</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDependencies</span><span class="p">(</span><span class="nv">$parameters</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$dependencies</span> <span class="o">=</span> <span class="p">[];</span>
+
+        <span class="sd">/** @var ReflectionParameter $parameter */</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$parameters</span> <span class="k">as</span> <span class="nv">$parameter</span><span class="p">)</span> <span class="p">{</span>
+            <span class="sd">/** @var ReflectionClass $dependency */</span>
+            <span class="nv">$dependency</span> <span class="o">=</span> <span class="nv">$parameter</span><span class="o">-&gt;</span><span class="na">getClass</span><span class="p">();</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$dependency</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">// 是变量,有默认值则设置默认值
+</span><span class="c1"></span>                <span class="nv">$dependencies</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resolveNonClass</span><span class="p">(</span><span class="nv">$parameter</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 是一个类，递归解析
+</span><span class="c1"></span>                <span class="nv">$dependencies</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">(</span><span class="nv">$dependency</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$dependencies</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">resolveNonClass</span><span class="p">(</span><span class="nv">$parameter</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 有默认值则返回默认值
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nv">$parameter</span><span class="o">-&gt;</span><span class="na">isDefaultValueAvailable</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$parameter</span><span class="o">-&gt;</span><span class="na">getDefaultValue</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s1">&#39;I have no idea what to do here.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ----
+</span><span class="c1"></span><span class="nv">$c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">bar</span> <span class="o">=</span> <span class="s1">&#39;Bar&#39;</span><span class="p">;</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">foo</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="na">bar</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// 从容器中取得Foo
+</span><span class="c1"></span><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">;</span>
+<span class="nv">$foo</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span> <span class="c1">// Bim::doSomething|Bar::doSomething|Foo::doSomething
+</span><span class="c1"></span>
+<span class="c1">// ----
+</span><span class="c1"></span><span class="nv">$di</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">foo</span> <span class="o">=</span> <span class="s1">&#39;Foo&#39;</span><span class="p">;</span>
+
+<span class="sd">/** @var Foo $foo */</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$di</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">;</span>
+
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$foo</span><span class="p">);</span>
+<span class="cm">/*
+</span><span class="cm">Foo#10 (1) {
+</span><span class="cm">  private $bar =&gt;
+</span><span class="cm">  class Bar#14 (1) {
+</span><span class="cm">    private $bim =&gt;
+</span><span class="cm">    class Bim#16 (0) {
+</span><span class="cm">    }
+</span><span class="cm">  }
+</span><span class="cm">}
+</span><span class="cm">*/</span>
+
+<span class="nv">$foo</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span> <span class="c1">// Bim::doSomething|Bar::doSomething|Foo::doSomething
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使面向对象编程更加灵活的模式">使面向对象编程更加灵活的模式</h2>
 <h3 id="组合模式">组合模式</h3>
 <blockquote>
-<p>（Composite）  将一组对象组合为可像单个对象一样使用的结构</p>
+<p>（Composite） 将对象组合成树形结构以表示‘部分-整体’的层次结构，使得用户对单个对象和组合对象的使用具有一致性</p>
+<p>个人理解：类似一个文字和一段文字都可以进行相同的操作，或是类似于文件夹系统虽是不同层级但操作方法相同。</p>
 </blockquote>
-<h3 id="装饰器模式">装饰器模式</h3>
+<ul>
+<li>灵活性：组合模式中的所有类属于同一个父类型，所以在设计中加入新的组合对象或叶子对象对外部没有影响。</li>
+<li>简单性：使用组合结构的客户端只需要调用一个简单的接口即可，因为它无需知道所使用的对象是组合对象还是叶子对象。</li>
+<li>隐式影响范围：组合模式中的对象以树状结构组织在一起，每个组合对象都持有指向子对象的引用。</li>
+<li>现实影响范围：可以遍历树形结构来得到对象信息或对对象执行操作。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Unit</span>
+<span class="p">{</span>
+    <span class="k">function</span> <span class="nf">getComposite</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">bombardStrength</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">CompositeUnit</span> <span class="k">extends</span> <span class="nx">Unit</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$units</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="k">function</span> <span class="nf">getComposite</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">units</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">removeUnit</span><span class="p">(</span><span class="nx">Unit</span> <span class="nv">$unit</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span> <span class="o">=</span> <span class="nx">array_udiff</span><span class="p">(</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$unit</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">===</span> <span class="nv">$b</span><span class="p">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">addUnit</span><span class="p">(</span><span class="nx">Unit</span> <span class="nv">$unit</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$unit</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span><span class="p">,</span> <span class="k">true</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$unit</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Army</span> <span class="k">extends</span> <span class="nx">CompositeUnit</span>
+<span class="p">{</span>
+    <span class="k">function</span> <span class="nf">bombardStrength</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">units</span> <span class="k">as</span> <span class="nv">$unit</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$ret</span> <span class="o">+=</span> <span class="nv">$unit</span><span class="o">-&gt;</span><span class="na">bombardStrength</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Archer</span> <span class="k">extends</span> <span class="nx">Unit</span>
+<span class="p">{</span>
+    <span class="k">function</span> <span class="nf">bombardStrength</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">LaserCannonUnit</span> <span class="k">extends</span> <span class="nx">Unit</span>
+<span class="p">{</span>
+    <span class="k">function</span> <span class="nf">bombardStrength</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">44</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">UnitScript</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">joinExisting</span><span class="p">(</span><span class="nx">Unit</span> <span class="nv">$newUnit</span><span class="p">,</span> <span class="nx">Unit</span> <span class="nv">$occupyingUnit</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$comp</span> <span class="o">=</span> <span class="nv">$occupyingUnit</span><span class="o">-&gt;</span><span class="na">getComposite</span><span class="p">()))</span> <span class="p">{</span>
+            <span class="nv">$comp</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="nv">$newUnit</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$comp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Army</span><span class="p">();</span>
+            <span class="nv">$comp</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="nv">$occupyingUnit</span><span class="p">);</span>
+            <span class="nv">$comp</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="nv">$newUnit</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$comp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$army1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Army</span><span class="p">();</span>
+<span class="nv">$army1</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="k">new</span> <span class="nx">Archer</span><span class="p">());</span>
+<span class="nv">$army1</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="k">new</span> <span class="nx">Archer</span><span class="p">());</span>
+<span class="nv">$army2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Army</span><span class="p">();</span>
+<span class="nv">$army2</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="k">new</span> <span class="nx">Archer</span><span class="p">());</span>
+<span class="nv">$army2</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="k">new</span> <span class="nx">Archer</span><span class="p">());</span>
+<span class="nv">$army2</span><span class="o">-&gt;</span><span class="na">addUnit</span><span class="p">(</span><span class="k">new</span> <span class="nx">LaserCannonUnit</span><span class="p">());</span>
+<span class="nv">$composite</span> <span class="o">=</span> <span class="nx">UnitScript</span><span class="o">::</span><span class="na">joinExisting</span><span class="p">(</span><span class="nv">$army2</span><span class="p">,</span> <span class="nv">$army1</span><span class="p">);</span>
+<span class="nx">print_r</span><span class="p">(</span><span class="nv">$composite</span><span class="o">-&gt;</span><span class="na">bombardStrength</span><span class="p">());</span>				<span class="c1">// 60
+</span><span class="c1"></span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://www.cnblogs.com/praglody/p/6783317.html">PHP设计模式之组合模式</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">CompanyBase</span>
+<span class="p">{</span>
+    <span class="c1">//节点名称
+</span><span class="c1"></span>    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//增加节点
+</span><span class="c1"></span>    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">);</span>
+
+    <span class="c1">//删除节点
+</span><span class="c1"></span>    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">);</span>
+
+    <span class="c1">//输出节点信息
+</span><span class="c1"></span>    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">//节点职责
+</span><span class="c1"></span>    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Company</span> <span class="k">extends</span> <span class="nx">CompanyBase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$item</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$nodeName</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">[</span><span class="nv">$nodeName</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">[</span><span class="nv">$nodeName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$c</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点已存在,节点名称：&#34;</span> <span class="o">.</span> <span class="nv">$nodeName</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$nodeName</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">[</span><span class="nv">$nodeName</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nx">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">[</span><span class="nv">$nodeName</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点不存在,节点名称：&#34;</span> <span class="o">.</span> <span class="nv">$nodeName</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$value</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;[</span><span class="si">{</span>$this-&gt;name<span class="si">}</span><span class="s2">]&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+            <span class="nv">$value</span><span class="o">-&gt;</span><span class="na">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">HumanResources</span> <span class="k">extends</span> <span class="nx">CompanyBase</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点下不能增加节点&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点下无子节点&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;人力资源部门的工作是为公司招聘人才&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Commerce</span> <span class="k">extends</span> <span class="nx">CompanyBase</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点下不能增加节点&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">CompanyBase</span> <span class="nv">$c</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;该节点下无子节点&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;商务部门的工作是为公司赚取利润&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s2">&#34;北京某科技公司&#34;</span><span class="p">);</span>
+<span class="nv">$h</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HumanResources</span><span class="p">(</span><span class="s2">&#34;人力资源部门&#34;</span><span class="p">);</span>
+<span class="nv">$com</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Commerce</span><span class="p">(</span><span class="s2">&#34;商务部门&#34;</span><span class="p">);</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$h</span><span class="p">);</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$com</span><span class="p">);</span>
+<span class="c1">//天津分公司
+</span><span class="c1"></span><span class="nv">$c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s2">&#34;天津分公司&#34;</span><span class="p">);</span>
+<span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$h</span><span class="p">);</span>
+<span class="nv">$c1</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$com</span><span class="p">);</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$c1</span><span class="p">);</span>
+<span class="c1">//武汉分公司
+</span><span class="c1"></span><span class="nv">$c2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s2">&#34;武汉分公司&#34;</span><span class="p">);</span>
+<span class="nv">$c2</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$h</span><span class="p">);</span>
+<span class="nv">$c2</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$com</span><span class="p">);</span>
+<span class="nv">$c</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$c2</span><span class="p">);</span>
+<span class="c1">//使用公司功能
+</span><span class="c1"></span><span class="nv">$c</span><span class="o">-&gt;</span><span class="na">show</span><span class="p">();</span>				<span class="nx">北京某科技公司</span>
+                  <span class="o">----</span><span class="nx">人力资源部门</span>
+                  <span class="o">----</span><span class="nx">商务部门</span>
+                  <span class="o">----</span><span class="nx">天津分公司</span>
+                  <span class="o">--------</span><span class="nx">人力资源部门</span>
+                  <span class="o">--------</span><span class="nx">商务部门</span>
+                  <span class="o">----</span><span class="nx">武汉分公司</span>
+                  <span class="o">--------</span><span class="nx">人力资源部门</span>
+                  <span class="o">--------</span><span class="nx">商务部门</span>
+<span class="c1">// $c-&gt;work();
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="装饰器模式">装饰器模式</h3>
 <blockquote>
 <p>（Decorator）  一种通过在运行时组合对象来拓展功能的灵活机制</p>
 </blockquote>
-<h3 id="外观模式">外观模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//装饰器接口
+</span><span class="c1"></span><span class="k">interface</span> <span class="nx">Decorator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeDraw</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDraw</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">//具体装饰器1-宇航员装饰
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">AstronautDecorator</span> <span class="k">implements</span> <span class="nx">Decorator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿上T恤&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">afterDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿上宇航服&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿戴完毕&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//具体装饰器2-警察装饰
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">PoliceDecorator</span> <span class="k">implements</span> <span class="nx">Decorator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿上警服&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="nf">afterDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿上防弹衣&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿戴完毕&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//被装饰者
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$decorators</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span> <span class="c1">//存放装饰器
+</span><span class="c1"></span>    <span class="c1">//添加装饰器
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">addDecorator</span><span class="p">(</span><span class="nx">Decorator</span> <span class="nv">$decorator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">decorators</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$decorator</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//所有装饰器的前方法调用
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">decorators</span> <span class="k">as</span> <span class="nv">$decorator</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$decorator</span><span class="o">-&gt;</span><span class="na">beforeDraw</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//所有装饰器的后方法调用
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDraw</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$decorators</span> <span class="o">=</span> <span class="nx">array_reverse</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">decorators</span><span class="p">);</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$decorators</span> <span class="k">as</span> <span class="nv">$decorator</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$decorator</span><span class="o">-&gt;</span><span class="na">afterDraw</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//装饰方法
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">clothes</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">beforeDraw</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="s2">&#34;穿上长衫&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">afterDraw</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//警察装饰
+</span><span class="c1"></span><span class="nv">$police</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
+<span class="nv">$police</span><span class="o">-&gt;</span><span class="na">addDecorator</span><span class="p">(</span><span class="k">new</span> <span class="nx">PoliceDecorator</span><span class="p">);</span>
+<span class="nv">$police</span><span class="o">-&gt;</span><span class="na">clothes</span><span class="p">();</span>
+<span class="c1">//宇航员装饰
+</span><span class="c1">// $astronaut = new Person;
+</span><span class="c1">// $astronaut-&gt;addDecorator(new AstronautDecorator);
+</span><span class="c1">// $astronaut-&gt;clothes();
+</span><span class="c1">//混搭风
+</span><span class="c1">// $madman = new Person;
+</span><span class="c1">// $madman-&gt;addDecorator(new PoliceDecorator);
+</span><span class="c1">// $madman-&gt;addDecorator(new AstronautDecorator);
+</span><span class="c1">// $madman-&gt;clothes();
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//区域抽象类
+</span><span class="c1"></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Area</span>
+<span class="p">{</span>    
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">treasure</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//森林类，价值100
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Forest</span> <span class="k">extends</span> <span class="nx">Area</span> 
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">treasure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//沙漠类，价值10
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Desert</span> <span class="k">extends</span> <span class="nx">Area</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">treasure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//区域类的装饰器类
+</span><span class="c1"></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">AreaDecorateor</span> <span class="k">extends</span> <span class="nx">Area</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_area</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Area</span> <span class="nv">$area</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_area</span> <span class="o">=</span> <span class="nv">$area</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//被破坏了后的区域，价值只有之前的一半
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Damaged</span> <span class="k">extends</span> <span class="nx">AreaDecorateor</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">treasure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_area</span><span class="o">-&gt;</span><span class="na">treasure</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//现在我们来获取被破坏的森林类的价值
+</span><span class="c1"></span><span class="nv">$damageForest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Damaged</span><span class="p">(</span><span class="k">new</span> <span class="nx">Forest</span><span class="p">());</span>
+<span class="k">echo</span> <span class="nv">$damageForest</span><span class="o">-&gt;</span><span class="na">treasure</span><span class="p">();</span>  <span class="c1">//返回50
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="外观模式">外观模式</h3>
 <blockquote>
 <p>（Facade）  为复杂或多边的系统创建一个简单接口</p>
 </blockquote>
-<h2 id="执行及描述任务">执行及描述任务</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//医院医生员工系统
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">DoctorSystem</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getDoctor</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="no">__CLASS__</span> <span class="o">.</span> <span class="s2">&#34;:&#34;</span> <span class="o">.</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">&#34;医生，挂你号&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Doctor</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//医生类
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Doctor</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">prescribe</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="no">__CLASS__</span> <span class="o">.</span> <span class="s2">&#34;:&#34;</span> <span class="o">.</span> <span class="s2">&#34;开个处方给你&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">return</span> <span class="s2">&#34;祖传秘方，药到病除&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//患者系统
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">SufferSystem</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">getData</span><span class="p">(</span><span class="nv">$suffer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$suffer</span> <span class="o">.</span> <span class="s2">&#34;资料&#34;</span><span class="p">;</span>
+        <span class="k">echo</span>  <span class="no">__CLASS__</span> <span class="o">.</span> <span class="s2">&#34;:&#34;</span> <span class="o">.</span> <span class="nv">$suffer</span> <span class="o">.</span> <span class="s2">&#34;的资料是这些&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">return</span>  <span class="nv">$data</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//医药系统
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">MedicineSystem</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nv">$prescribe</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="no">__CLASS__</span> <span class="o">.</span> <span class="s2">&#34;:&#34;</span> <span class="o">.</span> <span class="s2">&#34;拿到处方：&#34;</span> <span class="o">.</span> <span class="nv">$prescribe</span> <span class="o">.</span> <span class="s2">&#34;----通知药房发药了&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="nx">Shop</span><span class="o">::</span><span class="na">setMedicine</span><span class="p">(</span><span class="s2">&#34;砒霜5千克&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//药房
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">shop</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">public</span> <span class="nv">$medicine</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">setMedicine</span><span class="p">(</span><span class="nv">$medicine</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$medicine</span> <span class="o">=</span> <span class="nv">$medicine</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">getMedicine</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="no">__CLASS__</span> <span class="o">.</span> <span class="s2">&#34;:&#34;</span> <span class="o">.</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$medicine</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//通知就诊医生
+</span><span class="c1"></span><span class="nv">$doct</span> <span class="o">=</span> <span class="nx">DoctorSystem</span><span class="o">::</span><span class="na">getDoctor</span><span class="p">(</span><span class="s2">&#34;一号医生&#34;</span><span class="p">);</span>
+<span class="c1">//患者系统拿病历资料
+</span><span class="c1"></span><span class="nv">$data</span> <span class="o">=</span> <span class="nx">SufferSystem</span><span class="o">::</span><span class="na">getData</span><span class="p">(</span><span class="s2">&#34;一号患者&#34;</span><span class="p">);</span>
+<span class="c1">//医生看病历资料，开处方
+</span><span class="c1"></span><span class="nv">$prscirbe</span> <span class="o">=</span> <span class="nv">$doct</span><span class="o">-&gt;</span><span class="na">prescribe</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">//医药系统登记处方
+</span><span class="c1"></span><span class="nx">MedicineSystem</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="nv">$prscirbe</span><span class="p">);</span>
+<span class="c1">//药房拿药
+</span><span class="c1"></span><span class="nx">Shop</span><span class="o">::</span><span class="na">getMedicine</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nx">PHP_EOL</span> <span class="o">.</span> <span class="nx">PHP_EOL</span> <span class="o">.</span> <span class="s2">&#34;--------有了挂号系统以后--------&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+
+<span class="c1">//挂号系统
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Facade</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">regist</span><span class="p">(</span><span class="nv">$suffer</span><span class="p">,</span> <span class="nv">$doct</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$doct</span> <span class="o">=</span> <span class="nx">DoctorSystem</span><span class="o">::</span><span class="na">getDoctor</span><span class="p">(</span><span class="nv">$doct</span><span class="p">);</span>
+        <span class="c1">//患者系统拿病历资料
+</span><span class="c1"></span>        <span class="nv">$data</span> <span class="o">=</span> <span class="nx">SufferSystem</span><span class="o">::</span><span class="na">getData</span><span class="p">(</span><span class="nv">$suffer</span><span class="p">);</span>
+        <span class="c1">//医生看病历资料，开处方
+</span><span class="c1"></span>        <span class="nv">$prscirbe</span> <span class="o">=</span> <span class="nv">$doct</span><span class="o">-&gt;</span><span class="na">prescribe</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="c1">//医药系统登记处方
+</span><span class="c1"></span>        <span class="nx">MedicineSystem</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="nv">$prscirbe</span><span class="p">);</span>
+        <span class="c1">//药房拿药
+</span><span class="c1"></span>        <span class="nx">Shop</span><span class="o">::</span><span class="na">getMedicine</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">Facade</span><span class="o">::</span><span class="na">regist</span><span class="p">(</span><span class="s2">&#34;二号医生&#34;</span><span class="p">,</span> <span class="s2">&#34;二号患者&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="执行及描述任务">执行及描述任务</h2>
 <h3 id="解释器模式">解释器模式</h3>
 <blockquote>
 <p>（Interpreter）  构造可以创建脚本应用的迷你语言解释器</p>
 </blockquote>
-<h3 id="策略模式">策略模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Expression</span> <span class="p">{</span> <span class="c1">//抽象表示
+</span><span class="c1"></span>    <span class="k">function</span> <span class="nf">interpreter</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="nv">$str</span><span class="p">;</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="k">class</span> <span class="nc">ExpressionNum</span> <span class="k">extends</span> <span class="nx">Expression</span> <span class="p">{</span> <span class="c1">//表示数字
+</span><span class="c1"></span>    <span class="k">function</span> <span class="nf">interpreter</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">switch</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="k">case</span> <span class="s2">&#34;0&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;零&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;1&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;一&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;2&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;二&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;3&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;三&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;4&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;四&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;5&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;五&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;6&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;六&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;7&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;七&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;8&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;八&#34;</span><span class="p">;</span> 
+            <span class="k">case</span> <span class="s2">&#34;9&#34;</span><span class="o">:</span> <span class="k">return</span> <span class="s2">&#34;九&#34;</span><span class="p">;</span> 
+        <span class="p">}</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="k">class</span> <span class="nc">ExpressionCharater</span> <span class="k">extends</span> <span class="nx">Expression</span> <span class="p">{</span> <span class="c1">//表示字符
+</span><span class="c1"></span>    <span class="k">function</span> <span class="nf">interpreter</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="nx">strtoupper</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="k">class</span> <span class="nc">Interpreter</span> <span class="p">{</span> <span class="c1">//解释器
+</span><span class="c1"></span>    <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="nv">$expression</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> 
+        <span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nx">strlen</span><span class="p">(</span><span class="nv">$string</span><span class="p">);</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="nv">$temp</span> <span class="o">=</span> <span class="nv">$string</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span> 
+            <span class="k">switch</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span> 
+                <span class="k">case</span> <span class="nx">is_numeric</span><span class="p">(</span><span class="nv">$temp</span><span class="p">)</span><span class="o">:</span> <span class="nv">$expression</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressionNum</span><span class="p">();</span> <span class="k">break</span><span class="p">;</span> 
+                <span class="k">default</span><span class="o">:</span> <span class="nv">$expression</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressionCharater</span><span class="p">();</span> 
+            <span class="p">}</span> 
+            <span class="k">echo</span> <span class="nv">$expression</span><span class="o">-&gt;</span><span class="na">interpreter</span><span class="p">(</span><span class="nv">$temp</span><span class="p">);</span>
+            <span class="k">echo</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span> 
+        <span class="p">}</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="c1">//client
+</span><span class="c1"></span><span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Interpreter</span><span class="p">();</span> 
+<span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="s2">&#34;123s45abc&#34;</span><span class="p">);</span> 
+<span class="cm">/* 输出：
+</span><span class="cm">一
+</span><span class="cm">二
+</span><span class="cm">三
+</span><span class="cm">S
+</span><span class="cm">四
+</span><span class="cm">五
+</span><span class="cm">A
+</span><span class="cm">B
+</span><span class="cm">C */</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="策略模式">策略模式</h3>
 <blockquote>
 <p>（Strategy）  识别系统中的算法并以它们自己特有的类型封装算法</p>
 </blockquote>
-<h3 id="观察者模式">观察者模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">interface</span> <span class="nx">Strategy</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithmInterface</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteStrategyA</span> <span class="k">implements</span> <span class="nx">Strategy</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithmInterface</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;algorithmInterface A&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteStrategyB</span> <span class="k">implements</span> <span class="nx">Strategy</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithmInterface</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;algorithmInterface B&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Context</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$_strategy</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Strategy</span> <span class="nv">$strategy</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_strategy</span> <span class="o">=</span> <span class="nv">$strategy</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">contextInterface</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_strategy</span><span class="o">-&gt;</span><span class="na">algorithmInterface</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Client</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">function</span> <span class="nf">main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$strategyA</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcreteStrategyA</span><span class="p">();</span>
+        <span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Context</span><span class="p">(</span><span class="nv">$strategyA</span><span class="p">);</span>
+        <span class="nv">$context</span><span class="o">-&gt;</span><span class="na">contextInterface</span><span class="p">();</span>
+
+        <span class="nv">$strategyB</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcreteStrategyB</span><span class="p">();</span>
+        <span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Context</span><span class="p">(</span><span class="nv">$strategyB</span><span class="p">);</span>
+        <span class="nv">$context</span><span class="o">-&gt;</span><span class="na">contextInterface</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Client</span><span class="o">::</span><span class="na">main</span><span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="观察者模式">观察者模式</h3>
 <blockquote>
-<p>（Observer）  创建一种在发生系统时间时向不同对象发送通知的Hook机制</p>
+<p>（Observer）又名发布—订阅模式。  创建一种在发生系统时间时向不同对象发送通知的Hook机制。指多个对象间存在一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新</p>
 </blockquote>
-<h3 id="访问者模式">访问者模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Subject</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$observers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">addObserver</span><span class="p">(</span><span class="nx">Observer</span> <span class="nv">$observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$observer</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="s2">&#34;添加观察者成功&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delObserver</span><span class="p">(</span><span class="nx">Observer</span> <span class="nv">$observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$key</span> <span class="o">=</span> <span class="nx">array_search</span><span class="p">(</span><span class="nv">$observer</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span><span class="p">);</span> 
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$observer</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span><span class="p">[</span><span class="nv">$key</span><span class="p">])</span> <span class="p">{</span> 
+            <span class="nx">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+            <span class="k">echo</span> <span class="s1">&#39;删除观察者成功&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">echo</span> <span class="s1">&#39;观察者不存在，无需删除&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">notifyObservers</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span> <span class="k">as</span> <span class="nv">$observer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Server</span> <span class="k">extends</span> <span class="nx">Subject</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">publish</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;今天天气很好，我发布了更新包&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyObservers</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">interface</span> <span class="nx">Observer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Web</span> <span class="k">implements</span> <span class="nx">Observer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;通知已接收，web端系统更新中&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">App</span> <span class="k">implements</span> <span class="nx">Observer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;通知已接收，APP端稍后更新&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$server</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Server</span><span class="p">;</span>					
+<span class="nv">$web</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web</span><span class="p">;</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">App</span><span class="p">;</span>
+<span class="nv">$server</span><span class="o">-&gt;</span><span class="na">addObserver</span><span class="p">(</span><span class="nv">$web</span><span class="p">);</span>
+<span class="nv">$server</span><span class="o">-&gt;</span><span class="na">addObserver</span><span class="p">(</span><span class="nv">$app</span><span class="p">);</span>
+<span class="nv">$server</span><span class="o">-&gt;</span><span class="na">publish</span><span class="p">();</span>
+<span class="nv">$server</span><span class="o">-&gt;</span><span class="na">delObserver</span><span class="p">(</span><span class="nv">$web</span><span class="p">);</span>
+<span class="nv">$server</span><span class="o">-&gt;</span><span class="na">publish</span><span class="p">();</span>
+<span class="c1">//添加观察者成功
+</span><span class="c1">//添加观察者成功
+</span><span class="c1">//今天天气很好，我发布了更新包
+</span><span class="c1">//通知已接收，web端系统更新中
+</span><span class="c1">//通知已接收，APP端稍后更新
+</span><span class="c1">//删除观察者成功
+</span><span class="c1">//今天天气很好，我发布了更新包
+</span><span class="c1">//通知已接收，APP端稍后更新
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="访问者模式">访问者模式</h3>
 <blockquote>
-<p>（Visitor）  对对象树的所有节点应用操作</p>
+<p>（Visitor）  对对象树的所有节点应用操作，可以在不改变各元素类的前提下定义作用于这些元素的新操作</p>
 </blockquote>
-<h3 id="命令模式">命令模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">interface</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">accept</span><span class="p">(</span><span class="nx">Visitor</span> <span class="nv">$visitor</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteElementA</span> <span class="k">implements</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">accept</span><span class="p">(</span><span class="nx">Visitor</span> <span class="nv">$visitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$visitor</span><span class="o">-&gt;</span><span class="na">visit</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">operationA</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&#34;具体元素A的操作。&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteElementB</span> <span class="k">implements</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">accept</span><span class="p">(</span><span class="nx">Visitor</span> <span class="nv">$visitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$visitor</span><span class="o">-&gt;</span><span class="na">visit</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">operationB</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&#34;具体元素B的操作。&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nx">Visitor</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">visit</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$element</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteVisitorA</span> <span class="k">implements</span> <span class="nx">Visitor</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">visit</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$element</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$element</span> <span class="nx">instanceof</span> <span class="nx">ConcreteElementA</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">print_r</span><span class="p">(</span><span class="s2">&#34;具体访问者A访问--&gt;&#34;</span> <span class="o">.</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">operationA</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$element</span> <span class="nx">instanceof</span> <span class="nx">ConcreteElementB</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">print_r</span><span class="p">(</span><span class="s2">&#34;具体访问者A访问--&gt;&#34;</span> <span class="o">.</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">operationB</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteVisitorB</span> <span class="k">implements</span> <span class="nx">Visitor</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">visit</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$element</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$element</span> <span class="nx">instanceof</span> <span class="nx">ConcreteElementA</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">print_r</span><span class="p">(</span><span class="s2">&#34;具体访问者B访问--&gt;&#34;</span> <span class="o">.</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">operationA</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$element</span> <span class="nx">instanceof</span> <span class="nx">ConcreteElementB</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">print_r</span><span class="p">(</span><span class="s2">&#34;具体访问者B访问--&gt;&#34;</span> <span class="o">.</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">operationB</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//对象结构角色
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">ObjectStructure</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$list</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">accept</span><span class="p">(</span><span class="nx">Visitor</span> <span class="nv">$visitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">(</span><span class="nv">$visitor</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$element</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$element</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$element</span><span class="p">,</span> <span class="nv">$changeIndex</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$changeIndex</span> <span class="o">===</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$key</span> <span class="o">=</span> <span class="nx">array_search</span><span class="p">(</span><span class="nv">$element</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$key</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">array_splice</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">[</span><span class="nv">$element</span><span class="p">];</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nv">$value</span> <span class="o">===</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">list</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nv">$os</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ObjectStructure</span><span class="p">();</span>
+<span class="nv">$os</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">ConcreteElementA</span><span class="p">());</span>
+<span class="nv">$os</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">ConcreteElementB</span><span class="p">());</span>
+
+<span class="nv">$visitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcreteVisitorA</span><span class="p">();</span>
+<span class="nv">$os</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">(</span><span class="nv">$visitor</span><span class="p">);</span>
+<span class="nv">$visitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcreteVisitorB</span><span class="p">();</span>
+<span class="nv">$os</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">(</span><span class="nv">$visitor</span><span class="p">);</span>
+<span class="c1">//具体访问者A访问--&gt;具体元素A的操作。
+</span><span class="c1">//具体访问者A访问--&gt;具体元素B的操作。
+</span><span class="c1">//具体访问者B访问--&gt;具体元素A的操作。
+</span><span class="c1">//具体访问者B访问--&gt;具体元素B的操作。
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="命令模式">命令模式</h3>
 <blockquote>
-<p>（Command）  创建能够保存和传递的命令对象</p>
+<p>（Command）  创建能够保存和传递的命令对象。将请求封装成对象，从而使你可用不同的请求对客户进行参数化。</p>
 </blockquote>
-<h3 id="空对象模式">空对象模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$receiver</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Receiver</span> <span class="nv">$receiver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">receiver</span> <span class="o">=</span> <span class="nv">$receiver</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConcreteCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">receiver</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Receiver</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">action</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="s1">&#39;命令执行了！&#39;</span><span class="p">,</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Invoker</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$command</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$command</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">command</span> <span class="o">=</span> <span class="nv">$command</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">exec</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">command</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 准备执行者
+</span><span class="c1"></span><span class="nv">$receiverA</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Receiver</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span>
+<span class="c1">// 准备命令
+</span><span class="c1"></span><span class="nv">$command</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcreteCommand</span><span class="p">(</span><span class="nv">$receiverA</span><span class="p">);</span>
+<span class="c1">// 请求者
+</span><span class="c1"></span><span class="nv">$invoker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Invoker</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+<span class="nv">$invoker</span><span class="o">-&gt;</span><span class="na">exec</span><span class="p">();</span>
+<span class="c1">//A命令执行了！
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="空对象模式">空对象模式</h3>
 <blockquote>
 <p>（Null Object）  用无操作的对象代替空值</p>
 </blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">code</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;code makes me happy&#39;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">NullObject</span>
+<span class="p">{</span>
+    <span class="k">public</span>  <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$method</span><span class="p">,</span> <span class="nv">$arg</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;This is NullObject&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">getPerson</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$name</span> <span class="o">==</span> <span class="s1">&#39;PHPer&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">NullObject</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$phper</span> <span class="o">=</span> <span class="nx">getPerson</span><span class="p">(</span><span class="s1">&#39;JAVAer&#39;</span><span class="p">);</span>
+<span class="nv">$phper</span><span class="o">-&gt;</span><span class="na">code</span><span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     

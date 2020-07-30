@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-27T10:40:21+08:00" />
 <meta itemprop="dateModified" content="2020-07-27T10:40:21+08:00" />
-<meta itemprop="wordCount" content="7652">
+<meta itemprop="wordCount" content="7656">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 7652 words </span>
+          <span class="more-meta"> 7656 words </span>
           <span class="more-meta"> 16 mins read </span>
         
       </div>
@@ -214,23 +214,25 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">return [
-    &#39;bind&#39;      =&gt; [
-    ],
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;bind&#39;</span>      <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="p">],</span>
 
-    &#39;listen&#39;    =&gt; [
-        &#39;AppInit&#39;  =&gt; [ &#39;app\listener\ShowAppInit&#39; ], //添加在这里
-        &#39;HttpRun&#39;  =&gt; [],
-        &#39;HttpEnd&#39;  =&gt; [],
-        &#39;LogLevel&#39; =&gt; [],
-        &#39;LogWrite&#39; =&gt; [],
-    ],
+    <span class="s1">&#39;listen&#39;</span>    <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;AppInit&#39;</span>  <span class="o">=&gt;</span> <span class="p">[</span> <span class="s1">&#39;app\listener\ShowAppInit&#39;</span> <span class="p">],</span> <span class="c1">//添加在这里
+</span><span class="c1"></span>        <span class="s1">&#39;HttpRun&#39;</span>  <span class="o">=&gt;</span> <span class="p">[],</span>
+        <span class="s1">&#39;HttpEnd&#39;</span>  <span class="o">=&gt;</span> <span class="p">[],</span>
+        <span class="s1">&#39;LogLevel&#39;</span> <span class="o">=&gt;</span> <span class="p">[],</span>
+        <span class="s1">&#39;LogWrite&#39;</span> <span class="o">=&gt;</span> <span class="p">[],</span>
+    <span class="p">],</span>
 
-    &#39;subscribe&#39; =&gt; [
-    ],
-];
+    <span class="s1">&#39;subscribe&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="p">],</span>
+<span class="p">];</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这样就绑定了一个监听器（观察者）到<code>AppInit</code>事件，一旦该事件被触发，监听器将开始工作——执行其<code>handle</code>方法下的代码。一个请求的生命周期：Http::run()→Http::runWithRequest()→Http::initialize()→App::initialize() →App::load() 。</p>
@@ -260,32 +262,34 @@
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function load(): void
-{
-  ...
-	if (is_file($appPath . &#39;event.php&#39;)) {
-		$this-&gt;loadEvent(include $appPath . &#39;event.php&#39;);
-	}
-  ...
-}
-public function loadEvent(array $event): void
-{
-	if (isset($event[&#39;bind&#39;])) {
-		// 将事件标识到事件的映射合并到「Event」类「$bing」成员变量中
-		// 比如 &#39;UserLogin&#39; =&gt; &#39;app\event\UserLogin&#39;,
-		$this-&gt;event-&gt;bind($event[&#39;bind&#39;]);
-	}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">load</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+  <span class="o">...</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;event.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadEvent</span><span class="p">(</span><span class="k">include</span> <span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;event.php&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">loadEvent</span><span class="p">(</span><span class="k">array</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;bind&#39;</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="c1">// 将事件标识到事件的映射合并到「Event」类「$bing」成员变量中
+</span><span class="c1"></span>		<span class="c1">// 比如 &#39;UserLogin&#39; =&gt; &#39;app\event\UserLogin&#39;,
+</span><span class="c1"></span>		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;bind&#39;</span><span class="p">]);</span>
+	<span class="p">}</span>
 
-	if (isset($event[&#39;listen&#39;])) {
-		$this-&gt;event-&gt;listenEvents($event[&#39;listen&#39;]);
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;listen&#39;</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">listenEvents</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;listen&#39;</span><span class="p">]);</span>
+	<span class="p">}</span>
 
-	if (isset($event[&#39;subscribe&#39;])) {
-		$this-&gt;event-&gt;subscribe($event[&#39;subscribe&#39;]);
-	}
-}
+	<span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;subscribe&#39;</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">subscribe</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;subscribe&#39;</span><span class="p">]);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>最终得到的<code>Event</code>类对象大概如下：</p>
