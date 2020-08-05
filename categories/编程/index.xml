@@ -111,12 +111,12 @@
     </item>
     
     <item>
-      <title>Git常用命令</title>
-      <link>https://zs368.github.io/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <title>Git</title>
+      <link>https://zs368.github.io/post/git/</link>
       <pubDate>Fri, 29 May 2020 17:38:25 +0800</pubDate>
       
-      <guid>https://zs368.github.io/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>Git常见命令 初始化 Git仓库，使用git init命令。 添加文件到Git仓库，分两步： 使用命令git add &amp;lt;file&amp;gt; ，注意，可反复多次使用，添加多个文件</description>
+      <guid>https://zs368.github.io/post/git/</guid>
+      <description>Git基础命令 初始化 Git仓库，使用git init命令。 添加文件到Git仓库，分两步： 使用命令git add &amp;lt;file&amp;gt; ，注意，可反复多次使用，添加多个文件</description>
     </item>
     
   </channel>
