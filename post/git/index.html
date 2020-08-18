@@ -139,7 +139,11 @@
   <ul>
     <li><a href="#git基础命令">Git基础命令</a>
       <ul>
-        <li></li>
+        <li><a href="#初始化">初始化</a></li>
+        <li><a href="#版本回退">版本回退</a></li>
+        <li><a href="#分支">分支</a></li>
+        <li><a href="#标签">标签</a></li>
+        <li><a href="#远程仓库">远程仓库</a></li>
       </ul>
     </li>
     <li><a href="#git服务器自动部署">git服务器自动部署</a>
@@ -154,14 +158,14 @@
 </div>
     <div class="post-content">
       <h2 id="git基础命令">Git基础命令</h2>
-<h4 id="初始化">初始化</h4>
+<h3 id="初始化">初始化</h3>
 <p>Git仓库，使用<code>git init</code>命令。</p>
 <p>添加文件到Git仓库，分两步：</p>
 <ol>
 <li>使用命令<code>git add &lt;file&gt; </code>，注意，可反复多次使用，添加多个文件；</li>
 <li>使用命令<code>git commit -m &lt;message&gt;  </code>，完成。</li>
 </ol>
-<h4 id="版本回退">版本回退</h4>
+<h3 id="版本回退">版本回退</h3>
 <ul>
 <li>
 <p><code>HEAD</code>指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<code>git reset --hard commit_id</code>。</p>
@@ -179,7 +183,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="分支">分支</h4>
+<h3 id="分支">分支</h3>
 <ul>
 <li>查看分支：<code>git branch</code></li>
 <li>创建分支：<code>git branch &lt;name&gt; </code></li>
@@ -188,7 +192,7 @@
 <li>合并某分支到当前分支：<code>git merge &lt;name&gt; </code></li>
 <li>删除分支：<code>git branch -d &lt;name&gt; </code></li>
 </ul>
-<h4 id="标签">标签</h4>
+<h3 id="标签">标签</h3>
 <ul>
 <li>命令<code>git tag &lt;tagname&gt; </code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</li>
 <li>命令<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息；</li>
@@ -198,7 +202,7 @@
 <li>命令<code>git tag -d &lt;tagname&gt;</code> 可以删除一个本地标签；</li>
 <li>命令<code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签</li>
 </ul>
-<h4 id="远程仓库">远程仓库</h4>
+<h3 id="远程仓库">远程仓库</h3>
 <p>要关联一个远程库，使用命令<code>git remote add origin git@server-name:path/repo-name.git</code>；</p>
 <p>关联后，使用命令<code>git push -u origin master</code>第一次推送master分支的所有内容；</p>
 <p>此后，每次本地提交后，只要有必要，就可以使用命令<code>git push origin master</code>推送最新修改；</p>
