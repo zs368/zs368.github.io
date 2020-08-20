@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-08-18T16:46:07+08:00" />
 <meta itemprop="dateModified" content="2020-08-18T16:46:07+08:00" />
-<meta itemprop="wordCount" content="284">
+<meta itemprop="wordCount" content="487">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 284 words </span>
+          <span class="more-meta"> 487 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -140,6 +140,8 @@
     <li>
       <ul>
         <li><a href="#配置修改">配置修改</a></li>
+        <li><a href="#构建或重构容器">构建或重构容器</a></li>
+        <li><a href="#编辑容器的默认配置">编辑容器的默认配置</a></li>
       </ul>
     </li>
     <li><a href="#推荐阅读">推荐阅读</a></li>
@@ -229,10 +231,67 @@ cp env-example .env
 <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>xxxxxx
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="构建或重构容器">构建或重构容器</h3>
+<p>如果你对<code>Dockerfile</code>进行了任何修改，请确保你运行这个命令，这些修改才能生效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose build
+</code></pre></td></tr></table>
+</div>
+</div><p>或者，你可以指定要重建的容器（而不是重建所有容器）:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose build <span class="o">{</span>container-name<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你想全部重建，你可以使用<code>--no-cache</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose build --no-cache {container-name}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="编辑容器的默认配置">编辑容器的默认配置</h3>
+<p>打开<code>docker-compose.yml</code>修改任何你想修改的配置。</p>
+<p>栗子:</p>
+<p>修改Mysql数据库名称:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span>laradock<span class="w">
+</span><span class="w">    </span>...<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>把Redis默认端口改为1111:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="s2">&#34;1111:6379&#34;</span><span class="w">
+</span><span class="w">    </span>...<span class="w">
+</span></code></pre></td></tr></table>
+</div>
 </div><h2 id="推荐阅读">推荐阅读</h2>
-<p><a href="https://liwengo.top/2020/01/19/laradock-swoole/">https://liwengo.top/2020/01/19/laradock-swoole/</a></p>
-<p><a href="https://laradock.io/documentation/pos">https://laradock.io/documentation/pos</a></p>
-<p><a href="https://laradock.linganmin.cn/">https://laradock.linganmin.cn/</a></p>
+<p><a href="https://laradock.io/documentation/pos">英文文档</a></p>
+<p><a href="https://laradock.linganmin.cn/">中文文档</a></p>
+<p><a href="https://liwengo.top/2020/01/19/laradock-swoole/">国内配置</a></p>
     </div>
 
     
