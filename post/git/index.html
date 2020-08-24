@@ -49,7 +49,7 @@
 <meta itemprop="description" content="git常用命令">
 <meta itemprop="datePublished" content="2020-05-29T17:38:25+08:00" />
 <meta itemprop="dateModified" content="2020-05-29T17:38:25+08:00" />
-<meta itemprop="wordCount" content="3778">
+<meta itemprop="wordCount" content="4206">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 3778 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4206 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -150,6 +150,7 @@
       <ul>
         <li><a href="#裸仓库方式">裸仓库方式</a></li>
         <li><a href="#非裸仓库方式">非裸仓库方式</a></li>
+        <li><a href="#webhook">WebHook</a></li>
       </ul>
     </li>
   </ul>
@@ -218,6 +219,7 @@
 <blockquote>
 <p><a href="%5Bhttps://x-front-team.github.io/2016/09/03/%E4%BD%BF%E7%94%A8git%E9%92%A9%E5%AD%90%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1/%5D(https://x-front-team.github.io/2016/09/03/%E4%BD%BF%E7%94%A8git%E9%92%A9%E5%AD%90%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1/)">使用git钩子自动部署服务</a></p>
 <p><a href="https://learnku.com/articles/33689">Git 实现 Laravel 项目的自动化部署</a></p>
+<p><a href="https://learnku.com/articles/34320">WebHook</a></p>
 </blockquote>
 <h3 id="裸仓库方式">裸仓库方式</h3>
 <p>这也是比较推荐的方式，不太有副作用，尤其需要多人共享时。
@@ -255,20 +257,20 @@ ps: 本地和服务器都要安装git和node，否则没法玩~</p>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">const <span class="nv">http</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;http&#39;</span><span class="o">)</span><span class="p">;</span>
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
 
-const <span class="nv">hostname</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span><span class="p">;</span>
-const <span class="nv">port</span> <span class="o">=</span> 3000<span class="p">;</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
 
-const <span class="nv">server</span> <span class="o">=</span> http.createServer<span class="o">((</span>req, res<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
-  res.statusCode <span class="o">=</span> 200<span class="p">;</span>
-  res.setHeader<span class="o">(</span><span class="s1">&#39;Content-Type&#39;</span>, <span class="s1">&#39;text/plain&#39;</span><span class="o">)</span><span class="p">;</span>
-  res.end<span class="o">(</span><span class="s1">&#39;Hello World\n&#39;</span><span class="o">)</span><span class="p">;</span>
-<span class="o">})</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World\n&#39;</span><span class="p">);</span>
+<span class="p">});</span>
 
-server.listen<span class="o">(</span>port, hostname, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
-  console.log<span class="o">(</span><span class="sb">`</span>Server running at http://<span class="si">${</span><span class="nv">hostname</span><span class="si">}</span>:<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/<span class="sb">`</span><span class="o">)</span><span class="p">;</span>
-<span class="o">})</span><span class="p">;</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="nx">hostname</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running at http://</span><span class="si">${</span><span class="nx">hostname</span><span class="si">}</span><span class="sb">:</span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">/`</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>本地跑一下试试看：</p>
@@ -598,7 +600,121 @@ pm2 restart githook-test
 </div><p>再次测试，发现也可以自动部署啦！
 从git的默认行为来看，非裸仓库的方式，并不推荐，尤其是生产环境，一定要慎用。
 在一些不重要的小应用里使用还是不错的~</p>
+<h3 id="webhook">WebHook</h3>
+<p>1、仓库地址使用 ssh 例如：git@gitee.com:xxxxx/project.git</p>
+<p>2、在 gitee 或者 github 上的对应的项目添加你的部署公钥</p>
+<p>3、在 gitee 或者 github 上的对应的项目添加 WebHook 对应的 url 和访问秘钥</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
+<span class="c1">//访问秘钥
+</span><span class="c1"></span><span class="nv">$keySecret</span> <span class="o">=</span> <span class="s1">&#39;^!@KVzPZ^DaRNA7R53353%7aEAfsfdOptH7b%0i5&#39;</span><span class="p">;</span>
+
+<span class="c1">//需要更新的项目目录
+</span><span class="c1"></span><span class="nv">$wwwRoot</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/www/wwwroot/test1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/www/wwwroot/test2&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="c1">//保存运行脚本的日志
+</span><span class="c1"></span><span class="nv">$logFile</span> <span class="o">=</span> <span class="s1">&#39;log/layuimini-githook.log&#39;</span><span class="p">;</span>
+
+<span class="c1">//git执行命令
+</span><span class="c1"></span><span class="nv">$gitCommand</span> <span class="o">=</span> <span class="s1">&#39;git pull&#39;</span><span class="p">;</span>
+
+<span class="c1">// 判断是否开启秘钥认证(已实现gitee和github)
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$keySecret</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$keySecret</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">list</span><span class="p">(</span><span class="nv">$headers</span><span class="p">,</span> <span class="nv">$gitType</span><span class="p">)</span> <span class="o">=</span> <span class="p">[[],</span> <span class="k">null</span><span class="p">];</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$_SERVER</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">&#39;HTTP_&#39;</span> <span class="o">==</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$headers</span><span class="p">[</span><span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="mi">5</span><span class="p">))]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$gitType</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="s1">&#39;GITEE&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$gitType</span> <span class="o">=</span> <span class="s1">&#39;GITEE&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$gitType</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="s1">&#39;GITHUB&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$gitType</span> <span class="o">=</span> <span class="s1">&#39;GITHUB&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$gitType</span> <span class="o">==</span> <span class="s1">&#39;GITEE&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;X-GITEE-TOKEN&#39;</span><span class="p">])</span> <span class="o">||</span> <span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;X-GITEE-TOKEN&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$keySecret</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">die</span><span class="p">(</span><span class="s1">&#39;GITEE - 请求失败，秘钥有误&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$gitType</span> <span class="o">==</span> <span class="s1">&#39;GITHUB&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$json_content</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;php://input&#39;</span><span class="p">);</span>
+        <span class="nv">$signature</span> <span class="o">=</span> <span class="s2">&#34;sha1=&#34;</span> <span class="o">.</span> <span class="nx">hash_hmac</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="nv">$json_content</span><span class="p">,</span> <span class="nv">$keySecret</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$signature</span> <span class="o">!=</span> <span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;X-HUB-SIGNATURE&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">die</span><span class="p">(</span><span class="s1">&#39;GITHUB - 请求失败，秘钥有误&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">die</span><span class="p">(</span><span class="s1">&#39;请求错误，未知git类型&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">!</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$wwwRoot</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$wwwRoot</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$wwwRoot</span><span class="p">];</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$wwwRoot</span> <span class="k">as</span> <span class="nv">$vo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$shell</span> <span class="o">=</span> <span class="nx">sprintf</span><span class="p">(</span><span class="s2">&#34;cd %s &amp;&amp; git pull 2&gt;&amp;1&#34;</span><span class="p">,</span> <span class="nv">$vo</span><span class="p">);</span>
+    <span class="nv">$output</span> <span class="o">=</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$shell</span><span class="p">);</span>
+    <span class="nv">$log</span> <span class="o">=</span> <span class="nx">sprintf</span><span class="p">(</span><span class="s2">&#34;[%s] %s </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">,</span> <span class="nx">time</span><span class="p">())</span> <span class="o">.</span> <span class="s1">&#39; - &#39;</span> <span class="o">.</span> <span class="nv">$vo</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nv">$log</span><span class="p">;</span>
+    <span class="nx">file_put_contents</span><span class="p">(</span><span class="nv">$logFile</span><span class="p">,</span> <span class="nv">$log</span><span class="p">,</span> <span class="nx">FILE_APPEND</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
