@@ -271,6 +271,8 @@
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
@@ -283,31 +285,33 @@
 </span><span class="sd"> */</span>
 <span class="k">function</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="nv">$nums</span><span class="p">)</span>
 <span class="p">{</span>
-	<span class="nv">$str</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$nums</span><span class="p">;</span>
-	<span class="nv">$len</span> <span class="o">=</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
-	<span class="k">do</span> <span class="p">{</span>
-		<span class="nv">$str</span> <span class="o">=</span> <span class="nx">_sort</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$len</span><span class="p">);</span>
-		<span class="nv">$len</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
-	<span class="k">return</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$str</span><span class="p">;</span>
+    <span class="nv">$str</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$nums</span><span class="p">;</span>
+    <span class="nv">$len</span> <span class="o">=</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="nv">$str</span> <span class="o">=</span> <span class="nx">_sort</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$len</span><span class="p">);</span>
+        <span class="nv">$len</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$str</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="c1">//一次排序
 </span><span class="c1"></span><span class="k">function</span> <span class="nf">_sort</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$len</span><span class="p">)</span>
 <span class="p">{</span>
-	<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">switch</span> <span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-			<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-				<span class="c1">// $temp  = $str[$i];
-</span><span class="c1"></span>        <span class="c1">// $str[$i] = $str[$i+1];
-</span><span class="c1"></span>        <span class="c1">// $str[$i+1] = $temp;
-</span><span class="c1"></span>				<span class="nv">$str</span> <span class="o">=</span> <span class="nx">substr_replace</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="nv">$i</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-				<span class="k">break</span><span class="p">;</span>
-			<span class="k">default</span><span class="o">:</span>
-				<span class="k">break</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nv">$str</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+                <span class="c1">// $temp  = $str[$i];
+</span><span class="c1"></span>                <span class="c1">// $str[$i] = $str[$i+1];
+</span><span class="c1"></span>                <span class="c1">// $str[$i+1] = $temp;
+</span><span class="c1"></span>                <span class="nv">$str</span> <span class="o">=</span> <span class="nx">substr_replace</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="nv">$i</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$str</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="nx">var_dump</span><span class="p">(</span><span class="nx">bubble_sort</span><span class="p">(</span><span class="mi">23421</span><span class="p">));</span>
 </code></pre></td></tr></table>
 </div>
