@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-30T12:03:44+08:00" />
 <meta itemprop="dateModified" content="2020-07-30T12:03:44+08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="1046">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 0 words </span>
-          <span class="more-meta"> 0 mins read </span>
+          <span class="more-meta"> 1046 words </span>
+          <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
@@ -135,11 +135,277 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#排序算法">排序算法</a>
+      <ul>
+        <li><a href="#冒泡排序">冒泡排序</a></li>
+        <li><a href="#插入排序">插入排序</a></li>
+      </ul>
+    </li>
+    <li><a href="#推荐阅读">推荐阅读</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <h2 id="排序算法">排序算法</h2>
+<p>常见基于选择的排序算法有冒泡排序、插入排序、选择排序、归并排序和快速排序，我们在选择排序算法的时候，通常会根据以下几个维度来考虑：</p>
+<ol>
+<li>时间复杂度</li>
+<li>空间复杂度（对内存空间的消耗）</li>
+<li>算法的稳定性（如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变）</li>
+</ol>
+<h3 id="冒泡排序">冒泡排序</h3>
+<p>冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求，如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 n 次，就完成了 n 个数据的排序工作。</p>
+<p><img src="/img/arithmetic_1.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="sd">/**
+</span><span class="sd"> * 冒泡排序实现函数（PHP）        
+</span><span class="sd"> * 优：如果一次命中的话，就不用排序
+</span><span class="sd"> * @param $nums
+</span><span class="sd"> * @return mixed
+</span><span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="nv">$nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span><span class="p">(</span><span class="nv">$nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$nums</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nx">count</span><span class="p">(</span><span class="nv">$nums</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$flag</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="nx">count</span><span class="p">(</span><span class="nv">$nums</span><span class="p">)</span> <span class="o">-</span> <span class="nv">$i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                <span class="nv">$temp</span>  <span class="o">=</span> <span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="p">];</span>
+                <span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+                <span class="nv">$nums</span><span class="p">[</span><span class="nv">$j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$temp</span><span class="p">;</span>
+                <span class="nv">$flag</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$flag</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$nums</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">];</span>
+<span class="nv">$nums</span> <span class="o">=</span> <span class="nx">bubble_sort</span><span class="p">(</span><span class="nv">$nums</span><span class="p">);</span>
+<span class="nx">print_r</span><span class="p">(</span><span class="nv">$nums</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="sd">/**
+</span><span class="sd"> * 冒泡排序实现函数（PHP）        
+</span><span class="sd"> * 劣：必须调用_sort $len次，哪怕一次命中
+</span><span class="sd"> * @param $nums
+</span><span class="sd"> * @return mixed
+</span><span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="nv">$nums</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$str</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$nums</span><span class="p">;</span>
+	<span class="nv">$len</span> <span class="o">=</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+	<span class="k">do</span> <span class="p">{</span>
+		<span class="nv">$str</span> <span class="o">=</span> <span class="nx">_sort</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$len</span><span class="p">);</span>
+		<span class="nv">$len</span><span class="o">--</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="k">return</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$str</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//一次排序
+</span><span class="c1"></span><span class="k">function</span> <span class="nf">_sort</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$len</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">switch</span> <span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+			<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+				<span class="c1">// $temp  = $str[$i];
+</span><span class="c1"></span>        <span class="c1">// $str[$i] = $str[$i+1];
+</span><span class="c1"></span>        <span class="c1">// $str[$i+1] = $temp;
+</span><span class="c1"></span>				<span class="nv">$str</span> <span class="o">=</span> <span class="nx">substr_replace</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">],</span> <span class="nv">$i</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">default</span><span class="o">:</span>
+				<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nv">$str</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nx">bubble_sort</span><span class="p">(</span><span class="mi">23421</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//给出一串字符串，按顺序排列：   输入&#34;asdasdasd&#34;	输出&#34;aaadddsss&#34;
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * 劣：用新字符串和旧的比较，但还是每个字符串比较n次
+</span><span class="sd">     * @param String $s
+</span><span class="sd">     * @return String
+</span><span class="sd">     */</span>
+    <span class="k">function</span> <span class="nf">sortString</span><span class="p">(</span><span class="nv">$s</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$s_new</span> <span class="o">=</span> <span class="nv">$s</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$s</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="nv">$s_new</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span>            <span class="c1">//最好的情况，直接拼在后面
+</span><span class="c1"></span>                    <span class="nv">$s_new</span> <span class="o">=</span> <span class="nv">$s_new</span> <span class="o">.</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>             <span class="c1">//一般的情况，直接插入在当前字符串后面
+</span><span class="c1"></span>                    <span class="nv">$s_new</span> <span class="o">=</span> <span class="nx">substr_replace</span><span class="p">(</span><span class="nv">$s_new</span><span class="p">,</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="nv">$i</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>             <span class="c1">//最坏的情况，和前面的字符串依次比较
+</span><span class="c1"></span>                    <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="nv">$i</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nv">$s_new</span> <span class="o">=</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$s_new</span><span class="p">;</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                        <span class="k">switch</span> <span class="p">(</span><span class="nv">$s_new</span><span class="p">[</span><span class="nv">$j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=&gt;</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+                                <span class="k">break</span><span class="p">;</span>
+                            <span class="k">default</span><span class="o">:</span>
+                                <span class="nv">$s_new</span> <span class="o">=</span> <span class="nx">substr_replace</span><span class="p">(</span><span class="nv">$s_new</span><span class="p">,</span> <span class="nv">$s</span><span class="p">[</span><span class="nv">$i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="nv">$j</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                                <span class="k">break</span> <span class="mi">2</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$s_new</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//或者先重组为数组，使用sort函数排序，再拼接为字符串
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="插入排序">插入排序</h3>
+<p>插入排序的原理是：我们将数组中的数据分为两个区间，已排序区间和未排序区间。初始已排序区间只有一个元素，就是数组的第一个元素。插入算法的核心思想是取未排序区间中的元素，在已排序区间中找到合适的插入位置将其插入，并保证已排序区间数据一直有序。重复这个过程，直到未排序区间中元素为空，算法结束。</p>
+<p><img src="/img/arithmetic_2.png" alt=""></p>
+<h2 id="推荐阅读">推荐阅读</h2>
+<blockquote>
+<p>[数据结构与算法](</p>
+</blockquote>
     </div>
 
     
