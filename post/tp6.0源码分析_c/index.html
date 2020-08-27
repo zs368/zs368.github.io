@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-27T10:40:21+08:00" />
 <meta itemprop="dateModified" content="2020-07-27T10:40:21+08:00" />
-<meta itemprop="wordCount" content="7656">
+<meta itemprop="wordCount" content="7416">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 7656 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 7416 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -293,7 +293,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>最终得到的<code>Event</code>类对象大概如下：</p>
-<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_11.png)</p>
+<p><img src="/img/php_tp6_11.png" alt=""></p>
 <h3 id="定义事件">定义事件</h3>
 <h3 id="事件监听">事件监听</h3>
 <p>事件监听器绑定到事件之后，框架在初始化过程中，将这些配置加载到<code>Event</code>类的对象（当然也可以在程序中手动绑定监听器），接下来就可以决定在何时触发事件。<code>AppInit</code>事件是在<code>App::initialize()</code>方法中触发的，其代码如下：</p>
@@ -625,7 +625,7 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </code></pre></td></tr></table>
 </div>
 </div><p>运行过程见上面的注释。最后的结果大概是这样的：</p>
-<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_12.png)</p>
+<p><img src="/img/php_tp6_12.png" alt=""></p>
 <p>在<code>UserLogin</code>和<code>UserLogout</code>事件标识下，分别添加了对应的监听器，分别是事件订阅类<code>app\subscribe\User</code>的<code>onUserLogin</code>和<code>onUserLogout</code>。</p>
 <p>监听器添加完成后，接着是等待事件触发。<code>login</code>操作中，执行了<code>Event::trigger('UserLogin');</code>，这将执行<code>app\subscribe\User</code>的<code>onUserLogin</code>，其执行过程跟前面分析的执行事件监听器是一样的，结果输出如下：</p>
 <div class="highlight"><div class="chroma">
@@ -911,7 +911,7 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </div>
 </div><p>详细分析见代码注释。如果服务类定义了<code>register</code>方法，在服务注册的时候会被执行，该方法通常是用于将服务绑定到容器；此外，也可以通过定义<code>bind</code>属性的值来将服务绑定到容器。</p>
 <p>服务逐个注册之后，得到<code>App::services</code>的值大概是这样的：</p>
-<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_13.png)</p>
+<p><img src="/img/php_tp6_13.png" alt=""></p>
 <p>每个服务的实例都包含一个<code>App</code>类的实例。</p>
 <h4 id="服务初始化">服务初始化</h4>
 <p>执行<code>$this-&gt;make($initializer)-&gt;init($this)</code>，<code>$initializer</code>等于<code>BootService::class</code>时，调用该类中的<code>init</code>方法，该方法代码如下：</p>

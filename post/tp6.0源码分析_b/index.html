@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-27T10:40:16+08:00" />
 <meta itemprop="dateModified" content="2020-07-27T10:40:16+08:00" />
-<meta itemprop="wordCount" content="10343">
+<meta itemprop="wordCount" content="10184">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 10343 words </span>
+          <span class="more-meta"> 10184 words </span>
           <span class="more-meta"> 21 mins read </span>
         
       </div>
@@ -825,7 +825,7 @@ public function bootService($service)
 <p>关于系统服务，是Thinkphp6.0新加入的比较重要的一部分，后面再单独作分析。</p>
 </blockquote>
 <p>初始化之后，「App」类的实例大概是这样子的：</p>
-<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_9.png)</p>
+<p><img src="/img/php_tp6_9.png" alt=""></p>
 <h2 id="全局中间件的加载">全局中间件的加载</h2>
 <p>上一篇分析了应用的初始化，也就是对<code>Http</code>类的<code>run()</code>方法里面调用的<code>runWithRequest ()</code>方法的第一行代码<code>$this-&gt;initialize()</code>的展开分析。</p>
 <div class="highlight"><div class="chroma">
@@ -991,7 +991,7 @@ protected function buildMiddleware($middleware, string $type): array
 </code></pre></td></tr></table>
 </div>
 </div><p>详细分析见以上代码注释。最后返回的结果，在<code>add</code>方法中，执行<code>$this-&gt;queue[$type][] = $middleware;</code>添加到一个队列。最终的解析结果大概是这样的：</p>
-<p>![](/Users/zhangsheng/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/笔记/个人笔记/media/php_tp6_10.png)</p>
+<p><img src="/img/php_tp6_10.png" alt=""></p>
 <p>至此，全局中间件就加载完毕。</p>
 <h2 id="中间件的执行">中间件的执行？？？</h2>
 <p>ThinkPHP 6.0 对中间件的实现进行了巨大的改进，比起之前版本的实现更加简洁、有序、精妙，可以说是实现了质的飞跃，紧跟世界潮流。这篇文章对其实现细节进行分析。</p>
