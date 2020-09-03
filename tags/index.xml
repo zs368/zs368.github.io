@@ -6,10 +6,19 @@
     <description>Recent content in Tags on OxO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 18 Aug 2020 16:46:07 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2020 18:38:23 +0800</lastBuildDate>
     
 	<atom:link href="https://zs368.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>redis</title>
+      <link>https://zs368.github.io/tags/redis/</link>
+      <pubDate>Thu, 03 Sep 2020 18:38:23 +0800</pubDate>
+      
+      <guid>https://zs368.github.io/tags/redis/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>docker</title>

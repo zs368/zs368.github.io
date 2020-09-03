@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis - OxO</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="zs" /><meta name="description" content="" /><meta name="keywords" content="redis" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://zs368.github.io/post/redis/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Redis" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zs368.github.io/post/redis/" />
+<meta property="article:published_time" content="2020-09-03T18:38:23+08:00" />
+<meta property="article:modified_time" content="2020-09-03T18:38:23+08:00" />
+<meta itemprop="name" content="Redis">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2020-09-03T18:38:23+08:00" />
+<meta itemprop="dateModified" content="2020-09-03T18:38:23+08:00" />
+<meta itemprop="wordCount" content="6545">
+
+
+
+<meta itemprop="keywords" content="redis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">zs368</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/info/">
+        <li class="mobile-menu-item">Info</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">zs368</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/info/">Info</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+            </div>
+          <span class="more-meta"> 6545 words </span>
+          <span class="more-meta"> 14 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础">基础</a>
+      <ul>
+        <li><a href="#数据类型">数据类型</a></li>
+        <li><a href="#通用指令">通用指令</a></li>
+      </ul>
+    </li>
+    <li><a href="#高级">高级</a>
+      <ul>
+        <li><a href="#持久化">持久化</a></li>
+        <li><a href="#事务">事务</a></li>
+        <li><a href="#锁">锁</a></li>
+        <li><a href="#删除策略">删除策略</a></li>
+        <li><a href="#核心配置">核心配置</a></li>
+        <li><a href="#高级数据类型">高级数据类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#解决方案">解决方案</a>
+      <ul>
+        <li><a href="#主从复制">主从复制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="基础">基础</h2>
+<h3 id="数据类型">数据类型</h3>
+<p><img src="/img/redis-data-structure-types.jpg" alt=""></p>
+<h4 id="strings">STRINGS</h4>
+<ul>
+<li>存储的数据：单个数据，最简单的数据存储类型，也是最常用的数据存储类型</li>
+<li>存储数据的格式：一个存储空间保存一个数据</li>
+<li>存储内容：通常使用字符串，如果字符串以整数的形式展示，可以作为数字操作使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">APPEND key value                  <span class="c1"># append a value to a key</span>
+BITCOUNT key <span class="o">[</span>start end<span class="o">]</span>          <span class="c1"># count set bits in a string</span>
+SET key value                     <span class="c1"># set value in key</span>
+SETNX key value                   <span class="c1"># set if not exist value in key</span>
+SETRANGE key offset value         <span class="c1"># overwrite part of a string at key starting at the specified offset</span>
+STRLEN key                        <span class="c1"># get the length of the value stored in a key</span>
+MSET key value <span class="o">[</span>key value ...<span class="o">]</span>    <span class="c1"># set multiple keys to multiple values</span>
+MSETNX key value <span class="o">[</span>key value ...<span class="o">]</span>  <span class="c1"># set multiple keys to multiple values, only if none of the keys exist</span>
+GET key                           <span class="c1"># get value in key</span>
+GETRANGE key start end            <span class="c1"># get substring of stored value from start to end offsets (both inclusive)</span>
+MGET key <span class="o">[</span>key ...<span class="o">]</span>                <span class="c1"># get the values of all the given keys</span>
+INCR key                          <span class="c1"># increment value in key</span>
+INCRBY key increment              <span class="c1"># increment the integer value of a key by the given amount</span>
+INCRBYFLOAT key increment         <span class="c1"># increment the float value of a key by the given amount</span>
+DECR key                          <span class="c1"># decrement the integer value of key by one</span>
+DECRBY key decrement              <span class="c1"># decrement the integer value of a key by the given number</span>
+DEL key                           <span class="c1"># delete key</span>
+
+EXPIRE key <span class="m">120</span>                    <span class="c1"># key will be deleted in 120 seconds</span>
+TTL key                           <span class="c1"># returns the number of seconds until a key is deleted</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="lists">LISTS</h4>
+<ul>
+<li>数据存储需求：存储多个数据，并对数据进入存储空间的顺序进行区分</li>
+<li>需要的存储结构：一个存储空间保存多个数据，且通过数据可以体现进入顺序</li>
+<li>list类型：保存多个数据，底层使用双向链表存储结构实现</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">RPUSH key value <span class="o">[</span>value ...<span class="o">]</span>           <span class="c1"># put the new value at the end of the list</span>
+RPUSHX key value                      <span class="c1"># append a value to a list, only if the exists</span>
+LPUSH key value <span class="o">[</span>value ...<span class="o">]</span>           <span class="c1"># put the new value at the start of the list</span>
+LRANGE key start stop                 <span class="c1"># give a subset of the list</span>
+LINDEX key index                      <span class="c1"># get an element from a list by its index</span>
+LINSERT key BEFORE<span class="p">|</span>AFTER pivot value  <span class="c1"># insert an element before or after another element in a list</span>
+LLEN key                              <span class="c1"># return the current length of the list</span>
+LPOP key                              <span class="c1"># remove the first element from the list and returns it</span>
+LSET key index value                  <span class="c1"># set the value of an element in a list by its index</span>
+LREM key number_of_occurrences value  <span class="c1"># delete occurrences of value if the list stored in key</span>
+LTRIM key start stop                  <span class="c1"># trim a list to the specified range</span>
+RPOP key                              <span class="c1"># remove the last element from the list and returns it</span>
+RPOPLPUSH <span class="nb">source</span> destination          <span class="c1"># remove the last element in a list, prepend it to another list and return it</span>
+BLPOP key <span class="o">[</span>key ...<span class="o">]</span> timeout           <span class="c1"># remove and get the first element in a list, or block until one is available</span>
+BRPOP key <span class="o">[</span>key ...<span class="o">]</span> timeout           <span class="c1"># remove and get the last element in a list, or block until one is available</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="sets">SETS</h4>
+<ul>
+<li>新的存储需求：存储大量的数据，在查询方面提供更高的效率</li>
+<li>需要的存储结构：能够保存大量的数据，高效的内部存储机制，便于查询</li>
+<li>set类型：与hash存储结构完全相同，仅存储键，不存储值（nil），并且值是不允许重复的</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">SADD key member <span class="o">[</span>member ...<span class="o">]</span>     <span class="c1"># add the given value to the set</span>
+SCARD key                        <span class="c1"># get the number of members in a set</span>
+SREM key member <span class="o">[</span>member ...<span class="o">]</span>     <span class="c1"># remove the given value from the set</span>
+SISMEMBER myset value            <span class="c1"># test if the given value is in the set.</span>
+SMEMBERS myset                   <span class="c1"># return a list of all the members of this set</span>
+SUNION key <span class="o">[</span>key ...<span class="o">]</span>             <span class="c1"># combine two or more sets and returns the list of all elements</span>
+SINTER key <span class="o">[</span>key ...<span class="o">]</span>             <span class="c1"># intersect multiple sets</span>
+SMOVE <span class="nb">source</span> destination member  <span class="c1"># move a member from one set to another</span>
+SPOP key <span class="o">[</span>count<span class="o">]</span>                 <span class="c1"># remove and return one or multiple random members from a set</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="sorted-sets">SORTED SETS</h4>
+<ul>
+<li>新的存储需求：数据排序有利于数据的有效展示，需要提供一种可以根据自身特征进行排序的方式</li>
+<li>需要的存储结构：新的存储模型，可以保存可排序的数据</li>
+<li>sorted_set类型：在set的存储结构基础上添加可排序字段</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ZADD key <span class="o">[</span>NX<span class="p">|</span>XX<span class="o">]</span> <span class="o">[</span>CH<span class="o">]</span> <span class="o">[</span>INCR<span class="o">]</span> score member <span class="o">[</span>score member ...<span class="o">]</span>  <span class="c1"># add one or more members to a sorted set, or update its score if it already exists</span>
+
+ZCARD key                           <span class="c1"># get the number of members in a sorted set</span>
+ZCOUNT key min max                  <span class="c1"># count the members in a sorted set with scores within the given values</span>
+ZINCRBY key increment member        <span class="c1"># increment the score of a member in a sorted set</span>
+ZRANGE key start stop <span class="o">[</span>WITHSCORES<span class="o">]</span>  <span class="c1"># returns a subset of the sorted set</span>
+ZRANK key member                    <span class="c1"># determine the index of a member in a sorted set</span>
+ZREM key member <span class="o">[</span>member ...<span class="o">]</span>        <span class="c1"># remove one or more members from a sorted set</span>
+ZREMRANGEBYRANK key start stop      <span class="c1"># remove all members in a sorted set within the given indexes</span>
+ZREMRANGEBYSCORE key min max        <span class="c1"># remove all members in a sorted set, by index, with scores ordered from high to low</span>
+ZSCORE key member                   <span class="c1"># get the score associated with the given mmeber in a sorted set</span>
+
+ZRANGEBYSCORE key min max <span class="o">[</span>WITHSCORES<span class="o">]</span> <span class="o">[</span>LIMIT offset count<span class="o">]</span>  <span class="c1"># return a range of members in a sorted set, by score</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="hashes">HASHES</h4>
+<ul>
+<li>新的存储需求：对一系列存储的数据进行编组，方便管理，典型应用存储对象信息</li>
+<li>需要的存储结构：一个存储空间保存多个键值对数据</li>
+<li>hash类型：底层使用哈希表结构实现数据存储</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">HGET key field          <span class="c1"># get the value of a hash field</span>
+HGETALL key             <span class="c1"># get all the fields and values in a hash</span>
+HSET key field value    <span class="c1"># set the string value of a hash field</span>
+HSETNX key field value  <span class="c1"># set the string value of a hash field, only if the field does not exists</span>
+
+HMSET key field value <span class="o">[</span>field value ...<span class="o">]</span>  <span class="c1"># set multiple fields at once</span>
+
+HINCRBY key field increment  <span class="c1"># increment value in hash by X</span>
+HDEL key field <span class="o">[</span>field ...<span class="o">]</span>   <span class="c1"># delete one or more hash fields</span>
+HEXISTS key field            <span class="c1"># determine if a hash field exists</span>
+HKEYS key                    <span class="c1"># get all the fields in a hash</span>
+HLEN key                     <span class="c1"># get the number of fields in a hash</span>
+HSTRLEN key field            <span class="c1"># get the length of the value of a hash field</span>
+HVALS key                    <span class="c1"># get all the values in a hash</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="通用指令">通用指令</h3>
+<h4 id="key通用指令">KEY通用指令</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">del key									<span class="c1">#删除指定key</span>
+exists key							<span class="c1">#获取key是否存在</span>
+<span class="nb">type</span> key								<span class="c1">#获取key的类型</span>
+expire key seconds			<span class="c1">#为指定key设置有效期</span>
+pexpire key milliseconds
+expireat key timestamp
+pexpireat key milliseconds-timestamp
+ttl key									<span class="c1">#获取key的有效时间</span>
+pttl key
+persist key							<span class="c1">#切换key从时效性转换为永久性</span>
+keys pattern						<span class="c1">#查询key    *任意数量的任意符号  ?一个任意符号  []一个指定符号</span>   
+rename key newkey				<span class="c1">#为key改名</span>
+renamenx key newkey
+sort										<span class="c1">#对所有key排序</span>
+<span class="nb">help</span> @generic						<span class="c1">#其他key通用操作</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="db基本操作">DB基本操作</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">select</span> index						<span class="c1">#切换数据库</span>
+move key db							<span class="c1">#数据移动</span>
+dbsize									<span class="c1">#数据清除</span>
+flushdb
+flushall
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="高级">高级</h2>
+<h3 id="持久化">持久化</h3>
+<h4 id="rdb">RDB</h4>
+<p><strong>优点</strong></p>
+<ul>
+<li>RDB是一个紧凑压缩的二进制文件，存储效率较高</li>
+<li>RDB内部存储的是redis在某个时间点的数据快照，非常适合用于数据备份，全量复制等场景</li>
+<li>RDB恢复数据的速度要比AOF快很多</li>
+<li>应用：服务器中每X小时执行bgsave备份，并将RDB文件拷贝到远程机器中，用于灾难恢复</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>RDB方式无论是执行指令还是利用配置，无法做到实时持久化，具有较大的可能性丢失数据</li>
+<li>bgsave指令每次运行要执行fork操作创建子进程，要牺牲掉一些性能</li>
+<li>Redis的众多版本中未进行RDB文件格式的版本统一，有可能出现各版本服务之间数据格式无法兼容现象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">save										<span class="c1">#手动执行一次保存操作</span>
+bgsave									<span class="c1">#手动启动后台保存操作，但不是立即执行</span>
+debug reload						<span class="c1">#服务器运行过程中重启</span>
+shutdown save						<span class="c1">#关闭服务器时指定保存数据</span>
+<span class="c1">#conf文件配置选项</span>
+save second changes			<span class="c1">#满足限定时间范围内key的变化数量达到指定数量即进行持久化</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="aof">AOF</h4>
+<p>将数据的操作过程进行保存，日志形式，存储操作过程，存储格式复杂，关注点在数据的操作过程</p>
+<ul>
+<li><strong>always</strong> 每次写入操作均同步到AOF文件中，<strong>数据零误差</strong>，<strong>性能较低</strong>，不建议使用。</li>
+<li><strong>everysec</strong> 每秒将缓冲区中的指令同步到AOF文件中，数据准确性较高，<strong>性能较高</strong>，建议使用，也是默认配置，在系统突然宕机的情况下丢失1秒内的数据</li>
+<li><strong>no</strong> 由操作系统控制每次同步到AOF文件的周期，整体过程<strong>不可控</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">bgrewriteaof												<span class="c1">#手动重写</span>
+<span class="c1">#conf文件配置选项</span>
+appendonly yes<span class="p">|</span>no										<span class="c1">#AOF功能开启</span>
+appendfsync always<span class="p">|</span>everysec<span class="p">|</span>no			<span class="c1">#AOF写数据策略</span>
+appendfilename filename							<span class="c1">#AOF持久化文件名</span>
+dir																	<span class="c1">#AOF持久化文件保存路径</span>
+
+auto-aof-rewrite-min-size size			<span class="c1">#自动重写</span>
+auto-aof-rewrite-percentage percentage
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="事务">事务</h3>
+<p>redis事务就是一个命令执行的队列，将一系列预定义命令包装成一个整体（一个队列）。当执行时，一次性</p>
+<p>按照添加顺序依次执行，中间不会被打断或者干扰。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">multi																<span class="c1">#开启事务</span>
+discard															<span class="c1">#取消事务</span>
+<span class="nb">exec</span>																<span class="c1">#执行事务</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>语法错误（指命令书写格式有误）——整体事务中所有命令均不会执行。包括那些语法正确的命令。</p>
+<p>运行错误（指命令格式正确，但是无法正确的执行。例如对list进行incr操作）——能够正确运行的命令会执行，运行错误的命令不会被执行。</p>
+<h3 id="锁">锁</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">watch key1 <span class="o">[</span>key2……<span class="o">]</span>							<span class="c1">#对 key 添加监视锁，在执行exec前如果key发生了变化，终止事务执行</span>
+unwatch													<span class="c1">#取消对所有 key 的监视</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="分布式锁"><strong>分布式锁</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">setnx lock-key value						<span class="c1">#使用 setnx 设置一个公共锁</span>
+del															<span class="c1">#释放锁</span>	
+expire lock-key second					<span class="c1">#添加时间限定，到时不释放，放弃锁</span>
+pexpire lock-key milliseconds
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="删除策略">删除策略</h3>
+<p>内存中的数据可以通过TTL指令获取其状态</p>
+<ul>
+<li>XX ：具有时效性的数据</li>
+<li>-1 ：永久有效的数据</li>
+<li>-2 ：已经过期的数据 或 被删除的数据 或 未定义的数据</li>
+</ul>
+<h4 id="定时删除">定时删除</h4>
+<p>创建一个定时器，当key设置有过期时间，且过期时间到达时，由定时器任务立即执行对键的删除操作</p>
+<ul>
+<li>优点：节约内存，到时就删除，快速释放掉不必要的内存占用</li>
+<li>缺点：CPU压力很大，无论CPU此时负载量多高，均占用CPU，会影响redis服务器响应时间和指令吞吐量</li>
+<li>总结：用处理器性能换取存储空间（拿时间换空间）</li>
+</ul>
+<h4 id="惰性删除">惰性删除</h4>
+<p>数据到达过期时间，不做处理。等下次访问该数据时——如果未过期，返回数据。发现已过期，删除，返回不存在。</p>
+<ul>
+<li>优点：节约CPU性能，发现必须删除的时候才删除</li>
+<li>缺点：内存压力很大，出现长期占用内存的数据</li>
+<li>总结：用存储空间换取处理器性能 <strong>expireIfNeeded()</strong> （拿时间换空间）</li>
+</ul>
+<h4 id="定期删除">定期删除</h4>
+<p>周期性轮询redis库中的时效性数据，采用随机抽取的策略，利用过期数据占比的方式控制删除频度</p>
+<ul>
+<li>特点1：CPU性能占用设置有峰值，检测频度可自定义设置</li>
+<li>特点2：内存压力不是很大，长期占用内存的冷数据会被持续清理</li>
+<li>总结：周期性抽查存储空间（随机抽查，重点抽查）</li>
+</ul>
+<p><img src="/img/redis_2.png" alt=""></p>
+<h4 id="逐出算法">逐出算法</h4>
+<p>Redis使用内存存储数据，在执行每一个命令前，会调用**freeMemoryIfNeeded()**检测内存是否充足。如</p>
+<p>果内存不满足新加入数据的最低存储要求，redis要临时删除一些数据为当前指令清理存储空间。</p>
+<p>注意：逐出数据的过程不是100%能够清理出足够的可使用的内存空间，如果不成功则反复执行。当对所</p>
+<p>有数据尝试完毕后，如果不能达到内存清理的要求，将出现错误信息。</p>
+<p><strong>相关配置</strong></p>
+<ul>
+<li><strong>maxmemory</strong>——最大可使用内存（占用物理内存的比例，默认值为0，表示不限制。生产环境中根据需求设定，通常设置在50%以上）</li>
+<li><strong>maxmemory-samples</strong>——每次选取待删除数据的个数（选取数据时并不会全库扫描，导致严重的性能消耗，降低读写性能。因此采用随机获取数据的方式作为待检测删除数据）</li>
+<li><strong>maxmemory-policy</strong>——删除策略（达到最大内存后的，对被挑选出来的数据进行删除的策略）</li>
+<li><strong>server.db[i].expires</strong>——检测易失数据
+<ul>
+<li>volatile-lru：挑选最近最少使用的数据淘汰</li>
+<li>volatile-lfu：挑选最近使用次数最少的数据淘汰</li>
+<li>volatile-ttl：挑选将要过期的数据淘汰</li>
+<li>volatile-random：任意选择数据淘汰</li>
+</ul>
+</li>
+<li><strong>server.db[i].dict</strong>——检测全库数据
+<ul>
+<li>allkeys-lru：挑选最近最少使用的数据淘汰</li>
+<li>allkeys-lfu：挑选最近使用次数最少的数据淘汰</li>
+<li>allkeys-random：任意选择数据淘汰</li>
+</ul>
+</li>
+<li>放弃数据驱逐
+<ul>
+<li>no-enviction（驱逐）：禁止驱逐数据（redis4.0中默认策略），会引发错误OOM（Out Of Memory）</li>
+</ul>
+</li>
+</ul>
+<h3 id="核心配置">核心配置</h3>
+<h4 id="服务器">服务器</h4>
+<ul>
+<li><strong>daemonize</strong> yes<strong>|</strong>no  ——  设置服务器以守护进程的方式运行</li>
+<li><strong>bind</strong> 127.0.0.1  ——  绑定主机地址</li>
+<li><strong>port</strong> 6379  ——  设置服务器端口</li>
+<li><strong>databases</strong> 16  ——  设置数据库数量</li>
+</ul>
+<h4 id="日志配置">日志配置</h4>
+<ul>
+<li><strong>loglevel</strong> debug<strong>|verbose|</strong>notice<strong>|</strong>warning  ——  设置服务器以指定日志记录级别</li>
+<li><strong>logfile</strong> 端口号.log  ——  日志记录文件名</li>
+</ul>
+<p>注意：日志级别开发期设置为verbose即可，生产环境中配置为notice，简化日志输出量，降低写日志IO的频度</p>
+<h4 id="客户端配置">客户端配置</h4>
+<ul>
+<li><strong>maxclients</strong> 0  ——  设置同一时间最大客户端连接数，默认无限制。当客户端连接到达上限，Redis会关闭新的连接</li>
+<li><strong>timeout</strong> 300  ——  客户端闲置等待最大时长，达到最大值后关闭连接。如需关闭该功能，设置为 0</li>
+</ul>
+<h4 id="多服务器快捷配置"><strong>多服务器快捷配置</strong></h4>
+<ul>
+<li><strong>include</strong> /path/server-端口号.conf  ——  导入并加载指定配置文件信息，用于快速创建redis公共配置较多的redis实例配置文件，便于维护</li>
+</ul>
+<h3 id="高级数据类型">高级数据类型</h3>
+<h4 id="bitmaps"><strong>Bitmaps</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">getbit key offset									<span class="c1">#获取指定key对应偏移量上的bit值</span>
+setbit key offset value						<span class="c1">#设置指定key对应偏移量上的bit值，value只能是1或0</span>
+bitop op destKey key1 <span class="o">[</span>key2...<span class="o">]</span>		<span class="c1">#对指定key按位进行交、并、非、异或操作，并将结果保存到destKey中</span>
+bitcount key <span class="o">[</span>start end<span class="o">]</span>					<span class="c1">#统计指定key中1的数量</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="hyperloglog"><strong>HyperLogLog</strong></h4>
+<p>基数是数据集去重后元素个数。HyperLogLog 是用来做基数统计的，运用了LogLog的算法。</p>
+<ul>
+<li>用于进行基数统计，不是集合，不保存数据，只记录数量而不是具体数据</li>
+<li>核心是基数估算算法，最终数值存在一定误差</li>
+<li>误差范围：基数估计的结果是一个带有 0.81% 标准错误的近似值</li>
+<li>耗空间极小，每个hyperloglog key占用了12K的内存用于标记基数</li>
+<li>pfadd命令不是一次性分配12K内存使用，会随着基数的增加内存逐渐增大</li>
+<li>Pfmerge命令合并后占用的存储空间为12K，无论合并之前数据量多少</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">pfadd key element <span class="o">[</span>element ...<span class="o">]</span>						<span class="c1">#添加数据</span>
+pfcount key <span class="o">[</span>key ...<span class="o">]</span>											<span class="c1">#统计数据</span>
+pfmerge destkey sourcekey <span class="o">[</span>sourcekey...<span class="o">]</span>	<span class="c1">#合并数据</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="geo"><strong>GEO</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">geoadd key longitude latitude member <span class="o">[</span>longitude latitude member ...<span class="o">]</span>		<span class="c1">#添加坐标点</span>
+geopos key member <span class="o">[</span>member ...<span class="o">]</span>						<span class="c1">#获取坐标点</span>
+geodist key member1 member2 <span class="o">[</span>unit<span class="o">]</span>				<span class="c1">#计算坐标点距离</span>
+
+<span class="c1">#添加坐标点</span>
+georadius key longitude latitude radius m<span class="p">|</span>km<span class="p">|</span>ft<span class="p">|</span>mi <span class="o">[</span>withcoord<span class="o">]</span> <span class="o">[</span>withdist<span class="o">]</span> <span class="o">[</span>withhash<span class="o">]</span> <span class="o">[</span>count count<span class="o">]</span>
+<span class="c1">#获取坐标点</span>
+georadiusbymember key member radius m<span class="p">|</span>km<span class="p">|</span>ft<span class="p">|</span>mi <span class="o">[</span>withcoord<span class="o">]</span> <span class="o">[</span>withdist<span class="o">]</span> <span class="o">[</span>withhash<span class="o">]</span> <span class="o">[</span>count count<span class="o">]</span>
+<span class="c1">#计算经纬度</span>
+geohash key member <span class="o">[</span>member ...<span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="解决方案">解决方案</h2>
+<h3 id="主从复制">主从复制</h3>
+<p>主从复制即将master中的数据即时、有效的复制到slave中</p>
+<ul>
+<li>读写分离：master写、slave读，提高服务器的读写负载能力</li>
+<li>负载均衡：基于主从结构，配合读写分离，由slave分担master负载，并根据需求的变化，改变slave的数量，通过多个从节点分担数据读取负载，大大提高Redis服务器并发量与数据吞吐量</li>
+<li>故障恢复：当master出现问题时，由slave提供服务，实现快速的故障恢复</li>
+<li>数据冗余：实现数据热备份，是持久化之外的一种数据冗余方式</li>
+<li>高可用基石：基于主从复制，构建哨兵模式与集群，实现Redis的高可用方案</li>
+</ul>
+<h4 id="流程"><strong>流程</strong></h4>
+<ol>
+<li>
+<p><strong>建立连接阶段（即准备阶段）</strong>——建立slave到master的连接，使master能够识别slave，并保存slave端口号</p>
+<ol>
+<li>设置master的地址和端口，保存master信息</li>
+<li>建立socket连接</li>
+<li>发送ping命令（定时器任务）</li>
+<li>身份验证</li>
+<li>发送slave端口信息</li>
+</ol>
+<p><img src="/img/redis_3.png" alt=""></p>
+</li>
+<li>
+<p><strong>数据同步阶段</strong>——在slave初次连接master后，复制master中的所有数据到slave <strong>&amp;&amp;</strong> 将slave的数据库状态更新成master当前的数据库状态</p>
+<ol>
+<li>请求同步数据</li>
+<li>创建RDB同步数据</li>
+<li>恢复RDB同步数据</li>
+<li>请求部分同步数据</li>
+<li>恢复部分同步数据</li>
+</ol>
+<p><img src="/img/redis_4.png" alt=""></p>
+</li>
+<li>
+<p><strong>命令传播阶段</strong>  —— 当master数据库状态被修改后，导致主从服务器数据库状态不一致，此时需要让主从数据同步到一致的状态，同步的动作称为命令传播 <strong>&amp;&amp;</strong>  master将接收到的数据变更命令发送给slave，slave接收命令后执行命令</p>
+<ul>
+<li>网络闪断闪连					忽略</li>
+<li>短时间网络中断                部分复制</li>
+<li>长时间网络中断                全量复制</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#主从连接（slave连接master）</span>
+slaveof &lt;masterip&gt; &lt;masterport&gt;									<span class="c1">#客户端发送命令</span>
+redis-server -slaveof &lt;masterip&gt; &lt;masterport&gt;		<span class="c1">#启动服务器参数</span>
+slaveof &lt;masterip&gt; &lt;masterport&gt;									<span class="c1">#服务器配置</span>
+
+<span class="c1">#主从断开连接</span>
+slaveof no one																	<span class="c1">#客户端发送命令</span>
+
+<span class="c1">#授权访问</span>
+requirepass &lt;password&gt;													<span class="c1">#master客户端发送命令设置密码</span>
+config <span class="nb">set</span> requirepass &lt;password&gt;								<span class="c1">#master配置文件设置密码</span>
+config get requirepass
+auth &lt;password&gt;																	<span class="c1">#slave客户端发送命令设置密码</span>
+masterauth &lt;password&gt;														<span class="c1">#slave配置文件设置密码</span>
+redis-server –a &lt;password&gt;											<span class="c1">#slave启动服务器设置密码</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="备注">备注</h4>
+<p><strong>数据同步阶段master说明</strong></p>
+<ol>
+<li>如果master数据量巨大，数据同步阶段应避开流量高峰期，避免造成master阻塞，影响业务正常执行</li>
+<li>复制缓冲区大小设定不合理，会导致数据溢出。如进行全量复制周期太长，进行部分复制时发现数据已经存在丢失的情况，必须进行第二次全量复制，致使slave陷入死循环状态<code>**repl-backlog-size** 1mb</code></li>
+<li>master单机内存占用主机内存的比例不应过大，建议使用50%-70%的内存，留下30%-50%的内存用于执行bgsave命令和创建复制缓冲区</li>
+</ol>
+<p><strong>数据同步阶段slave说明</strong></p>
+<ol>
+<li>为避免slave进行全量复制、部分复制时服务器响应阻塞或数据不同步，建议关闭此期间的对外服务<code>**slave-serve-stale-data** *yes***|***no*</code></li>
+<li>数据同步阶段，master发送给slave信息可以理解master是slave的一个客户端，主动向slave发送命令</li>
+<li>多个slave同时对master请求数据同步，master发送的RDB文件增多，会对带宽造成巨大冲击，如果master带宽不足，因此数据同步需要根据业务需求，适量错峰</li>
+<li>slave过多时，建议调整拓扑结构，由一主多从结构变为树状结构，中间的节点既是master，也是slave。注意使用树状结构时，由于层级深度，导致深度越高的slave与最顶层master间数据同步延迟较大，数据一致性变差，应谨慎选择</li>
+</ol>
+<p><strong>部分复制的三个核心要素</strong></p>
+<p>服务器的运行 id（run id）</p>
+<ul>
+<li>概念：服务器运行ID是每一台服务器每次运行的身份识别码，一台服务器多次运行可以生成多个运行id</li>
+<li>组成：运行id由40位字符组成，是一个随机的十六进制字符</li>
+<li>作用：运行id被用于在服务器间进行传输，识别身份（如果想两次操作均对同一台服务器进行，必须每次操作携带对应的运行id，用于对方识别）</li>
+<li>实现方式：运行id在每台服务器启动时自动生成的，master在首次连接slave时，会将自己的运行ID发送给slave，slave保存此ID，通过info Server命令，可以查看节点的runid</li>
+</ul>
+<p>主服务器的复制积压缓冲区</p>
+<ul>
+<li>概念：复制缓冲区，又名复制积压缓冲区，是一个先进先出（FIFO）的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区（复制缓冲区默认数据存储空间大小是1M，由于存储空间大小是固定的，当入队元素的数量大于队列长度时，最先入队的元素会被弹出，而新元素会被放入队列）</li>
+<li>由来：每台服务器启动时，如果开启有AOF或被连接成为master节点，即创建复制缓冲区</li>
+<li>作用：用于保存master收到的所有指令（仅影响数据变更的指令，例如set，select）</li>
+<li></li>
+</ul>
+<p>主从服务器的复制偏移量</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/redis/">redis</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/laradock/">
+            <span class="next-text nav-default">Laradock</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/zs368/" class="iconfont icon-github" title="github"></a>
+      <a href="http://bilibili.com" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://zs368.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
