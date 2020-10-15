@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_c/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-27T10:40:21+08:00" />
 <meta itemprop="dateModified" content="2020-07-27T10:40:21+08:00" />
-<meta itemprop="wordCount" content="7416">
+<meta itemprop="wordCount" content="7420">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 7416 words </span>
+          <span class="more-meta"> 7420 words </span>
           <span class="more-meta"> 15 mins read </span>
         
       </div>
@@ -185,7 +185,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">namespace</span> <span class="nx">app\listener</span><span class="p">;</span>
 <span class="k">class</span> <span class="nc">ShowAppInit</span>
 <span class="p">{</span>
@@ -217,7 +217,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">return</span> <span class="p">[</span>
     <span class="s1">&#39;bind&#39;</span>      <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="p">],</span>
@@ -265,7 +265,7 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">protected</span> <span class="k">function</span> <span class="nf">load</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
 <span class="p">{</span>
   <span class="o">...</span>
@@ -302,7 +302,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">$this-&gt;event-&gt;trigger(AppInit::class);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nx">AppInit</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接着，我们看看<code>trigger</code>方法是如何触发事件的（如何调用监听器的<code>handle</code>方法）——其代码如下：</p>
@@ -362,58 +362,58 @@
 </span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function trigger($event, $params = null, bool $once = false)
-{
-	// 如果是一个对象，解析出对象的类
-	if (is_object($event)) {
-		$params = $event;
-		$event  = get_class($event);
-	}
-	// 根据事件标识解析出实际的事件
-	if (isset($this-&gt;bind[$event])) {
-		$event = $this-&gt;bind[$event];
-	}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">trigger</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$once</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// 如果是一个对象，解析出对象的类
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">is_object</span><span class="p">(</span><span class="nv">$event</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$params</span> <span class="o">=</span> <span class="nv">$event</span><span class="p">;</span>
+		<span class="nv">$event</span>  <span class="o">=</span> <span class="nx">get_class</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">// 根据事件标识解析出实际的事件
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">[</span><span class="nv">$event</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="nv">$event</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">[</span><span class="nv">$event</span><span class="p">];</span>
+	<span class="p">}</span>
 
-	$result    = [];
-	// 解析出事件的监听者（可多个）
-	$listeners = $this-&gt;listener[$event] ?? [];
-	$listeners = array_unique($listeners, SORT_REGULAR);
+	<span class="nv">$result</span>    <span class="o">=</span> <span class="p">[];</span>
+	<span class="c1">// 解析出事件的监听者（可多个）
+</span><span class="c1"></span>	<span class="nv">$listeners</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listener</span><span class="p">[</span><span class="nv">$event</span><span class="p">]</span> <span class="o">??</span> <span class="p">[];</span>
+	<span class="nv">$listeners</span> <span class="o">=</span> <span class="nx">array_unique</span><span class="p">(</span><span class="nv">$listeners</span><span class="p">,</span> <span class="nx">SORT_REGULAR</span><span class="p">);</span>
   
-	foreach ($listeners as $key =&gt; $listener) {
-    // 执行监听器的操作
-    $result[$key] = $this-&gt;dispatch($listener, $params);
-    // 如果返回false，或者没有返回值且 $once 为 true，直接中断，不再执行后面的监听器
-    if (false === $result[$key] || (!is_null($result[$key]) <span class="err">&amp;&amp;</span> $once)) {
-      break;
-    }
-  }
-  // 是否返回多个监听器的结果,$once 为 false 则返回最后一个监听器的结果
-  return $once ? end($result) : $result;
-}
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$listeners</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$listener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 执行监听器的操作
+</span><span class="c1"></span>    <span class="nv">$result</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$listener</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+    <span class="c1">// 如果返回false，或者没有返回值且 $once 为 true，直接中断，不再执行后面的监听器
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">===</span> <span class="nv">$result</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="nv">$key</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$once</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// 是否返回多个监听器的结果,$once 为 false 则返回最后一个监听器的结果
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nv">$once</span> <span class="o">?</span> <span class="nx">end</span><span class="p">(</span><span class="nv">$result</span><span class="p">)</span> <span class="o">:</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
 
-protected function dispatch($event, $params = null)
-{
-	if (!is_string($event)) {
-		$call = $event;
-	} elseif (strpos($event, &#39;::&#39;)) {
-		$call = $event;
-	} else {
-		$obj  = $this-&gt;app-&gt;make($event);
-		$call = [$obj, &#39;handle&#39;];
-	}
-	 return $this-&gt;app-&gt;invoke($call, [$params]);
-}
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$event</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$call</span> <span class="o">=</span> <span class="nv">$event</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">strpos</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="s1">&#39;::&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$call</span> <span class="o">=</span> <span class="nv">$event</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nv">$obj</span>  <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
+		<span class="nv">$call</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$obj</span><span class="p">,</span> <span class="s1">&#39;handle&#39;</span><span class="p">];</span>
+	<span class="p">}</span>
+	 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">invoke</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="p">[</span><span class="nv">$params</span><span class="p">]);</span>
+<span class="p">}</span>
 
-public function invoke($callable, array $vars = [], bool $accessible = false)
-{
-  if ($callable instanceof Closure) {
-    return $this-&gt;invokeFunction($callable, $vars);
-  } elseif (is_string($callable) <span class="err">&amp;&amp;</span> false === strpos($callable, &#39;::&#39;)) {
-    return $this-&gt;invokeFunction($callable, $vars);
-  } else {
-    return $this-&gt;invokeMethod($callable, $vars, $accessible);
-  }
-}
+<span class="k">public</span> <span class="k">function</span> <span class="nf">invoke</span><span class="p">(</span><span class="nv">$callable</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$vars</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">bool</span> <span class="nv">$accessible</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$callable</span> <span class="nx">instanceof</span> <span class="nx">Closure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invokeFunction</span><span class="p">(</span><span class="nv">$callable</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$callable</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="k">false</span> <span class="o">===</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$callable</span><span class="p">,</span> <span class="s1">&#39;::&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invokeFunction</span><span class="p">(</span><span class="nv">$callable</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invokeMethod</span><span class="p">(</span><span class="nv">$callable</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">,</span> <span class="nv">$accessible</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>注意到监听器的<code>handle</code>方法还可以接收一个参数，从上面的分析可知，<code>trigger</code>方法的第二个参数最终将传给<code>handle</code>方法。</p>
@@ -433,10 +433,10 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">&#39;listen&#39;    =&gt; [
-        &#39;UserLogin&#39;    =&gt; [],
-        &#39;UserLogout&#39;   =&gt; [],
-    ],
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;listen&#39;</span>    <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;UserLogin&#39;</span>    <span class="o">=&gt;</span> <span class="p">[],</span>
+        <span class="s1">&#39;UserLogout&#39;</span>   <span class="o">=&gt;</span> <span class="p">[],</span>
+    <span class="p">],</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果没有这两个事件标识，订阅类的方法将无法被添加到<code>Event</code>类的<code>$listener</code> 数组，导致最后无法执行到订阅类的方法的。</p>
@@ -457,15 +457,15 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class User
-{
-    public function onUserLogin(){
-        echo &#39;我知道用户登录了，因为我订阅了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#39;;
-    }
-    public function onUserLogout(){
-        echo &#39;我知道用户退出了，因为我订阅了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#39;;
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onUserLogin</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">&#39;我知道用户登录了，因为我订阅了&lt;br&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onUserLogout</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">&#39;我知道用户退出了，因为我订阅了&lt;br&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -491,21 +491,21 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class User
-{
-    public function __construct(){
-        //添加一个订阅类
-        Event::subscribe(\app\subscribe\User::class);
-    }
-    public function login(){
-        echo &#34;用户登录了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>   &#34;;
-        Event::trigger(&#39;UserLogin&#39;);
-    }
-    public function logout(){
-        echo &#34;用户退出了<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>   &#34;;
-        Event::trigger(&#39;UserLogout&#39;);
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(){</span>
+        <span class="c1">//添加一个订阅类
+</span><span class="c1"></span>        <span class="nx">Event</span><span class="o">::</span><span class="na">subscribe</span><span class="p">(</span><span class="nx">\app\subscribe\User</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s2">&#34;用户登录了&lt;br&gt;   &#34;</span><span class="p">;</span>
+        <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;UserLogin&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s2">&#34;用户退出了&lt;br&gt;   &#34;</span><span class="p">;</span>
+        <span class="nx">Event</span><span class="o">::</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;UserLogout&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>假如访问<code>User</code>控制器的<code>login</code>操作，调试运行代码到<code>Event::subscrible()</code>方法，该方法代码如下：</p>
@@ -534,27 +534,27 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function subscribe($subscriber)
-{
-	$subscribers = (array) $subscriber;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">$subscriber</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$subscribers</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$subscriber</span><span class="p">;</span>
 
-	foreach ($subscribers as $subscriber) {
-		if (is_string($subscriber)) {
-			//实例化事件订阅类
-			$subscriber = $this-&gt;app-&gt;make($subscriber);
-		}
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$subscribers</span> <span class="k">as</span> <span class="nv">$subscriber</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$subscriber</span><span class="p">))</span> <span class="p">{</span>
+			<span class="c1">//实例化事件订阅类
+</span><span class="c1"></span>			<span class="nv">$subscriber</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$subscriber</span><span class="p">);</span>
+		<span class="p">}</span>
 
-		if (method_exists($subscriber, &#39;subscribe&#39;)) {
-			// 手动订阅
-			$subscriber-&gt;subscribe($this);
-		} else {
-			// 智能订阅
-			$this-&gt;observe($subscriber);
-		}
-	}
+		<span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$subscriber</span><span class="p">,</span> <span class="s1">&#39;subscribe&#39;</span><span class="p">))</span> <span class="p">{</span>
+			<span class="c1">// 手动订阅
+</span><span class="c1"></span>			<span class="nv">$subscriber</span><span class="o">-&gt;</span><span class="na">subscribe</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="c1">// 智能订阅
+</span><span class="c1"></span>			<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observe</span><span class="p">(</span><span class="nv">$subscriber</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 
-	return $this;
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里关键看<code>observe</code>方法：</p>
@@ -592,36 +592,36 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function observe($observer, string $prefix = &#39;&#39;)
-{
-	if (!$this-&gt;withEvent) {
-		return $this;
-	}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">observe</span><span class="p">(</span><span class="nv">$observer</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">withEvent</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	if (is_string($observer)) {
-		$observer = $this-&gt;app-&gt;make($observer);
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$observer</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$observer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	$reflect = new ReflectionClass($observer);
-	$methods = $reflect-&gt;getMethods(ReflectionMethod::IS_PUBLIC);
-	// 支持订阅类中的方法指定前缀
-	if (empty($prefix) <span class="err">&amp;&amp;</span> $reflect-&gt;hasProperty(&#39;eventPrefix&#39;)) {
-		$reflectProperty = $reflect-&gt;getProperty(&#39;eventPrefix&#39;);
+	<span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionClass</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+	<span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getMethods</span><span class="p">(</span><span class="nx">ReflectionMethod</span><span class="o">::</span><span class="na">IS_PUBLIC</span><span class="p">);</span>
+	<span class="c1">// 支持订阅类中的方法指定前缀
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$prefix</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">hasProperty</span><span class="p">(</span><span class="s1">&#39;eventPrefix&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$reflectProperty</span> <span class="o">=</span> <span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getProperty</span><span class="p">(</span><span class="s1">&#39;eventPrefix&#39;</span><span class="p">);</span>
 
-		$reflectProperty-&gt;setAccessible(true);
-		$prefix = $reflectProperty-&gt;getValue($observer);
-	}
+		<span class="nv">$reflectProperty</span><span class="o">-&gt;</span><span class="na">setAccessible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+		<span class="nv">$prefix</span> <span class="o">=</span> <span class="nv">$reflectProperty</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	foreach ($methods as $method) {
-		$name = $method-&gt;getName();
-		if (0 === strpos($name, &#39;on&#39;)) {
-			// 自动将订阅类的方法添加到监听器
-			$this-&gt;listen($prefix . substr($name, 2), [$observer, $name]);
-		}
-	}
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$methods</span> <span class="k">as</span> <span class="nv">$method</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+		<span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">))</span> <span class="p">{</span>
+			<span class="c1">// 自动将订阅类的方法添加到监听器
+</span><span class="c1"></span>			<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">listen</span><span class="p">(</span><span class="nv">$prefix</span> <span class="o">.</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="nv">$observer</span><span class="p">,</span> <span class="nv">$name</span><span class="p">]);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 
-	return $this;
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>运行过程见上面的注释。最后的结果大概是这样的：</p>
@@ -703,7 +703,7 @@ public function invoke($callable, array $vars = [], bool $accessible = false)
 }
 </code></pre></td></tr></table>
 </div>
-</div><p>在PHP中，当一个类静态调用一个不存在的方法，将会触发该魔术方法，所以<strong><code>think\facade\Event::subscribe()</code></strong>这样调用的时候，首先是执行该<code>__callStatic</code>方法。
+</div><p>在PHP中，当一个类静态调用一个不存在的方法，将会触发该魔术方法，所以**<code>think\facade\Event::subscribe()</code>**这样调用的时候，首先是执行该<code>__callStatic</code>方法。
 在这个例子中，该方法<code>$method</code>参数传入的值是<code>subscribe</code>，<code>$params</code>传入的值是<code>app\subscribe\User</code>。
 先看看这其中的<code>static::createFacade()</code>方法：</p>
 <div class="highlight"><div class="chroma">

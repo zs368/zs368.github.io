@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/php/" />
@@ -293,7 +293,7 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//使用use关键字把父作用域的变量及状态附加到PHP闭包中。
 </span><span class="c1"></span><span class="nv">$id</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">];</span>
 <span class="nx">UserBankCard</span><span class="o">::</span><span class="na">destroy</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
@@ -365,7 +365,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//在日志中统计过去三十天访问某个站点的访问数据
 </span><span class="c1"></span><span class="nv">$dateStart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">();</span>
 <span class="nv">$dateInterval</span> <span class="o">=</span> <span class="nx">\DateInterval</span><span class="o">::</span><span class="na">createFromDateString</span><span class="p">(</span><span class="s1">&#39;-1 day&#39;</span><span class="p">);</span>
@@ -436,7 +436,7 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//自定义一个流过滤器 DirtyWordsFilter，把流数据读入内存时审查其中的脏字
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">DirtyWordsFilter</span> <span class="k">extends</span> <span class="k">php_user_filter</span>
 <span class="p">{</span>
@@ -526,7 +526,7 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//使用生成器实现
 </span><span class="c1"></span><span class="k">function</span> <span class="nf">makeRange</span><span class="p">(</span><span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$length</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -607,13 +607,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">interface</span> <span class="nx">接口名称</span><span class="p">{</span> <span class="c1">//使用interface关键字声明接口
 </span><span class="c1"></span><span class="nx">常量成员</span> <span class="c1">//接口中的成员属性只能是常量，不能是变量
 </span><span class="c1"></span><span class="nx">抽象方法</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">();</span> <span class="c1">//接口中的所有方法必须是抽象方法(没有方法体)
 </span><span class="c1"></span><span class="p">}</span>
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="常用工具">常用工具</h2>
 <h3 id="composer">composer</h3>

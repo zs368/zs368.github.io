@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/tp6.0%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90_b/" />
@@ -187,21 +187,21 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function run(Request $request = null): Response
-{
-	//自动创建request对象
-	$request = $request ?? $this-&gt;app-&gt;make(&#39;request&#39;, [], true);
-	// 将Request类的实例保存到「$instances」数组
-	$this-&gt;app-&gt;instance(&#39;request&#39;, $request);
-	try {
-  	// 见应用的初始化
-		$response = $this-&gt;runWithRequest($request);    
-	} catch (Throwable $e) {
-		$this-&gt;reportException($e);
-		$response = $this-&gt;renderException($request, $e);
-	}
-	return $response;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+<span class="p">{</span>
+	<span class="c1">//自动创建request对象
+</span><span class="c1"></span>	<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span> <span class="o">??</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="k">true</span><span class="p">);</span>
+	<span class="c1">// 将Request类的实例保存到「$instances」数组
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">instance</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="nv">$request</span><span class="p">);</span>
+	<span class="k">try</span> <span class="p">{</span>
+  	<span class="c1">// 见应用的初始化
+</span><span class="c1"></span>		<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">runWithRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>    
+	<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportException</span><span class="p">(</span><span class="nv">$e</span><span class="p">);</span>
+		<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>进入<code>make</code>方法中，就和依赖注入中的流程差不多一样</p>
@@ -220,12 +220,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">namespace app;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">app</span><span class="p">;</span>
 
-class Request extends \think\Request
-{
+<span class="k">class</span> <span class="nc">Request</span> <span class="k">extends</span> <span class="nx">\think\Request</span>
+<span class="p">{</span>
 
-}
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>实际上它啥事也没干，直接继承系统的<code>\think\Request</code>。当然，如有需要，我们也可以在这里对系统的<code>Request</code>类进行改写重构。由于<code>\think\Request</code>类存在<code>__make()</code>方法，所以实例化之前首先调用该方法。<code>__make()</code>方法代码如下：</p>
@@ -273,46 +273,46 @@ class Request extends \think\Request
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public static function __make(App $app) 	//TODO???
-{
-	//实例化自身
-	$request = new static();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">__make</span><span class="p">(</span><span class="nx">App</span> <span class="nv">$app</span><span class="p">)</span> 	<span class="c1">//TODO???
+</span><span class="c1"></span><span class="p">{</span>
+	<span class="c1">//实例化自身
+</span><span class="c1"></span>	<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="k">static</span><span class="p">();</span>
 
- 	// 如果存在方法apache_request_headers则执行之，作用是获取所有HTTP请求头
-	if (function_exists(&#39;apache_request_headers&#39;) <span class="err">&amp;&amp;</span> $result = apache_request_headers()) {
-            $header = $result;
-  } else {
-    $header = [];
-    $server = $_SERVER;
-    foreach ($server as $key =&gt; $val) {
-      if (0 === strpos($key, &#39;HTTP_&#39;)) {
-        $key          = str_replace(&#39;_&#39;, &#39;-&#39;, strtolower(substr($key, 5)));
-        $header[$key] = $val;
-      }
-    }
-    if (isset($server[&#39;CONTENT_TYPE&#39;])) {
-      $header[&#39;content-type&#39;] = $server[&#39;CONTENT_TYPE&#39;];
-    }
-    if (isset($server[&#39;CONTENT_LENGTH&#39;])) {
-      $header[&#39;content-length&#39;] = $server[&#39;CONTENT_LENGTH&#39;];
-    }
-  }
+ 	<span class="c1">// 如果存在方法apache_request_headers则执行之，作用是获取所有HTTP请求头
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">function_exists</span><span class="p">(</span><span class="s1">&#39;apache_request_headers&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nx">apache_request_headers</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$header</span> <span class="o">=</span> <span class="nv">$result</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$header</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nv">$server</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">;</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$server</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="s1">&#39;HTTP_&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$key</span>          <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nx">substr</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="mi">5</span><span class="p">)));</span>
+        <span class="nv">$header</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$server</span><span class="p">[</span><span class="s1">&#39;CONTENT_TYPE&#39;</span><span class="p">]))</span> <span class="p">{</span>
+      <span class="nv">$header</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$server</span><span class="p">[</span><span class="s1">&#39;CONTENT_TYPE&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$server</span><span class="p">[</span><span class="s1">&#39;CONTENT_LENGTH&#39;</span><span class="p">]))</span> <span class="p">{</span>
+      <span class="nv">$header</span><span class="p">[</span><span class="s1">&#39;content-length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$server</span><span class="p">[</span><span class="s1">&#39;CONTENT_LENGTH&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-	$request-&gt;header = array_change_key_case($header);
-  $request-&gt;server = $_SERVER;
-  $request-&gt;env    = $app-&gt;env;
-  $inputData = $request-&gt;getInputData($request-&gt;input);
+	<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">header</span> <span class="o">=</span> <span class="nx">array_change_key_case</span><span class="p">(</span><span class="nv">$header</span><span class="p">);</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">server</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">env</span>    <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">env</span><span class="p">;</span>
+  <span class="nv">$inputData</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getInputData</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">);</span>
 
-  $request-&gt;get     = $_GET;
-  $request-&gt;post    = $_POST ?: $inputData;
-  $request-&gt;put     = $inputData;
-  $request-&gt;request = $_REQUEST;
-  $request-&gt;cookie  = $_COOKIE;
-  $request-&gt;file    = $_FILES ?? [];
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span>     <span class="o">=</span> <span class="nv">$_GET</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">post</span>    <span class="o">=</span> <span class="nv">$_POST</span> <span class="o">?:</span> <span class="nv">$inputData</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">put</span>     <span class="o">=</span> <span class="nv">$inputData</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$_REQUEST</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookie</span>  <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">;</span>
+  <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">file</span>    <span class="o">=</span> <span class="nv">$_FILES</span> <span class="o">??</span> <span class="p">[];</span>
 
-	//__make()方法最终返回Request类的实例
-	return $request;
-}
+	<span class="c1">//__make()方法最终返回Request类的实例
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nv">$request</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>__make()</code>方法首先实例化<code>think\Request</code>类自身。<code>think\Request</code>类构造函数如下：</p>
@@ -328,14 +328,14 @@ class Request extends \think\Request
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function __construct()
-{
-	// 保存 php://input，用于读取POST数据
-	// 参考资料：http://www.nowamagic.net/academy/detail/12220520
-	//（可用于Coentent-Type取值为application/x-www-data-urlencoded、text/json、text/xml，不能用于multipart/form-data类型）
-	// 用$_POST的话，仅在Coentent-Type取值为application/x-www-data-urlencoded和multipart/form-data两种情况下有用
-	$this-&gt;input = file_get_contents(&#39;php://input&#39;);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// 保存 php://input，用于读取POST数据
+</span><span class="c1"></span>	<span class="c1">// 参考资料：http://www.nowamagic.net/academy/detail/12220520
+</span><span class="c1"></span>	<span class="c1">//（可用于Coentent-Type取值为application/x-www-data-urlencoded、text/json、text/xml，不能用于multipart/form-data类型）
+</span><span class="c1"></span>	<span class="c1">// 用$_POST的话，仅在Coentent-Type取值为application/x-www-data-urlencoded和multipart/form-data两种情况下有用
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;php://input&#39;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>构造函数读取了<code>php://input</code>保存起来。接着，<code>__make()</code>方法保存了一些请求相关的数据，返回一个<code>Request</code>类实例， <code>make()</code>方法也成功得到该实例，整个过程跟<code>Http</code>类的实例化类似。得到<code>Request</code>类的实例后，<code>run()</code>方法接着将该实例保存到<code>$instance</code>数组，以便后面单例模式要用到时可以直接获取。</p>
@@ -351,12 +351,12 @@ class Request extends \think\Request
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function runWithRequest(Request $request)
-{
-	$this-&gt;initialize();
-	.
-	.
-	.
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">runWithRequest</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">();</span>
+	<span class="o">.</span>
+	<span class="o">.</span>
+	<span class="o">.</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>Http</code>类的<code>initialize()</code>方法：</p>
@@ -371,13 +371,13 @@ class Request extends \think\Request
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function initialize()
-{
-	//如果还未初始化，则初始化之
-	if (!$this-&gt;app-&gt;initialized()) {
-		$this-&gt;app-&gt;initialize();
-	}
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">//如果还未初始化，则初始化之
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">initialized</span><span class="p">())</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>实际上是调用<code>App</code>类的<code>initialize()</code>方法。该方法代码：</p>
@@ -426,47 +426,47 @@ class Request extends \think\Request
 </span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function initialize()
-{
-    // 设置应用状态为已经初始化
-	$this-&gt;initialized = true;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 设置应用状态为已经初始化
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">initialized</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-	//记录开始时间
-	$this-&gt;beginTime = microtime(true);
-	//记录起始内存使用量
-	$this-&gt;beginMem  = memory_get_usage();
+	<span class="c1">//记录开始时间
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">beginTime</span> <span class="o">=</span> <span class="nx">microtime</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+	<span class="c1">//记录起始内存使用量
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">beginMem</span>  <span class="o">=</span> <span class="nx">memory_get_usage</span><span class="p">();</span>
 
-	// ==( A )== 加载环境变量
-	if (is_file($this-&gt;rootPath . &#39;.env&#39;)) {
-		$this-&gt;env-&gt;load($this-&gt;rootPath . &#39;.env&#39;);
-	}
-	//设置配置文件后缀
-	$this-&gt;configExt = $this-&gt;env-&gt;get(&#39;config_ext&#39;, &#39;.php&#39;);
-	// ==( B )== 设置调试模式
-	$this-&gt;debugModeInit();
+	<span class="c1">// ==( A )== 加载环境变量
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rootPath</span> <span class="o">.</span> <span class="s1">&#39;.env&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">env</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rootPath</span> <span class="o">.</span> <span class="s1">&#39;.env&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">//设置配置文件后缀
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configExt</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">env</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;config_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;.php&#39;</span><span class="p">);</span>
+	<span class="c1">// ==( B )== 设置调试模式
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debugModeInit</span><span class="p">();</span>
 
-	// ==( C )== 加载应用文件和配置等操作
-	$this-&gt;load();
+	<span class="c1">// ==( C )== 加载应用文件和配置等操作
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">();</span>
 
-	// 加载框架默认语言包
-	$langSet = $this-&gt;lang-&gt;defaultLangSet();
-	$this-&gt;lang-&gt;load($this-&gt;thinkPath . &#39;lang&#39; . DIRECTORY_SEPARATOR . $langSet . &#39;.php&#39;);
+	<span class="c1">// 加载框架默认语言包
+</span><span class="c1"></span>	<span class="nv">$langSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lang</span><span class="o">-&gt;</span><span class="na">defaultLangSet</span><span class="p">();</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lang</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">thinkPath</span> <span class="o">.</span> <span class="s1">&#39;lang&#39;</span> <span class="o">.</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nv">$langSet</span> <span class="o">.</span> <span class="s1">&#39;.php&#39;</span><span class="p">);</span>
 
-	// 加载应用默认语言包
-	$this-&gt;loadLangPack($langSet);
+	<span class="c1">// 加载应用默认语言包
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLangPack</span><span class="p">(</span><span class="nv">$langSet</span><span class="p">);</span>
 
-	// 监听AppInit
-	$this-&gt;event-&gt;trigger(AppInit::class);
+	<span class="c1">// 监听AppInit
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nx">AppInit</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
 
-	date_default_timezone_set($this-&gt;config-&gt;get(&#39;app.default_timezone&#39;, &#39;Asia/Shanghai&#39;));
+	<span class="nx">date_default_timezone_set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app.default_timezone&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia/Shanghai&#39;</span><span class="p">));</span>
 
-	// ==( D )== 初始化错误和异常处理、注册系统服务和初始化系统服务
-	foreach ($this-&gt;initializers as $initializer) {
-		$this-&gt;make($initializer)-&gt;init($this);
-	}
+	<span class="c1">// ==( D )== 初始化错误和异常处理、注册系统服务和初始化系统服务
+</span><span class="c1"></span>	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">initializers</span> <span class="k">as</span> <span class="nv">$initializer</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$initializer</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">init</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	return $this;
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>应用的初始化做了大量的操作，其主要的操作有：加载环境变量、加载配置文件，加载语言包、监听AppInit、initializers数组包含的类的初始化。</p>
@@ -481,11 +481,11 @@ class Request extends \think\Request
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function load(string $file): void
-{
-	$env = parse_ini_file($file, true) ?: [];
-	$this-&gt;set($env);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$file</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="nv">$env</span> <span class="o">=</span> <span class="nx">parse_ini_file</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span> <span class="o">?:</span> <span class="p">[];</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$env</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>该方法读取<code>.env</code>文件的值后，调用<code>set()</code>方法，将配置保存在<code>Env</code>类的<code>$data</code>成员变量。<code>set()</code>方法代码：</p>
@@ -516,29 +516,29 @@ class Request extends \think\Request
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function set($env, $value = null): void
-{
-	if (is_array($env)) {
-		//全部KEY转为大写字母
-		$env = array_change_key_case($env, CASE_UPPER);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">set</span><span class="p">(</span><span class="nv">$env</span><span class="p">,</span> <span class="nv">$value</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$env</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">//全部KEY转为大写字母
+</span><span class="c1"></span>		<span class="nv">$env</span> <span class="o">=</span> <span class="nx">array_change_key_case</span><span class="p">(</span><span class="nv">$env</span><span class="p">,</span> <span class="nx">CASE_UPPER</span><span class="p">);</span>
 
-		foreach ($env as $key =&gt; $val) {
-			//有二级配置的，转为KEY1_KEY2 =&gt; $v 的形式
-			if (is_array($val)) {
-				foreach ($val as $k =&gt; $v) {
-					$this-&gt;data[$key . &#39;_&#39; . strtoupper($k)] = $v;
-				}
-			} else {
-				$this-&gt;data[$key] = $val;
-			}
-		}
-		//ENV的值不是数组的情况
-	} else {
-		$name = strtoupper(str_replace(&#39;.&#39;, &#39;_&#39;, $env));
+		<span class="k">foreach</span> <span class="p">(</span><span class="nv">$env</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">//有二级配置的，转为KEY1_KEY2 =&gt; $v 的形式
+</span><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$val</span><span class="p">))</span> <span class="p">{</span>
+				<span class="k">foreach</span> <span class="p">(</span><span class="nv">$val</span> <span class="k">as</span> <span class="nv">$k</span> <span class="o">=&gt;</span> <span class="nv">$v</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$key</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="nx">strtoupper</span><span class="p">(</span><span class="nv">$k</span><span class="p">)]</span> <span class="o">=</span> <span class="nv">$v</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="c1">//ENV的值不是数组的情况
+</span><span class="c1"></span>	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nv">$name</span> <span class="o">=</span> <span class="nx">strtoupper</span><span class="p">(</span><span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nv">$env</span><span class="p">));</span>
 
-		$this-&gt;data[$name] = $value;
-	}
-}
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="b-调试模式设置">(B) 调试模式设置</h3>
@@ -573,32 +573,32 @@ class Request extends \think\Request
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function debugModeInit(): void
-{
-	// 应用调试模式
-	if (!$this-&gt;appDebug) {
-		$this-&gt;appDebug = $this-&gt;env-&gt;get(&#39;app_debug&#39;) ? true : false;
-		// 关闭错误显示
-		ini_set(&#39;display_errors&#39;, &#39;Off&#39;);
-	}
-	// 如果不是命令行模式
-	if (!$this-&gt;runningInConsole()) {
-		// 重新申请一块比较大的buffer
-		// php缓冲控制 参考：https://www.php.net/manual/en/ref.outcontrol.php , https://www.cnblogs.com/saw2012/archive/2013/01/30/2882451.html
-		// 新版PHP默认开启缓冲区ob_start()，ob_get_level() == 1
-		if (ob_get_level() &gt; 0) {
-			// 相当于ob_get_contents() 和 ob_clean()
-			// 获取缓冲区内容并删除缓冲区内容
-			$output = ob_get_clean();
-		}
-		// 开启新的缓冲区控制
-		ob_start();
-		if (!empty($output)) {
-			// 由于开启了新的缓冲区控制，这里不会直接输出$output，而是等到依次执行了ob_flush()和flash()之后才将内容输出到浏览器
-			echo $output;
-		}
-	}
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">debugModeInit</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="c1">// 应用调试模式
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">appDebug</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">appDebug</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">env</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app_debug&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="k">true</span> <span class="o">:</span> <span class="k">false</span><span class="p">;</span>
+		<span class="c1">// 关闭错误显示
+</span><span class="c1"></span>		<span class="nx">ini_set</span><span class="p">(</span><span class="s1">&#39;display_errors&#39;</span><span class="p">,</span> <span class="s1">&#39;Off&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">// 如果不是命令行模式
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">runningInConsole</span><span class="p">())</span> <span class="p">{</span>
+		<span class="c1">// 重新申请一块比较大的buffer
+</span><span class="c1"></span>		<span class="c1">// php缓冲控制 参考：https://www.php.net/manual/en/ref.outcontrol.php , https://www.cnblogs.com/saw2012/archive/2013/01/30/2882451.html
+</span><span class="c1"></span>		<span class="c1">// 新版PHP默认开启缓冲区ob_start()，ob_get_level() == 1
+</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="nx">ob_get_level</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 相当于ob_get_contents() 和 ob_clean()
+</span><span class="c1"></span>			<span class="c1">// 获取缓冲区内容并删除缓冲区内容
+</span><span class="c1"></span>			<span class="nv">$output</span> <span class="o">=</span> <span class="nx">ob_get_clean</span><span class="p">();</span>
+		<span class="p">}</span>
+		<span class="c1">// 开启新的缓冲区控制
+</span><span class="c1"></span>		<span class="nx">ob_start</span><span class="p">();</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$output</span><span class="p">))</span> <span class="p">{</span>
+			<span class="c1">// 由于开启了新的缓冲区控制，这里不会直接输出$output，而是等到依次执行了ob_flush()和flash()之后才将内容输出到浏览器
+</span><span class="c1"></span>			<span class="k">echo</span> <span class="nv">$output</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="c-加载应用文件和配置等操作">(C) 加载应用文件和配置等操作</h3>
@@ -643,42 +643,42 @@ class Request extends \think\Request
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function load(): void
-{
-	$appPath = $this-&gt;getAppPath();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">load</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="nv">$appPath</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getAppPath</span><span class="p">();</span>
 
-	if (is_file($appPath . &#39;common.php&#39;)) {
-		include_once $appPath . &#39;common.php&#39;;
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;common.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">include_once</span> <span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;common.php&#39;</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	include_once $this-&gt;thinkPath . &#39;helper.php&#39;;
+	<span class="k">include_once</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">thinkPath</span> <span class="o">.</span> <span class="s1">&#39;helper.php&#39;</span><span class="p">;</span>
 
-	$configPath = $this-&gt;getConfigPath();
+	<span class="nv">$configPath</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigPath</span><span class="p">();</span>
 
-	$files = [];
+	<span class="nv">$files</span> <span class="o">=</span> <span class="p">[];</span>
 
-	// glob的作用是扫描给定路径模式下的文件
-	if (is_dir($configPath)) {
-		$files = glob($configPath . &#39;*&#39; . $this-&gt;configExt);
-	}
+	<span class="c1">// glob的作用是扫描给定路径模式下的文件
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">is_dir</span><span class="p">(</span><span class="nv">$configPath</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$files</span> <span class="o">=</span> <span class="nx">glob</span><span class="p">(</span><span class="nv">$configPath</span> <span class="o">.</span> <span class="s1">&#39;*&#39;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configExt</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	foreach ($files as $file) {
-		// 在 「Config」类作用域下的操作：「load」加载文件后，通过「parse」方法解析文件内容，
-    // 最后，通过「set」方法将所有配置合并了「config」成员变量
-		$this-&gt;config-&gt;load($file, pathinfo($file, PATHINFO_FILENAME));
-	}
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$files</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// 在 「Config」类作用域下的操作：「load」加载文件后，通过「parse」方法解析文件内容，
+</span><span class="c1"></span>    <span class="c1">// 最后，通过「set」方法将所有配置合并了「config」成员变量
+</span><span class="c1"></span>		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nx">pathinfo</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nx">PATHINFO_FILENAME</span><span class="p">));</span>
+	<span class="p">}</span>
 
-	if (is_file($appPath . &#39;event.php&#39;)) {
-		$this-&gt;loadEvent(include $appPath . &#39;event.php&#39;);
-	}
-	// 注册自定义的服务
-	if (is_file($appPath . &#39;service.php&#39;)) {
-		$services = include $appPath . &#39;service.php&#39;;
-		foreach ($services as $service) {
-			$this-&gt;register($service);
-		}
-	}
-}
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;event.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadEvent</span><span class="p">(</span><span class="k">include</span> <span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;event.php&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">// 注册自定义的服务
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;service.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$services</span> <span class="o">=</span> <span class="k">include</span> <span class="nv">$appPath</span> <span class="o">.</span> <span class="s1">&#39;service.php&#39;</span><span class="p">;</span>
+		<span class="k">foreach</span> <span class="p">(</span><span class="nv">$services</span> <span class="k">as</span> <span class="nv">$service</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nv">$service</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="d-初始化错误和异常处理注册系统服务和初始化系统服务">(D) 初始化错误和异常处理、注册系统服务和初始化系统服务</h3>
@@ -690,9 +690,9 @@ class Request extends \think\Request
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">foreach ($this-&gt;initializers as $initializer) {
-	$this-&gt;make($initializer)-&gt;init($this);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">initializers</span> <span class="k">as</span> <span class="nv">$initializer</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$initializer</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">init</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>先实例化包含在里面的类，然后调用其「init」方法。<code>initializers</code>数组的值如下：</p>
@@ -705,11 +705,11 @@ class Request extends \think\Request
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected $initializers = [
-	Error::class, 					  // 错误处理类
-	RegisterService::class, 	// 注册系统服务类
-	BootService::class,  			// 启动系统服务
-];
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$initializers</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="nx">Error</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> 					  <span class="c1">// 错误处理类
+</span><span class="c1"></span>	<span class="nx">RegisterService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> 	<span class="c1">// 注册系统服务类
+</span><span class="c1"></span>	<span class="nx">BootService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>  			<span class="c1">// 启动系统服务
+</span><span class="c1"></span><span class="p">];</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>略过系统错误处理类，先看注册系统服务类：</p>
@@ -738,27 +738,27 @@ class Request extends \think\Request
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected $services = [
-	PaginatorService::class,	// 分页服务类
-	ValidateService::class,		// 验证服务类
-	ModelService::class,			// 模型服务类
-];
-public function init(App $app)
-{
-  $file = $app-&gt;getRootPath() . &#39;vendor/services.php&#39;;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$services</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="nx">PaginatorService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>	<span class="c1">// 分页服务类
+</span><span class="c1"></span>	<span class="nx">ValidateService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>		<span class="c1">// 验证服务类
+</span><span class="c1"></span>	<span class="nx">ModelService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>			<span class="c1">// 模型服务类
+</span><span class="c1"></span><span class="p">];</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">(</span><span class="nx">App</span> <span class="nv">$app</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getRootPath</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;vendor/services.php&#39;</span><span class="p">;</span>
 
-  $services = $this-&gt;services;
+  <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">;</span>
 
-  if (is_file($file)) {
-    $services = array_merge($services, include $file);
-  }
+  <span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nx">array_merge</span><span class="p">(</span><span class="nv">$services</span><span class="p">,</span> <span class="k">include</span> <span class="nv">$file</span><span class="p">);</span>
+  <span class="p">}</span>
 
-  foreach ($services as $service) {
-    if (class_exists($service)) {
-      $app-&gt;register($service);		// 注册到系统服务
-    }
-  }
-}
+  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$services</span> <span class="k">as</span> <span class="nv">$service</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">class_exists</span><span class="p">(</span><span class="nv">$service</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nv">$service</span><span class="p">);</span>		<span class="c1">// 注册到系统服务
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>启动系统服务类实现如下：</p>
@@ -773,13 +773,13 @@ public function init(App $app)
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class BootService
-{
-    public function init(App $app)
-    {
-        $app-&gt;boot();		//是初始化每个系统服务，也就是调用每个服务的`boot`方法
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">BootService</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">(</span><span class="nx">App</span> <span class="nv">$app</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">boot</span><span class="p">();</span>		<span class="c1">//是初始化每个系统服务，也就是调用每个服务的`boot`方法
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>App</code>类的<code>boot</code>方法：</p>
@@ -800,19 +800,19 @@ public function init(App $app)
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function boot(): void
-{
-	array_walk($this-&gt;services, function ($service) {
-		$this-&gt;bootService($service);
-	});
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="nx">array_walk</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$service</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootService</span><span class="p">(</span><span class="nv">$service</span><span class="p">);</span>
+	<span class="p">});</span>
+<span class="p">}</span>
 
-public function bootService($service)
-{
-	if (method_exists($service, &#39;boot&#39;)) {
-		return $this-&gt;invoke([$service, &#39;boot&#39;]);
-	}
-}
+<span class="k">public</span> <span class="k">function</span> <span class="nf">bootService</span><span class="p">(</span><span class="nv">$service</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$service</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invoke</span><span class="p">([</span><span class="nv">$service</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">]);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>该方法分别调用了每个服务的<code>boot</code>方法，从而初始化已注册的服务，系统注册的服务的来源有三个地方。</p>
@@ -846,20 +846,20 @@ public function bootService($service)
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function runWithRequest(Request $request)
-{
-	$this-&gt;initialize();
-	// 加载全局中间件
-	$this-&gt;loadMiddleware();
-	...
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">runWithRequest</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">();</span>
+	<span class="c1">// 加载全局中间件
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadMiddleware</span><span class="p">();</span>
+	<span class="o">...</span>
+<span class="p">}</span>
 
-protected function loadMiddleware(): void
-{
-	if (is_file($this-&gt;app-&gt;getBasePath() . &#39;middleware.php&#39;)) {
-		$this-&gt;app-&gt;middleware-&gt;import(include $this-&gt;app-&gt;getBasePath() . &#39;middleware.php&#39;);
-	}
-}
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">loadMiddleware</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_file</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">getBasePath</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;middleware.php&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="k">include</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">getBasePath</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;middleware.php&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>通过<code>$this-&gt;app-&gt;middleware</code>得到<code>Middleware</code>类的实例后，接着程序调用<code>import</code>方法，传入从「app」目录下的「middleware.php」文件中读取的数据。该文件的原始内容如下（原来全部注释掉的）：</p>
@@ -877,16 +877,16 @@ protected function loadMiddleware(): void
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">return [
-    // 全局请求缓存
-    // \think\middleware\CheckRequestCache::class,
-    // 多语言加载
-     \think\middleware\LoadLangPack::class,
-    // Session初始化
-    // \think\middleware\SessionInit::class,
-    // 页面Trace调试
-     \think\middleware\TraceDebug::class,
-];
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">return</span> <span class="p">[</span>
+    <span class="c1">// 全局请求缓存
+</span><span class="c1"></span>    <span class="c1">// \think\middleware\CheckRequestCache::class,
+</span><span class="c1"></span>    <span class="c1">// 多语言加载
+</span><span class="c1"></span>     <span class="nx">\think\middleware\LoadLangPack</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="c1">// Session初始化
+</span><span class="c1"></span>    <span class="c1">// \think\middleware\SessionInit::class,
+</span><span class="c1"></span>    <span class="c1">// 页面Trace调试
+</span><span class="c1"></span>     <span class="nx">\think\middleware\TraceDebug</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">];</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里为了研究中间件是如何加载的，先去掉两个注释，也就是添加两个中间件。接下来看<code>import</code>方法：</p>
@@ -941,53 +941,53 @@ protected function loadMiddleware(): void
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function import(array $middlewares = [], string $type = &#39;global&#39;): void
-{
-	foreach ($middlewares as $middleware) {
-		$this-&gt;add($middleware, $type);
-	}
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">import</span><span class="p">(</span><span class="k">array</span> <span class="nv">$middlewares</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="s1">&#39;global&#39;</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$middlewares</span> <span class="k">as</span> <span class="nv">$middleware</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nv">$type</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-public function add($middleware, string $type = &#39;route&#39;): void
-{
-	$middleware = $this-&gt;buildMiddleware($middleware, $type);
+<span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="s1">&#39;route&#39;</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="nv">$middleware</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">buildMiddleware</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nv">$type</span><span class="p">);</span>
 
-	if (!empty($middleware)) {
-		$this-&gt;queue[$type][] = $middleware;
-		$this-&gt;queue[$type]   = array_unique($this-&gt;queue[$type], SORT_REGULAR);
-	}
-}
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">queue</span><span class="p">[</span><span class="nv">$type</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$middleware</span><span class="p">;</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">queue</span><span class="p">[</span><span class="nv">$type</span><span class="p">]</span>   <span class="o">=</span> <span class="nx">array_unique</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">queue</span><span class="p">[</span><span class="nv">$type</span><span class="p">],</span> <span class="nx">SORT_REGULAR</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-protected function buildMiddleware($middleware, string $type): array
-{
-	if (is_array($middleware)) {
-		[$middleware, $params] = $middleware;
-	}
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">buildMiddleware</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">))</span> <span class="p">{</span>
+		<span class="p">[</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nv">$params</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$middleware</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	if ($middleware instanceof \Closure) {
-		//返回闭包和参数
-		return [$middleware, $param ?? null];
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="nv">$middleware</span> <span class="nx">instanceof</span> <span class="nx">\Closure</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">//返回闭包和参数
+</span><span class="c1"></span>		<span class="k">return</span> <span class="p">[</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nv">$param</span> <span class="o">??</span> <span class="k">null</span><span class="p">];</span>
+	<span class="p">}</span>
 
-	if (!is_string($middleware)) {
-		throw new InvalidArgumentException(&#39;The middleware is invalid&#39;);
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nx">InvalidArgumentException</span><span class="p">(</span><span class="s1">&#39;The middleware is invalid&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	//中间件别名检查
-  $alias = $this-&gt;app-&gt;config-&gt;get(&#39;middleware.alias&#39;, []);
+	<span class="c1">//中间件别名检查
+</span><span class="c1"></span>  <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;middleware.alias&#39;</span><span class="p">,</span> <span class="p">[]);</span>
 	 
-  if (isset($alias[$middleware])) {
-		$middleware = $alias[$middleware];
-	}
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$alias</span><span class="p">[</span><span class="nv">$middleware</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="nv">$middleware</span> <span class="o">=</span> <span class="nv">$alias</span><span class="p">[</span><span class="nv">$middleware</span><span class="p">];</span>
+	<span class="p">}</span>
 
-	//如果中间件有包含中间件（说明中间件可以嵌套），再走一遍「import」递归解析
-	if (is_array($middleware)) {
-		$this-&gt;import($middleware, $type);
-		return [];
-	}
-	//返回解析结果
-	return [[$middleware, &#39;handle&#39;], $param ?? null];
-}
+	<span class="c1">//如果中间件有包含中间件（说明中间件可以嵌套），再走一遍「import」递归解析
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">,</span> <span class="nv">$type</span><span class="p">);</span>
+		<span class="k">return</span> <span class="p">[];</span>
+	<span class="p">}</span>
+	<span class="c1">//返回解析结果
+</span><span class="c1"></span>	<span class="k">return</span> <span class="p">[[</span><span class="nv">$middleware</span><span class="p">,</span> <span class="s1">&#39;handle&#39;</span><span class="p">],</span> <span class="nv">$param</span> <span class="o">??</span> <span class="k">null</span><span class="p">];</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>详细分析见以上代码注释。最后返回的结果，在<code>add</code>方法中，执行<code>$this-&gt;queue[$type][] = $middleware;</code>添加到一个队列。最终的解析结果大概是这样的：</p>
@@ -1011,17 +1011,17 @@ protected function buildMiddleware($middleware, string $type): array
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function runWithRequest(Request $request)
-{
-	.
-	.
-	.
-	return $this-&gt;app-&gt;middleware-&gt;pipeline()
-		-&gt;send($request)
-		-&gt;then(function ($request) {
-			return $this-&gt;dispatchToRoute($request);
-		});
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">runWithRequest</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="o">.</span>
+	<span class="o">.</span>
+	<span class="o">.</span>
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">pipeline</span><span class="p">()</span>
+		<span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+		<span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatchToRoute</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+		<span class="p">});</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="pipeline方法">pipeline方法</h3>
@@ -1052,25 +1052,25 @@ protected function buildMiddleware($middleware, string $type): array
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function pipeline(string $type = &#39;global&#39;)
-{
-  return (new Pipeline())
-    -&gt;through(array_map(function ($middleware) {
-      return function ($request, $next) use ($middleware) {
-        [$call, $params] = $middleware;
-        if (is_array($call) <span class="err">&amp;&amp;</span> is_string($call[0])) {
-          $call = [$this-&gt;app-&gt;make($call[0]), $call[1]];
-        }
-        $response = call_user_func($call, $request, $next, ...$params);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">pipeline</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="s1">&#39;global&#39;</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Pipeline</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">through</span><span class="p">(</span><span class="nx">array_map</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$middleware</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$middleware</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$params</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$middleware</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$call</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">is_string</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+          <span class="nv">$call</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nv">$call</span><span class="p">[</span><span class="mi">1</span><span class="p">]];</span>
+        <span class="p">}</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nx">call_user_func</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">,</span> <span class="o">...</span><span class="nv">$params</span><span class="p">);</span>
 
-        if (!$response instanceof Response) {
-          throw new LogicException(&#39;The middleware must return Response instance&#39;);
-        }
-        return $response;
-      };
-    }, $this-&gt;sortMiddleware($this-&gt;queue[$type] ?? [])))
-    -&gt;whenException([$this, &#39;handleException&#39;]);
-}
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$response</span> <span class="nx">instanceof</span> <span class="nx">Response</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nx">LogicException</span><span class="p">(</span><span class="s1">&#39;The middleware must return Response instance&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+      <span class="p">};</span>
+    <span class="p">},</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sortMiddleware</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">queue</span><span class="p">[</span><span class="nv">$type</span><span class="p">]</span> <span class="o">??</span> <span class="p">[])))</span>
+    <span class="o">-&gt;</span><span class="na">whenException</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;handleException&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>through</code>方法代码：</p>
@@ -1083,11 +1083,11 @@ protected function buildMiddleware($middleware, string $type): array
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function through($pipes)
-{
-	$this-&gt;pipes = is_array($pipes) ? $pipes : func_get_args();
-	return $this;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">through</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pipes</span> <span class="o">=</span> <span class="nx">is_array</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$pipes</span> <span class="o">:</span> <span class="nx">func_get_args</span><span class="p">();</span>
+	<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>前面调用 <code>through</code> 传入的 <code>array_map(...)</code>把所有中间件逐个封装为闭包，然后<code>through</code>则是把这些闭包保存在Pipeline类的 <code>$pipes</code> 属性中。所以，最后得到<code>$pipes</code>中每个闭包的形式特征是这样的（伪代码）：</p>
@@ -1100,11 +1100,11 @@ protected function buildMiddleware($middleware, string $type): array
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// $request: 请求实例 $next: 回调函数
-function ($request, $next) {
-    $response = handle($request, $next, $param);
-    return $response;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// $request: 请求实例 $next: 回调函数
+</span><span class="c1"></span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nx">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">,</span> <span class="nv">$param</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="sendthen方法">send、then方法</h3>
@@ -1118,11 +1118,11 @@ function ($request, $next) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function send($passable)
-{
-	$this-&gt;passable = $passable;
-	return $this;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nv">$passable</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passable</span> <span class="o">=</span> <span class="nv">$passable</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>send</code>方法之后，接着调用<code>then</code>方法：</p>
@@ -1134,10 +1134,10 @@ function ($request, $next) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">//这里的then接收一个闭包作为参数，这个闭包实际上包含了控制器操作的执行代码
--&gt;then(function ($request) {
-  return $this-&gt;dispatchToRoute($request);
-});
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">//这里的then接收一个闭包作为参数，这个闭包实际上包含了控制器操作的执行代码
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatchToRoute</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>then</code>方法代码：</p>
@@ -1166,24 +1166,24 @@ function ($request, $next) {
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function then(Closure $destination)
-{
-	$pipeline = array_reduce(
-		// 用于迭代的数组（中间件闭包），这里将其倒序
-		array_reverse($this-&gt;pipes),
-		// array_reduce需要的回调函数
-		$this-&gt;carry(),
-		// 这里是迭代的初始值
-		function ($passable) use ($destination) {
-			try {
-				return $destination($passable);
-			} catch (Throwable | Exception $e) {
-				return $this-&gt;handleException($passable, $e);
-			}
-		});
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">then</span><span class="p">(</span><span class="nx">Closure</span> <span class="nv">$destination</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$pipeline</span> <span class="o">=</span> <span class="nx">array_reduce</span><span class="p">(</span>
+		<span class="c1">// 用于迭代的数组（中间件闭包），这里将其倒序
+</span><span class="c1"></span>		<span class="nx">array_reverse</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pipes</span><span class="p">),</span>
+		<span class="c1">// array_reduce需要的回调函数
+</span><span class="c1"></span>		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">carry</span><span class="p">(),</span>
+		<span class="c1">// 这里是迭代的初始值
+</span><span class="c1"></span>		<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">try</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="o">|</span> <span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleException</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
 
-	return $pipeline($this-&gt;passable);
-}
+	<span class="k">return</span> <span class="nv">$pipeline</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passable</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>carry</code>代码：</p>
@@ -1205,20 +1205,20 @@ function ($request, $next) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function carry()
-{
-	// 1. $stack 上次迭代得到的值，如果是第一次迭代，其值是后面的「初始值」
-  // 2. $pipe 本次迭代的值
-	return function ($stack, $pipe) {
-		return function ($passable) use ($stack, $pipe) {
-			try {
-				return $pipe($passable, $stack);
-			} catch (Throwable | Exception $e) {
-				return $this-&gt;handleException($passable, $e);
-			}
-		};
-	};
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">carry</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// 1. $stack 上次迭代得到的值，如果是第一次迭代，其值是后面的「初始值」
+</span><span class="c1"></span>  <span class="c1">// 2. $pipe 本次迭代的值
+</span><span class="c1"></span>	<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">try</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> <span class="nv">$stack</span><span class="p">);</span>
+			<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="o">|</span> <span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleException</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">};</span>
+	<span class="p">};</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>为了更方便分析原理，我们把<code>carry</code>方法内联到<code>then</code>中去，并去掉错误捕获的代码，得到：</p>
@@ -1241,21 +1241,21 @@ function ($request, $next) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function then(Closure $destination)
-{
-	$pipeline = array_reduce(
-		array_reverse($this-&gt;pipes),
-		function ($stack, $pipe) {
-			return function ($passable) use ($stack, $pipe) {
-				return $pipe($passable, $stack);
-			};
-		},
-		function ($passable) use ($destination) {
-			return $destination($passable);
-		});
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">then</span><span class="p">(</span><span class="nx">Closure</span> <span class="nv">$destination</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$pipeline</span> <span class="o">=</span> <span class="nx">array_reduce</span><span class="p">(</span>
+		<span class="nx">array_reverse</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pipes</span><span class="p">),</span>
+		<span class="k">function</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> <span class="nv">$stack</span><span class="p">);</span>
+			<span class="p">};</span>
+		<span class="p">},</span>
+		<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>
+		<span class="p">});</span>
 
-	return $pipeline($this-&gt;passable);
-}
+	<span class="k">return</span> <span class="nv">$pipeline</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passable</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里关键是理解<code>array_reduce</code>以及<code>$pipeline($this-&gt;passable)</code>的执行过程，这两个过程可以类比于「包洋葱」和「剥洋葱」的过程。</p>
@@ -1268,9 +1268,9 @@ function ($request, $next) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($destination) {
-	return $destination($passable);
-});
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>回调函数的返回值为：</p>
@@ -1281,9 +1281,9 @@ function ($request, $next) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($stack, $pipe) {
-	return $pipe($passable, $stack);
-};
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> <span class="nv">$stack</span><span class="p">);</span>
+<span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>将A代入B可以得到第一次迭代之后的<code>$stack</code>的值：</p>
@@ -1298,13 +1298,13 @@ function ($request, $next) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($stack, $pipe) {
-    return $pipe($passable, 
-        function ($passable) use ($destination) {
-            return $destination($passable);
-        })
-    );
-};
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> 
+        <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>
+        <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>第二次迭代，同理，将C代入B可得：</p>
@@ -1325,19 +1325,19 @@ function ($request, $next) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// 伪代码
-// 每一层的$pipe都代表一个中间件闭包
-function ($passable) use ($stack, $pipe) {
-    return $pipe($passable,  //倒数第二层中间件
-        function ($passable) use ($stack, $pipe) {
-            return $pipe($passable,  //倒数第一层中间件
-                function ($passable) use ($destination) {
-                    return $destination($passable);  //包含控制器操作的闭包
-                })
-            );
-        };
-    );
-};
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 伪代码
+</span><span class="c1">// 每一层的$pipe都代表一个中间件闭包
+</span><span class="c1"></span><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  <span class="c1">//倒数第二层中间件
+</span><span class="c1"></span>        <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  <span class="c1">//倒数第一层中间件
+</span><span class="c1"></span>                <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  <span class="c1">//包含控制器操作的闭包
+</span><span class="c1"></span>                <span class="p">})</span>
+            <span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">);</span>
+<span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>以此类推，有多少个中间件，就代入多少次，最后一次得到<code>$stack</code>就返回给<code>$pipeline</code>。由于前面对中间件闭包进行了倒序，排在前面的闭包被包裹在更里层，所以倒序后的闭包越是后面的在外面，从正序来看，则变成越前面的中间件在最外层。层层包裹好闭包后，我们得到了一个类似洋葱结构的「超级」闭包。</p>
@@ -1352,10 +1352,10 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($request, $next) {
-    $response = handle($request, $next, $param);
-    return $response;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nx">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">,</span> <span class="nv">$param</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>其中<code>handle</code>是中间件中的入口，其结构特点是这样的：</p>
@@ -1369,12 +1369,12 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function handle($request, $next, $param) {
-	// do sth ------ M1-1 / M2-1
-	$response = $next($request);
-	// do sth ------ M1-2 / M2-2
-	return $response;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$next</span><span class="p">,</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// do sth ------ M1-1 / M2-1
+</span><span class="c1"></span>	<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+	<span class="c1">// do sth ------ M1-2 / M2-2
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们上面的 「洋葱」一共只有两层，也就是有两层中间件的闭包，假设M1-1，M1-2分别是第一个中间件handle方法的前置和后置操作点位，第二个中间件同理，前置和后置点位分别是M2-1，M2-2。现在，让程序执行<code>$pipeline($this-&gt;passable)</code>，展开来看，也就是执行：</p>
@@ -1394,18 +1394,18 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// 伪代码
-function ($passable) use ($stack, $pipe) {
-    return $pipe($passable, 
-        function ($passable) use ($stack, $pipe) {
-            return $pipe($passable, 
-                function ($passable) use ($destination) {
-                    return $destination($passable);  
-                })
-            );
-        };
-    );
-}($this-&gt;passable)
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 伪代码
+</span><span class="c1"></span><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> 
+        <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span> 
+                <span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+                <span class="p">})</span>
+            <span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">);</span>
+<span class="p">}(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passable</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>此时，程序要求从：</p>
@@ -1422,15 +1422,15 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">return $pipe($passable,  
-	function ($passable) use ($stack, $pipe) {
-		return $pipe($passable,  
-			function ($passable) use ($destination) {
-				return $destination($passable);  
-			})
-		);
-	};
-);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  
+	<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  
+			<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+			<span class="p">})</span>
+		<span class="p">);</span>
+	<span class="p">};</span>
+<span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>返回值，也就是要执行第一个中间件闭包，<code>$passable</code>对应<code>handle</code>方法的<code>$request</code>参数，而下一层闭包</p>
@@ -1445,13 +1445,13 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($stack, $pipe) {
-	return $pipe($passable,  
-		function ($passable) use ($destination) {
-			return $destination($passable);  
-		})
-	);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  
+		<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+		<span class="p">})</span>
+	<span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>则对应<code>handle</code>方法的<code>$next</code>参数。</p>
@@ -1467,13 +1467,13 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($stack, $pipe) {
-	return $pipe($passable,  
-		function ($passable) use ($destination) {
-			return $destination($passable);  
-		})
-	);
-}($request)
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$stack</span><span class="p">,</span> <span class="nv">$pipe</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$pipe</span><span class="p">(</span><span class="nv">$passable</span><span class="p">,</span>  
+		<span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+		<span class="p">})</span>
+	<span class="p">);</span>
+<span class="p">}(</span><span class="nv">$request</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>依此类推，执行该闭包，即执行第二个中间件的<code>handle</code>方法，此时，先执行<strong>M2-1</strong>点位，然后执行<code>$response = $next($request)</code>，此时的<code>$next</code>闭包是：</p>
@@ -1484,9 +1484,9 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($destination) {
-	return $destination($passable);  
-})
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+<span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>属于洋葱之芯——最里面的一层，也就是包含控制器操作的闭包，执行这个闭包：</p>
@@ -1497,9 +1497,9 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function ($passable) use ($destination) {
-	return $destination($passable);  
-})($request)
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="p">(</span><span class="nv">$passable</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$destination</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nv">$destination</span><span class="p">(</span><span class="nv">$passable</span><span class="p">);</span>  
+<span class="p">})(</span><span class="nv">$request</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>最终，我们从<code>return $destination($passable)</code>中返回一个<code>Response</code>类的实例（具体怎么返回的，后面再作分析），也就是，第二层的<code>$response = $next($request)</code>语句成功得到了结果，接着执行下面的语句，也就是<strong>M2-2</strong>点位，最后第二层闭包返回结果，也就是第一层闭包的<code>$response = $next($request)</code>语句成功得到了结果，然后执行这一层闭包该语句后面的语句，即<strong>M1-2</strong>点位，该点位之后，第一层闭包也成功返回结果，于是，then方法最终得到了返回结果。</p>
@@ -1519,15 +1519,15 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function runWithRequest(Request $request)
-{
-	...
-	return $this-&gt;app-&gt;middleware-&gt;pipeline()
-            -&gt;send($request)
-            -&gt;then(function ($request) {
-                return $this-&gt;dispatchToRoute($request);
-            });
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">runWithRequest</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="o">...</span>
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">pipeline</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatchToRoute</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+            <span class="p">});</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来分析<code>$this-&gt;dispatchToRoute($request)</code> 。在配置文件中关闭路由解析，即在<code>config/app.php</code>中将<code>with_route</code>设置为<code>false</code>。以下分析假设访问的URL为<code>www.tp6.com/demo/hello</code>，并创建好了<code>Demo</code>控制器和<code>hello</code>操作——其代码如下：</p>
@@ -1547,7 +1547,7 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">namespace</span> <span class="nx">app\controller</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">app\BaseController</span><span class="p">;</span>
@@ -1574,14 +1574,14 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function dispatchToRoute($request)
-{
-	$withRoute = $this-&gt;app-&gt;config-&gt;get(&#39;app.with_route&#39;, true) ? function () {
-		$this-&gt;loadRoutes();
-	} : null;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">dispatchToRoute</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$withRoute</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app.with_route&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span> <span class="o">?</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadRoutes</span><span class="p">();</span>
+	<span class="p">}</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
 
-	return $this-&gt;app-&gt;route-&gt;dispatch($request, $withRoute);
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">route</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$withRoute</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>主要逻辑都在<code>dispatch</code>方法：</p>
@@ -1628,45 +1628,45 @@ function ($passable) use ($stack, $pipe) {
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function dispatch(Request $request, $withRoute = null)
-{
-	$this-&gt;request = $request;
-	$this-&gt;host    = $this-&gt;request-&gt;host(true);
-	//加载路由配置、缓存等
-	$this-&gt;init();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$withRoute</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$request</span><span class="p">;</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">host</span>    <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">host</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+	<span class="c1">//加载路由配置、缓存等
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">init</span><span class="p">();</span>
 
-	if ($withRoute) {
-		//加载路由
-    if ($withRoute instanceof Closure) {
-      $withRoute();
-    }
-    $dispatch = $this-&gt;check();
-	} else {
-		// 如果没有开启路由，将执行这里的语句  $this-&gt;path()得到PATHINFO，比如/demo/hello
-		$dispatch = $this-&gt;url($this-&gt;path());
-	}
-	// $dispatch是think\route\dispatch\Url的实例，该类继承了Controller类
-	// 且该类中没有init方法，所以这里执行的是其父类的init方法
-	$dispatch-&gt;init($this-&gt;app);
+	<span class="k">if</span> <span class="p">(</span><span class="nv">$withRoute</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">//加载路由
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$withRoute</span> <span class="nx">instanceof</span> <span class="nx">Closure</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nv">$withRoute</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nv">$dispatch</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">();</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="c1">// 如果没有开启路由，将执行这里的语句  $this-&gt;path()得到PATHINFO，比如/demo/hello
+</span><span class="c1"></span>		<span class="nv">$dispatch</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">());</span>
+	<span class="p">}</span>
+	<span class="c1">// $dispatch是think\route\dispatch\Url的实例，该类继承了Controller类
+</span><span class="c1"></span>	<span class="c1">// 且该类中没有init方法，所以这里执行的是其父类的init方法
+</span><span class="c1"></span>	<span class="nv">$dispatch</span><span class="o">-&gt;</span><span class="na">init</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">);</span>
 
-	return $this-&gt;app-&gt;middleware-&gt;pipeline(&#39;route&#39;)
-            -&gt;send($request)
-            -&gt;then(function () use ($dispatch) {
-                return $dispatch-&gt;run();
-            });
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">pipeline</span><span class="p">(</span><span class="s1">&#39;route&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$dispatch</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$dispatch</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+            <span class="p">});</span>
+<span class="p">}</span>
 
-public function url(string $url): Dispatch
-{
-  if ($this-&gt;request-&gt;method() == &#39;OPTIONS&#39;) {
-    // 自动响应options请求
-    return new Callback($this-&gt;request, $this-&gt;group, function () {
-      return Response::create(&#39;&#39;, &#39;html&#39;, 204)-&gt;header([&#39;Allow&#39; =&gt; &#39;GET, POST, PUT, DELETE&#39;]);
-    });
-  }
-	// 第三个参数为PATHINFO
-	return new UrlDispatch($this-&gt;request, $this-&gt;group, $url);
-}
+<span class="k">public</span> <span class="k">function</span> <span class="nf">url</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$url</span><span class="p">)</span><span class="o">:</span> <span class="nx">Dispatch</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 自动响应options请求
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="nx">Callback</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Response</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="mi">204</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">([</span><span class="s1">&#39;Allow&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET, POST, PUT, DELETE&#39;</span><span class="p">]);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+	<span class="c1">// 第三个参数为PATHINFO
+</span><span class="c1"></span>	<span class="k">return</span> <span class="k">new</span> <span class="nx">UrlDispatch</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>该方法新建并返回一个<code>think\route\dispatch\Url</code>类的实例，其中的构造函数：</p>
@@ -1740,72 +1740,72 @@ public function url(string $url): Dispatch
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function __construct(Request $request, Rule $rule, $dispatch)
-{
-	$this-&gt;request = $request;
-	$this-&gt;rule    = $rule;
-	// 解析默认的URL规则
-	$dispatch = $this-&gt;parseUrl($dispatch);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Rule</span> <span class="nv">$rule</span><span class="p">,</span> <span class="nv">$dispatch</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$request</span><span class="p">;</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span>    <span class="o">=</span> <span class="nv">$rule</span><span class="p">;</span>
+	<span class="c1">// 解析默认的URL规则
+</span><span class="c1"></span>	<span class="nv">$dispatch</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">parseUrl</span><span class="p">(</span><span class="nv">$dispatch</span><span class="p">);</span>
 
-	parent::__construct($request, $rule, $dispatch, $this-&gt;param);
-}
+	<span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$rule</span><span class="p">,</span> <span class="nv">$dispatch</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">);</span>
+<span class="p">}</span>
 
-protected function parseUrl(string $url): array
-{
-	// 获取URL分隔符
-	$depr = $this-&gt;rule-&gt;config(&#39;pathinfo_depr&#39;);
-	// 获取路由对象并读取路由绑定
-	$bind = $this-&gt;rule-&gt;getRouter()-&gt;getDomainBind();
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">parseUrl</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$url</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+<span class="p">{</span>
+	<span class="c1">// 获取URL分隔符
+</span><span class="c1"></span>	<span class="nv">$depr</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;pathinfo_depr&#39;</span><span class="p">);</span>
+	<span class="c1">// 获取路由对象并读取路由绑定
+</span><span class="c1"></span>	<span class="nv">$bind</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">getRouter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getDomainBind</span><span class="p">();</span>
 
-	if ($bind <span class="err">&amp;&amp;</span> preg_match(&#39;/^[a-z]/is&#39;, $bind)) {
-		$bind = str_replace(&#39;/&#39;, $depr, $bind);
-		// 如果有域名绑定
-		$url = $bind . (&#39;.&#39; != substr($bind, -1) ? $depr : &#39;&#39;) . ltrim($url, $depr);
-	}
-	// $path为[控制器，操作]这样组成的数组，如[&#34;demo&#34;, &#34;hello&#34;]
-	$path = $this-&gt;rule-&gt;parseUrlPath($url);
-	if (empty($path)) {
-		return [null, null];
-	}
+	<span class="k">if</span> <span class="p">(</span><span class="nv">$bind</span> <span class="o">&amp;&amp;</span> <span class="nx">preg_match</span><span class="p">(</span><span class="s1">&#39;/^[a-z]/is&#39;</span><span class="p">,</span> <span class="nv">$bind</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nv">$bind</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nv">$depr</span><span class="p">,</span> <span class="nv">$bind</span><span class="p">);</span>
+		<span class="c1">// 如果有域名绑定
+</span><span class="c1"></span>		<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$bind</span> <span class="o">.</span> <span class="p">(</span><span class="s1">&#39;.&#39;</span> <span class="o">!=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$bind</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$depr</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">.</span> <span class="nx">ltrim</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nv">$depr</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">// $path为[控制器，操作]这样组成的数组，如[&#34;demo&#34;, &#34;hello&#34;]
+</span><span class="c1"></span>	<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">parseUrlPath</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$path</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="p">[</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">];</span>
+	<span class="p">}</span>
 
-	// 解析控制器，获取控制器名
-	$controller = !empty($path) ? array_shift($path) : null;
-	// 检查控制器是否合法
-	// 正则匹配：开头是字母，后面是0个到多个字母、下划线或者点
-	if ($controller <span class="err">&amp;&amp;</span> !preg_match(&#39;/^[A-Za-z][\w|\.]*$/&#39;, $controller)) {
-		throw new HttpException(404, &#39;controller not exists:&#39; . $controller);
-	}
+	<span class="c1">// 解析控制器，获取控制器名
+</span><span class="c1"></span>	<span class="nv">$controller</span> <span class="o">=</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="o">?</span> <span class="nx">array_shift</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+	<span class="c1">// 检查控制器是否合法
+</span><span class="c1"></span>	<span class="c1">// 正则匹配：开头是字母，后面是0个到多个字母、下划线或者点
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nv">$controller</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">preg_match</span><span class="p">(</span><span class="s1">&#39;/^[A-Za-z][\w|\.]*$/&#39;</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nx">HttpException</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s1">&#39;controller not exists:&#39;</span> <span class="o">.</span> <span class="nv">$controller</span><span class="p">);</span>
+	<span class="p">}</span>
 
-	// 解析操作
-	$action = !empty($path) ? array_shift($path) : null;
-	$var    = [];
+	<span class="c1">// 解析操作
+</span><span class="c1"></span>	<span class="nv">$action</span> <span class="o">=</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="o">?</span> <span class="nx">array_shift</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+	<span class="nv">$var</span>    <span class="o">=</span> <span class="p">[];</span>
 
-	// 解析额外参数（去除控制器名和操作名后的参数 可以看一下 parseUrlPath 中的代码）
-	if ($path) {
-		// 正则匹配：一个至多个字母，下划线，中间是‘|’，结尾是非‘|’的任意字符，比如 hello|123
-		preg_replace_callback(&#39;/(\w+)\|([^\|]+)/&#39;, function ($match) use (<span class="err">&amp;</span>$var) {
-			$var[$match[1]] = strip_tags($match[2]);
-		}, implode(&#39;|&#39;, $path));
-	}
+	<span class="c1">// 解析额外参数（去除控制器名和操作名后的参数 可以看一下 parseUrlPath 中的代码）
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// 正则匹配：一个至多个字母，下划线，中间是‘|’，结尾是非‘|’的任意字符，比如 hello|123
+</span><span class="c1"></span>		<span class="nx">preg_replace_callback</span><span class="p">(</span><span class="s1">&#39;/(\w+)\|([^\|]+)/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$match</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="o">&amp;</span><span class="nv">$var</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nv">$var</span><span class="p">[</span><span class="nv">$match</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">strip_tags</span><span class="p">(</span><span class="nv">$match</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+		<span class="p">},</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="nv">$path</span><span class="p">));</span>
+	<span class="p">}</span>
 
-	$panDomain = $this-&gt;request-&gt;panDomain();
-	if ($panDomain <span class="err">&amp;&amp;</span> $key = array_search(&#39;*&#39;, $var)) {
-		// 泛域名赋值
-		$var[$key] = $panDomain;
-	}
+	<span class="nv">$panDomain</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">panDomain</span><span class="p">();</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nv">$panDomain</span> <span class="o">&amp;&amp;</span> <span class="nv">$key</span> <span class="o">=</span> <span class="nx">array_search</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="nv">$var</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">// 泛域名赋值
+</span><span class="c1"></span>		<span class="nv">$var</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$panDomain</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	// 设置当前请求的参数
-	$this-&gt;param = $var;
+	<span class="c1">// 设置当前请求的参数
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">param</span> <span class="o">=</span> <span class="nv">$var</span><span class="p">;</span>
 
-	// 封装路由
-	$route = [$controller, $action];
-	// 如果路由被定义过
-	if ($this-&gt;hasDefinedRoute($route)) {
-		throw new HttpException(404, &#39;invalid request:&#39; . str_replace(&#39;|&#39;, $depr, $url));
-	}
+	<span class="c1">// 封装路由
+</span><span class="c1"></span>	<span class="nv">$route</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$action</span><span class="p">];</span>
+	<span class="c1">// 如果路由被定义过
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasDefinedRoute</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nx">HttpException</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s1">&#39;invalid request:&#39;</span> <span class="o">.</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="nv">$depr</span><span class="p">,</span> <span class="nv">$url</span><span class="p">));</span>
+	<span class="p">}</span>
 
-	return $route;
-}
+	<span class="k">return</span> <span class="nv">$route</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>该方法最后返回一个控制器和操作组成的数组，大概类似这样：<code>[$controller, $action]</code>。最终，<code>dispatch</code>方法的<code>$dispatch = $this-&gt;url($this-&gt;path());</code>语句得到一个<code>think\route\dispatch\Url</code>类的实例</p>
@@ -1835,26 +1835,26 @@ protected function parseUrl(string $url): array
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected function dispatchToRoute($request)
-{
-	$withRoute = $this-&gt;app-&gt;config-&gt;get(&#39;app.with_route&#39;, true) ? function () {
-		$this-&gt;loadRoutes();
-	} : null;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">dispatchToRoute</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$withRoute</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app.with_route&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span> <span class="o">?</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadRoutes</span><span class="p">();</span>
+	<span class="p">}</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
 
-	return $this-&gt;app-&gt;route-&gt;dispatch($request, $withRoute);
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">route</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$withRoute</span><span class="p">);</span>
+<span class="p">}</span>
 
-public function dispatch(Request $request, $withRoute = null)
-{
-	...
-	$dispatch-&gt;init($this-&gt;app);
+<span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$withRoute</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="o">...</span>
+	<span class="nv">$dispatch</span><span class="o">-&gt;</span><span class="na">init</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">);</span>
 
-	return $this-&gt;app-&gt;middleware-&gt;pipeline(&#39;route&#39;)
-		-&gt;send($request)
-		-&gt;then(function () use ($dispatch) {
-			return $dispatch-&gt;run();
-		});
-}
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">pipeline</span><span class="p">(</span><span class="s1">&#39;route&#39;</span><span class="p">)</span>
+		<span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+		<span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$dispatch</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nv">$dispatch</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+		<span class="p">});</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里又给控制器操作的代码包裹上了中间件闭包，其原理也跟前面分析的全局中间件原理一样，不再赘述。重点的重点关注<code>run</code>方法。<code>run</code>方法代码如下：</p>
@@ -1880,24 +1880,24 @@ public function dispatch(Request $request, $withRoute = null)
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function run(): Response
-{
-	// HTTP的OPTIONS方法用于获取目的资源所支持的通信选项。
-	if ($this-&gt;rule instanceof RuleItem <span class="err">&amp;&amp;</span> $this-&gt;request-&gt;method() == &#39;OPTIONS&#39; <span class="err">&amp;&amp;</span> $this-&gt;rule-&gt;isAutoOptions()) {
-		$rules = $this-&gt;rule-&gt;getRouter()-&gt;getRule($this-&gt;rule-&gt;getRule());
-		$allow = [];
-		foreach ($rules as $item) {
-			$allow[] = strtoupper($item-&gt;getMethod());
-		}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+<span class="p">{</span>
+	<span class="c1">// HTTP的OPTIONS方法用于获取目的资源所支持的通信选项。
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span> <span class="nx">instanceof</span> <span class="nx">RuleItem</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;OPTIONS&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">isAutoOptions</span><span class="p">())</span> <span class="p">{</span>
+		<span class="nv">$rules</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">getRouter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRule</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">getRule</span><span class="p">());</span>
+		<span class="nv">$allow</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rules</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nv">$allow</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">strtoupper</span><span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">());</span>
+		<span class="p">}</span>
 
-		return Response::create(&#39;&#39;, &#39;html&#39;, 204)-&gt;header([&#39;Allow&#39; =&gt; implode(&#39;, &#39;, $allow)]);
-	}
+		<span class="k">return</span> <span class="nx">Response</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="mi">204</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">([</span><span class="s1">&#39;Allow&#39;</span> <span class="o">=&gt;</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="nv">$allow</span><span class="p">)]);</span>
+	<span class="p">}</span>
 
-	// 这里的exec方法位于Controller类
-	$data = $this-&gt;exec();
-	// 控制器操作返回的数据，进一步加工，设置Http报头、状态码等，返回一个Response对象
-	return $this-&gt;autoResponse($data);
-}
+	<span class="c1">// 这里的exec方法位于Controller类
+</span><span class="c1"></span>	<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exec</span><span class="p">();</span>
+	<span class="c1">// 控制器操作返回的数据，进一步加工，设置Http报头、状态码等，返回一个Response对象
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoResponse</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>分析详见注释。主要的逻辑在<code>$data = $this-&gt;exec()</code>，其中，注意<code>exec</code>方法位于<code>think\route\dispatch\Controller</code>类，其代码如下：</p>
@@ -2019,120 +2019,120 @@ public function dispatch(Request $request, $withRoute = null)
 </span><span class="lnt">114
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function exec()
-{
-	try {
-		// A 实例化控制器
-		$instance = $this-&gt;controller($this-&gt;controller);
-	} catch (ClassNotFoundException $e) {
-		throw new HttpException(404, &#39;controller not exists:&#39; . $e-&gt;getClass());
-	}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">exec</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">try</span> <span class="p">{</span>
+		<span class="c1">// A 实例化控制器
+</span><span class="c1"></span>		<span class="nv">$instance</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ClassNotFoundException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nx">HttpException</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s1">&#39;controller not exists:&#39;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getClass</span><span class="p">());</span>
+	<span class="p">}</span>
 
-	// B 注册控制器中间件
-	$this-&gt;registerControllerMiddleware($instance);
-	// 这里跟前面全局中间件原理一样，不再分析
-	return $this-&gt;app-&gt;middleware-&gt;pipeline(&#39;controller&#39;)
-		-&gt;send($this-&gt;request)
-		-&gt;then(function () use ($instance) {
-			// 获取当前操作名
-      $suffix = $this-&gt;rule-&gt;config(&#39;action_suffix&#39;);
-      $action = $this-&gt;actionName . $suffix;
+	<span class="c1">// B 注册控制器中间件
+</span><span class="c1"></span>	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerControllerMiddleware</span><span class="p">(</span><span class="nv">$instance</span><span class="p">);</span>
+	<span class="c1">// 这里跟前面全局中间件原理一样，不再分析
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">pipeline</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">)</span>
+		<span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">)</span>
+		<span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$instance</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 获取当前操作名
+</span><span class="c1"></span>      <span class="nv">$suffix</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;action_suffix&#39;</span><span class="p">);</span>
+      <span class="nv">$action</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">actionName</span> <span class="o">.</span> <span class="nv">$suffix</span><span class="p">;</span>
 
-			if (is_callable([$instance, $action])) {
-				$vars = $this-&gt;request-&gt;param();
-				try {
-					$reflect = new ReflectionMethod($instance, $action);
-					// 严格获取当前操作方法名
-					$actionName = $reflect-&gt;getName();
-          if ($suffix) {
-            $actionName = substr($actionName, 0, -strlen($suffix));
-          }
+			<span class="k">if</span> <span class="p">(</span><span class="nx">is_callable</span><span class="p">([</span><span class="nv">$instance</span><span class="p">,</span> <span class="nv">$action</span><span class="p">]))</span> <span class="p">{</span>
+				<span class="nv">$vars</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">();</span>
+				<span class="k">try</span> <span class="p">{</span>
+					<span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="nv">$instance</span><span class="p">,</span> <span class="nv">$action</span><span class="p">);</span>
+					<span class="c1">// 严格获取当前操作方法名
+</span><span class="c1"></span>					<span class="nv">$actionName</span> <span class="o">=</span> <span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nv">$suffix</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$actionName</span> <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$actionName</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="nx">strlen</span><span class="p">(</span><span class="nv">$suffix</span><span class="p">));</span>
+          <span class="p">}</span>
           
-					$this-&gt;request-&gt;setAction($actionName);
-				} catch (ReflectionException $e) {
-					$reflect = new ReflectionMethod($instance, &#39;__call&#39;);
-					$vars    = [$action, $vars];
-					$this-&gt;request-&gt;setAction($action);
-				}
-			} else {
-				// 操作不存在
-				throw new HttpException(404, &#39;method not exists:&#39; . get_class($instance) . &#39;-&gt;&#39; . $action . &#39;()&#39;);
-			}
-			// 控制器操作的执行在这里
-			$data = $this-&gt;app-&gt;invokeReflectMethod($instance, $reflect, $vars);
+					<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">setAction</span><span class="p">(</span><span class="nv">$actionName</span><span class="p">);</span>
+				<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ReflectionException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="nv">$instance</span><span class="p">,</span> <span class="s1">&#39;__call&#39;</span><span class="p">);</span>
+					<span class="nv">$vars</span>    <span class="o">=</span> <span class="p">[</span><span class="nv">$action</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">];</span>
+					<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">setAction</span><span class="p">(</span><span class="nv">$action</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="c1">// 操作不存在
+</span><span class="c1"></span>				<span class="k">throw</span> <span class="k">new</span> <span class="nx">HttpException</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s1">&#39;method not exists:&#39;</span> <span class="o">.</span> <span class="nx">get_class</span><span class="p">(</span><span class="nv">$instance</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">.</span> <span class="nv">$action</span> <span class="o">.</span> <span class="s1">&#39;()&#39;</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="c1">// 控制器操作的执行在这里
+</span><span class="c1"></span>			<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">invokeReflectMethod</span><span class="p">(</span><span class="nv">$instance</span><span class="p">,</span> <span class="nv">$reflect</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">);</span>
 
-			return $this-&gt;autoResponse($data);
-		});
-}
+			<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoResponse</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+		<span class="p">});</span>
+<span class="p">}</span>
 
-// A 控制器的实例化
-public function controller(string $name)
-{
-	// 是否使用控制器后缀
-	$suffix = $this-&gt;rule-&gt;config(&#39;controller_suffix&#39;) ? &#39;Controller&#39; : &#39;&#39;;
-	// 访问控制器层名称
-	$controllerLayer = $this-&gt;rule-&gt;config(&#39;controller_layer&#39;) ?: &#39;controller&#39;;
-	// 空控制器名称
-	$emptyController = $this-&gt;rule-&gt;config(&#39;empty_controller&#39;) ?: &#39;Error&#39;;
-	//获取控制器完整的类名
-	$class = $this-&gt;app-&gt;parseClass($controllerLayer, $name . $suffix);
-	// 如果这个类存在
-	if (class_exists($class)) {
-		//通过容器获取实例（非单例模式）
-		return $this-&gt;app-&gt;make($class, [], true);
-		//不存在时，如果有空控制器的类存在
-	} elseif ($emptyController <span class="err">&amp;&amp;</span> class_exists($emptyClass = $this-&gt;app-&gt;parseClass($controllerLayer, $emptyController . $suffix))) {
-		//同理，实例化空控制器
-		return $this-&gt;app-&gt;make($emptyClass, [], true);
-	}
-	// 如果找不到控制器的类，且连控控制器也没有，抛出错误
-	throw new ClassNotFoundException(&#39;class not exists:&#39; . $class, $class);
-}
+<span class="c1">// A 控制器的实例化
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">controller</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// 是否使用控制器后缀
+</span><span class="c1"></span>	<span class="nv">$suffix</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;controller_suffix&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;Controller&#39;</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+	<span class="c1">// 访问控制器层名称
+</span><span class="c1"></span>	<span class="nv">$controllerLayer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;controller_layer&#39;</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;controller&#39;</span><span class="p">;</span>
+	<span class="c1">// 空控制器名称
+</span><span class="c1"></span>	<span class="nv">$emptyController</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rule</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;empty_controller&#39;</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+	<span class="c1">//获取控制器完整的类名
+</span><span class="c1"></span>	<span class="nv">$class</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">parseClass</span><span class="p">(</span><span class="nv">$controllerLayer</span><span class="p">,</span> <span class="nv">$name</span> <span class="o">.</span> <span class="nv">$suffix</span><span class="p">);</span>
+	<span class="c1">// 如果这个类存在
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">class_exists</span><span class="p">(</span><span class="nv">$class</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">//通过容器获取实例（非单例模式）
+</span><span class="c1"></span>		<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="p">[],</span> <span class="k">true</span><span class="p">);</span>
+		<span class="c1">//不存在时，如果有空控制器的类存在
+</span><span class="c1"></span>	<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$emptyController</span> <span class="o">&amp;&amp;</span> <span class="nx">class_exists</span><span class="p">(</span><span class="nv">$emptyClass</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">parseClass</span><span class="p">(</span><span class="nv">$controllerLayer</span><span class="p">,</span> <span class="nv">$emptyController</span> <span class="o">.</span> <span class="nv">$suffix</span><span class="p">)))</span> <span class="p">{</span>
+		<span class="c1">//同理，实例化空控制器
+</span><span class="c1"></span>		<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$emptyClass</span><span class="p">,</span> <span class="p">[],</span> <span class="k">true</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">// 如果找不到控制器的类，且连控控制器也没有，抛出错误
+</span><span class="c1"></span>	<span class="k">throw</span> <span class="k">new</span> <span class="nx">ClassNotFoundException</span><span class="p">(</span><span class="s1">&#39;class not exists:&#39;</span> <span class="o">.</span> <span class="nv">$class</span><span class="p">,</span> <span class="nv">$class</span><span class="p">);</span>
+<span class="p">}</span>
 
-// B 控制器中间件注册
-protected function registerControllerMiddleware($controller): void
-{
-	// 获取反射类对象
-	$class = new ReflectionClass($controller);
-	// 检查控制器类是否有middleware属性
-	if ($class-&gt;hasProperty(&#39;middleware&#39;)) {
-		//提取middleware变量
-		$reflectionProperty = $class-&gt;getProperty(&#39;middleware&#39;);
-		//设置可见性为公有
-		$reflectionProperty-&gt;setAccessible(true);
-		//获取middleware属性的值
-		$middlewares = $reflectionProperty-&gt;getValue($controller);
-		//解析控制器中间件配置
-		foreach ($middlewares as $key =&gt; $val) {
-			if (!is_int($key)) {
-				//如果有设置only属性
-				//$this-&gt;request-&gt;action(true)获取当前操作名并转为小写
-				//$val[&#39;only&#39;]各元素也转为小写，然后判断当前操作是否在$val[&#39;only&#39;]里面
-				//不在则跳过（说明该操作不需要执行该中间件）
-				if (isset($val[&#39;only&#39;]) <span class="err">&amp;&amp;</span> !in_array($this-&gt;request-&gt;action(true), array_map(function ($item) {
-					return strtolower($item);
-				}, is_string($val[&#39;only&#39;]) ? explode(&#34;,&#34;, $val[&#39;only&#39;]) : $val[&#39;only&#39;]))) {
-					continue;
-					//如果有设置except属性，且当前操作在$val[&#39;except&#39;]里面，说明当前操作不需要该中间件，跳过
-				} elseif (isset($val[&#39;except&#39;]) <span class="err">&amp;&amp;</span> in_array($this-&gt;request-&gt;action(true), array_map(function ($item) {
-					return strtolower($item);
-				}, is_string($val[&#39;except&#39;]) ? explode(&#39;,&#39;, $val[&#39;except&#39;]) : $val[&#39;except&#39;]))) {
-					continue;
-				} else {
-					//保存中间件名称或者类
-					$val = $key;
-				}
-			}
+<span class="c1">// B 控制器中间件注册
+</span><span class="c1"></span><span class="k">protected</span> <span class="k">function</span> <span class="nf">registerControllerMiddleware</span><span class="p">(</span><span class="nv">$controller</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="c1">// 获取反射类对象
+</span><span class="c1"></span>	<span class="nv">$class</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionClass</span><span class="p">(</span><span class="nv">$controller</span><span class="p">);</span>
+	<span class="c1">// 检查控制器类是否有middleware属性
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nv">$class</span><span class="o">-&gt;</span><span class="na">hasProperty</span><span class="p">(</span><span class="s1">&#39;middleware&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">//提取middleware变量
+</span><span class="c1"></span>		<span class="nv">$reflectionProperty</span> <span class="o">=</span> <span class="nv">$class</span><span class="o">-&gt;</span><span class="na">getProperty</span><span class="p">(</span><span class="s1">&#39;middleware&#39;</span><span class="p">);</span>
+		<span class="c1">//设置可见性为公有
+</span><span class="c1"></span>		<span class="nv">$reflectionProperty</span><span class="o">-&gt;</span><span class="na">setAccessible</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+		<span class="c1">//获取middleware属性的值
+</span><span class="c1"></span>		<span class="nv">$middlewares</span> <span class="o">=</span> <span class="nv">$reflectionProperty</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$controller</span><span class="p">);</span>
+		<span class="c1">//解析控制器中间件配置
+</span><span class="c1"></span>		<span class="k">foreach</span> <span class="p">(</span><span class="nv">$middlewares</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_int</span><span class="p">(</span><span class="nv">$key</span><span class="p">))</span> <span class="p">{</span>
+				<span class="c1">//如果有设置only属性
+</span><span class="c1"></span>				<span class="c1">//$this-&gt;request-&gt;action(true)获取当前操作名并转为小写
+</span><span class="c1"></span>				<span class="c1">//$val[&#39;only&#39;]各元素也转为小写，然后判断当前操作是否在$val[&#39;only&#39;]里面
+</span><span class="c1"></span>				<span class="c1">//不在则跳过（说明该操作不需要执行该中间件）
+</span><span class="c1"></span>				<span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;only&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">(</span><span class="k">true</span><span class="p">),</span> <span class="nx">array_map</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+				<span class="p">},</span> <span class="nx">is_string</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;only&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nx">explode</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;only&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;only&#39;</span><span class="p">])))</span> <span class="p">{</span>
+					<span class="k">continue</span><span class="p">;</span>
+					<span class="c1">//如果有设置except属性，且当前操作在$val[&#39;except&#39;]里面，说明当前操作不需要该中间件，跳过
+</span><span class="c1"></span>				<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;except&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">in_array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">(</span><span class="k">true</span><span class="p">),</span> <span class="nx">array_map</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">return</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+				<span class="p">},</span> <span class="nx">is_string</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;except&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;except&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;except&#39;</span><span class="p">])))</span> <span class="p">{</span>
+					<span class="k">continue</span><span class="p">;</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="c1">//保存中间件名称或者类
+</span><span class="c1"></span>					<span class="nv">$val</span> <span class="o">=</span> <span class="nv">$key</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
 			
-			if (is_string($val) <span class="err">&amp;&amp;</span> strpos($val, &#39;:&#39;)) {\
-				$val = explode(&#39;:&#39;, $val, 2);\
-			}
+			<span class="k">if</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$val</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span> <span class="p">{</span><span class="nx">\</span>
+				<span class="nv">$val</span> <span class="o">=</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="nv">$val</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span><span class="nx">\</span>
+			<span class="p">}</span>
 			
-			//注册控制器中间件，跟前面注册路由中间件一样原理，只是，中间件的type为controller
-			$this-&gt;app-&gt;middleware-&gt;controller($val);
-		}
-	}
-}
+			<span class="c1">//注册控制器中间件，跟前面注册路由中间件一样原理，只是，中间件的type为controller
+</span><span class="c1"></span>			<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">(</span><span class="nv">$val</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>长路漫漫，到这里，终于分析完了<code>runWithRequest</code>方法，前面的分析，基本是围绕着它展开。<code>runWithRequest</code>方法跑完，<code>run</code>方法也差不多结束了，最终它返回一个<code>Response</code>对象。</p>
@@ -2156,22 +2156,22 @@ protected function registerControllerMiddleware($controller): void
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function run(Request $request = null): Response
-{
-	//自动创建request对象
-  $request = $request ?? $this-&gt;app-&gt;make(&#39;request&#39;, [], true);
-  $this-&gt;app-&gt;instance(&#39;request&#39;, $request);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+<span class="p">{</span>
+	<span class="c1">//自动创建request对象
+</span><span class="c1"></span>  <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span> <span class="o">??</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="k">true</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">instance</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="nv">$request</span><span class="p">);</span>
   
-	try {
-		$response = $this-&gt;runWithRequest($request);
-	} catch (Throwable $e) {
-		$this-&gt;reportException($e);
+	<span class="k">try</span> <span class="p">{</span>
+		<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">runWithRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportException</span><span class="p">(</span><span class="nv">$e</span><span class="p">);</span>
 
-		$response = $this-&gt;renderException($request, $e);
-	}
-	//设置cookie并返回响应对象
-	return $response;
-}
+		<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">//设置cookie并返回响应对象
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="发送响应和收尾工作">发送响应和收尾工作</h2>
@@ -2186,12 +2186,12 @@ protected function registerControllerMiddleware($controller): void
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">...
-$response = $http-&gt;run();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">...</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 
-$response-&gt;send();
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
 
-$http-&gt;end($response);
+<span class="nv">$http</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来是执行<code>$response-&gt;send();</code></p>
@@ -2223,30 +2223,30 @@ $http-&gt;end($response);
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function send(): void
-{
-	// 处理输出数据
-	$data = $this-&gt;getContent();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="c1">// 处理输出数据
+</span><span class="c1"></span>	<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">();</span>
 
-	if (!headers_sent() <span class="err">&amp;&amp;</span> !empty($this-&gt;header)) {
-		// 发送状态码
-		http_response_code($this-&gt;code);
-		// 发送头部信息
-		foreach ($this-&gt;header as $name =&gt; $val) {
-			header($name . (!is_null($val) ? &#39;:&#39; . $val : &#39;&#39;));
-		}
-	}
-	if ($this-&gt;cookie) {
-    $this-&gt;cookie-&gt;save();
-  }
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">headers_sent</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">// 发送状态码
+</span><span class="c1"></span>		<span class="nx">http_response_code</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">code</span><span class="p">);</span>
+		<span class="c1">// 发送头部信息
+</span><span class="c1"></span>		<span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">header</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">header</span><span class="p">(</span><span class="nv">$name</span> <span class="o">.</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;:&#39;</span> <span class="o">.</span> <span class="nv">$val</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+  <span class="p">}</span>
 
-	$this-&gt;sendData($data);
-	// 参考：http://www.laruence.com/2011/04/13/1991.html
-	if (function_exists(&#39;fastcgi_finish_request&#39;)) {
-		// 提高页面响应
-		fastcgi_finish_request();
-	}
-}
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sendData</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+	<span class="c1">// 参考：http://www.laruence.com/2011/04/13/1991.html
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">function_exists</span><span class="p">(</span><span class="s1">&#39;fastcgi_finish_request&#39;</span><span class="p">))</span> <span class="p">{</span>
+		<span class="c1">// 提高页面响应
+</span><span class="c1"></span>		<span class="nx">fastcgi_finish_request</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接着是运行：<code>$http-&gt;end($response);</code>，展开如下：</p>
@@ -2264,16 +2264,16 @@ $http-&gt;end($response);
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function end(Response $response): void
-{
-		$this-&gt;app-&gt;event-&gt;trigger(HttpEnd::class, $response);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">end</span><span class="p">(</span><span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">event</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nx">HttpEnd</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
 
-  	// 执行中间件   由此可以看出，可以在中间件添加end方法，在程序结束时执行
-  	$this-&gt;app-&gt;middleware-&gt;end($response);
+  	<span class="c1">// 执行中间件   由此可以看出，可以在中间件添加end方法，在程序结束时执行
+</span><span class="c1"></span>  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 
-  	// 写入日志
-  	$this-&gt;app-&gt;log-&gt;save();
-}
+  	<span class="c1">// 写入日志
+</span><span class="c1"></span>  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">log</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>以上代码执行完了之后，整个生命周期本该结束了，发现程序竟然还继续执行<code>think\initializer\Error</code>类的<code>appShutdown</code>方法：</p>
@@ -2290,15 +2290,15 @@ $http-&gt;end($response);
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function appShutdown(): void
-{
-	if (!is_null($error = error_get_last()) <span class="err">&amp;&amp;</span> $this-&gt;isFatal($error[&#39;type&#39;])) {
-		// 将错误信息托管至think\ErrorException
-		$exception = new ErrorException($error[&#39;type&#39;], $error[&#39;message&#39;], $error[&#39;file&#39;], $error[&#39;line&#39;]);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">appShutdown</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_null</span><span class="p">(</span><span class="nv">$error</span> <span class="o">=</span> <span class="nx">error_get_last</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isFatal</span><span class="p">(</span><span class="nv">$error</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]))</span> <span class="p">{</span>
+		<span class="c1">// 将错误信息托管至think\ErrorException
+</span><span class="c1"></span>		<span class="nv">$exception</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ErrorException</span><span class="p">(</span><span class="nv">$error</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">],</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">],</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">&#39;line&#39;</span><span class="p">]);</span>
 
-		$this-&gt;appException($exception);
-	}
-}
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">appException</span><span class="p">(</span><span class="nv">$exception</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>开始是想可能是析构函数调用了它，但也没有到有析构函数调用。最后发现，原来前面应用初始化的时候，加载了<code>think\initializer\Error</code>类，并执行了<code>init</code>方法：</p>
@@ -2318,18 +2318,18 @@ $http-&gt;end($response);
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"> public function init(App $app)
-{
-	$this-&gt;app = $app;
-	//开启所有级别错误提示
-	error_reporting(E_ALL);
-	//设置自定义的函数处理运行中的错误
-	set_error_handler([$this, &#39;appError&#39;]);
-	//设置默认的异常处理程序，用于没有用 try/catch 块来捕获的异常
-	set_exception_handler([$this, &#39;appException&#39;]);
-	//注册一个 callback ，它会在脚本执行完成或者 exit() 后被调用。
-	register_shutdown_function([$this, &#39;appShutdown&#39;]);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"> <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">(</span><span class="nx">App</span> <span class="nv">$app</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">;</span>
+	<span class="c1">//开启所有级别错误提示
+</span><span class="c1"></span>	<span class="nx">error_reporting</span><span class="p">(</span><span class="k">E_ALL</span><span class="p">);</span>
+	<span class="c1">//设置自定义的函数处理运行中的错误
+</span><span class="c1"></span>	<span class="nx">set_error_handler</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;appError&#39;</span><span class="p">]);</span>
+	<span class="c1">//设置默认的异常处理程序，用于没有用 try/catch 块来捕获的异常
+</span><span class="c1"></span>	<span class="nx">set_exception_handler</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;appException&#39;</span><span class="p">]);</span>
+	<span class="c1">//注册一个 callback ，它会在脚本执行完成或者 exit() 后被调用。
+</span><span class="c1"></span>	<span class="nx">register_shutdown_function</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;appShutdown&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/redis/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-09-03T18:38:23+08:00" />
 <meta itemprop="dateModified" content="2020-09-03T18:38:23+08:00" />
-<meta itemprop="wordCount" content="12531">
+<meta itemprop="wordCount" content="12466">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 12531 words </span>
-          <span class="more-meta"> 26 mins read </span>
+          <span class="more-meta"> 12466 words </span>
+          <span class="more-meta"> 25 mins read </span>
         
       </div>
     </header>
@@ -411,7 +411,7 @@ pexpireat key milliseconds-timestamp
 ttl key									<span class="c1">#获取key的有效时间</span>
 pttl key
 persist key							<span class="c1">#切换key从时效性转换为永久性</span>
-keys pattern						<span class="c1">#查询key    *任意数量的任意符号  ?一个任意符号  []一个指定符号</span>   
+keys pattern						<span class="c1">#查询key    *任意数量的任意符号  ?一个任意符号  []一个指定符号   </span>
 rename key newkey				<span class="c1">#为key改名</span>
 renamenx key newkey
 sort										<span class="c1">#对所有key排序</span>
@@ -538,7 +538,7 @@ unwatch													<span class="c1">#取消对所有 key 的监视</span>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">setnx lock-key value						<span class="c1">#使用 setnx 设置一个公共锁</span>
-del															<span class="c1">#释放锁</span>	
+del															<span class="c1">#释放锁	</span>
 expire lock-key second					<span class="c1">#添加时间限定，到时不释放，放弃锁</span>
 pexpire lock-key milliseconds
 </code></pre></td></tr></table>
@@ -606,14 +606,14 @@ pexpire lock-key milliseconds
 <h3 id="核心配置">核心配置</h3>
 <h4 id="服务器">服务器</h4>
 <ul>
-<li><strong>daemonize</strong> yes<strong>|</strong>no  ——  设置服务器以守护进程的方式运行</li>
+<li><strong>daemonize</strong> yes**|**no  ——  设置服务器以守护进程的方式运行</li>
 <li><strong>bind</strong> 127.0.0.1  ——  绑定主机地址</li>
 <li><strong>port</strong> 6379  ——  设置服务器端口</li>
 <li><strong>databases</strong> 16  ——  设置数据库数量</li>
 </ul>
 <h4 id="日志配置">日志配置</h4>
 <ul>
-<li><strong>loglevel</strong> debug<strong>|verbose|</strong>notice<strong>|</strong>warning  ——  设置服务器以指定日志记录级别</li>
+<li><strong>loglevel</strong> debug**|verbose|**notice**|**warning  ——  设置服务器以指定日志记录级别</li>
 <li><strong>logfile</strong> 端口号.log  ——  日志记录文件名</li>
 </ul>
 <p>注意：日志级别开发期设置为verbose即可，生产环境中配置为notice，简化日志输出量，降低写日志IO的频度</p>
@@ -1075,10 +1075,10 @@ redis-server –a &lt;password&gt;											<span class="c1">#slave启动服务
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">cluster-enabled<span class="w"> </span>yes|no<span class="w">								</span><span class="c">#添加节点</span><span class="w">
-</span><span class="w"></span>cluster-config-file<span class="w"> </span>&lt;filename<span class="sd">&gt;				#cluster配置文件名</span><span class="w">
-</span><span class="w"></span>cluster-node-timeout<span class="w"> </span>&lt;milliseconds<span class="sd">&gt;		#节点服务响应超时时间</span><span class="w">
-</span><span class="w"></span>cluster-migration-barrier<span class="w"> </span>&lt;count<span class="sd">&gt;			#master连接的slave最小数量</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">cluster-enabled yes|no								#添加节点</span><span class="w">
+</span><span class="w"></span><span class="l">cluster-config-file &lt;filename&gt;				#cluster配置文件名</span><span class="w">
+</span><span class="w"></span><span class="l">cluster-node-timeout &lt;milliseconds&gt;		#节点服务响应超时时间</span><span class="w">
+</span><span class="w"></span><span class="l">cluster-migration-barrier &lt;count&gt;			#master连接的slave最小数量</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p><strong>操作命令</strong></p>
@@ -1578,7 +1578,11 @@ redis-trib.rb reshard									<span class="c1">#重新分片</span>
           <a href="/tags/redis/">redis</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/laravel8%E5%8F%82%E8%80%83%E4%B9%A6%E5%86%8C/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Laravel8参考书册</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/laradock/">
             <span class="next-text nav-default">Laradock</span>
             <span class="next-text nav-mobile">Next</span>

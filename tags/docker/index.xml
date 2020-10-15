@@ -6,11 +6,7 @@
     <description>Recent content in docker on OxO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 18 Aug 2020 16:46:07 +0800</lastBuildDate>
-    
-	<atom:link href="https://zs368.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 18 Aug 2020 16:46:07 +0800</lastBuildDate><atom:link href="https://zs368.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laradock</title>
       <link>https://zs368.github.io/post/laradock/</link>

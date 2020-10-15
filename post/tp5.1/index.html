@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/tp5.1/" />
@@ -371,10 +371,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// 执行应用并响应（绑定当前访问到index模块）
-Container::get(&#39;app&#39;)-&gt;bind(&#39;index&#39;)-&gt;run()-&gt;send();
-// 关闭多模块设计
-&#39;app_multi_module&#39;  =&gt;  false,
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 执行应用并响应（绑定当前访问到index模块）
+</span><span class="c1"></span><span class="nx">Container</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="c1">// 关闭多模块设计
+</span><span class="c1"></span><span class="s1">&#39;app_multi_module&#39;</span>  <span class="o">=&gt;</span>  <span class="k">false</span><span class="p">,</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="命名空间">命名空间</h3>
@@ -417,12 +417,12 @@ Container::get(&#39;app&#39;)-&gt;bind(&#39;index&#39;)-&gt;run()-&gt;send();
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"> public function _empty($name)
- {
-   //把所有城市的操作解析到city方法
-   return $this-&gt;showCity($name);
- }
-<span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"> <span class="k">public</span> <span class="k">function</span> <span class="nf">_empty</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="c1">//把所有城市的操作解析到city方法
+</span><span class="c1"></span>   <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">showCity</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+ <span class="p">}</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">namespace</span> <span class="nx">app\index\controller</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">think\Request</span><span class="p">;</span>
 <span class="k">class</span> <span class="nc">Error</span> 
@@ -477,35 +477,35 @@ Container::get(&#39;app&#39;)-&gt;bind(&#39;index&#39;)-&gt;run()-&gt;send();
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">protected $request;
-/**
-* 构造方法
-* @param Request $request Request对象
-* @access public
-*/
-public function __construct(Request $request)
-{
-$this-&gt;request = $request;
-}
-public function index()
-{
-return $this-&gt;request-&gt;param(&#39;name&#39;);
-} 
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$request</span><span class="p">;</span>
+<span class="sd">/**
+</span><span class="sd">* 构造方法
+</span><span class="sd">* @param Request $request Request对象
+</span><span class="sd">* @access public
+</span><span class="sd">*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$request</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="p">}</span> 
 
-//已经继承后系统基类controller时，可以直接使用
-$this-&gt;request-&gt;param(&#39;name&#39;);
+<span class="c1">//已经继承后系统基类controller时，可以直接使用
+</span><span class="c1"></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 
-//操作方法注入
-public function index(Request $request)
-{
-  return $request-&gt;param(&#39;name&#39;);
-}
+<span class="c1">//操作方法注入
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="p">}</span>
 
-//Facade调用
-Request::param(&#39;name&#39;);
+<span class="c1">//Facade调用
+</span><span class="c1"></span><span class="nx">Request</span><span class="o">::</span><span class="na">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 
-//助手函数
-request()-&gt;param(&#39;name&#39;);
+<span class="c1">//助手函数
+</span><span class="c1"></span><span class="nx">request</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="http头信息">HTTP头信息</h3>
@@ -514,7 +514,7 @@ request()-&gt;param(&#39;name&#39;);
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-PHP" data-lang="PHP">$agent = Request::header(&#39;user-agent&#39;);
+<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="nv">$agent</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;user-agent&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="响应">响应</h2>
@@ -543,26 +543,26 @@ request()-&gt;param(&#39;name&#39;);
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Db::where()
-Db::table(&#39;think_user&#39;)
--&gt;alias(&#39;a&#39;)
--&gt;field(&#39;id,title,content&#39;)
--&gt;limit(10,25)						//从第10行开始的25条数据
--&gt;page(1,10)							//第一页取10个值
--&gt;order(&#39;id&#39;, &#39;desc&#39;)
--&gt;group(&#39;user_id&#39;)
--&gt;having(&#39;count(test_time)&gt;3&#39;)		//HAVING方法用于配合group方法完成从分组的结果中筛选
--&gt;join(&#39;work w&#39;,&#39;a.id = w.artist_id&#39;)		
--&gt;union(&#39;SELECT name FROM think_user_1&#39;)		//UNION操作用于合并两个或多个 SELECT 语句的结果集
--&gt;distinct(true)  				//DISTINCT 方法用于返回唯一不同的值
--&gt;lock(true)							//Lock方法是用于数据库的锁机制
--&gt;cache(true,60)					//cache方法用于查询缓存操作
--&gt;comment(&#39;查询考试前十名分数&#39;)			//COMMENT方法 用于在生成的SQL语句中添加注释内容
--&gt;fetchSql(true)					//etchSql用于直接返回SQL
--&gt;force(&#39;user&#39;)						//force 方法用于数据集的强制索引操作
--&gt;partition($data, $field, $rule)	//partition 方法用于是数据库水平分表
--&gt;failException()					//failException设置查询数据为空时是否需要抛出异常，如果不传入任何参数，默认为开启
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Db</span><span class="o">::</span><span class="na">where</span><span class="p">()</span>
+<span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">alias</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id,title,content&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>						<span class="c1">//从第10行开始的25条数据
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">page</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>							<span class="c1">//第一页取10个值
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">order</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;count(test_time)&gt;3&#39;</span><span class="p">)</span>		<span class="c1">//HAVING方法用于配合group方法完成从分组的结果中筛选
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;work w&#39;</span><span class="p">,</span><span class="s1">&#39;a.id = w.artist_id&#39;</span><span class="p">)</span>		
+<span class="o">-&gt;</span><span class="na">union</span><span class="p">(</span><span class="s1">&#39;SELECT name FROM think_user_1&#39;</span><span class="p">)</span>		<span class="c1">//UNION操作用于合并两个或多个 SELECT 语句的结果集
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">distinct</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>  				<span class="c1">//DISTINCT 方法用于返回唯一不同的值
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>							<span class="c1">//Lock方法是用于数据库的锁机制
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="k">true</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span>					<span class="c1">//cache方法用于查询缓存操作
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">comment</span><span class="p">(</span><span class="s1">&#39;查询考试前十名分数&#39;</span><span class="p">)</span>			<span class="c1">//COMMENT方法 用于在生成的SQL语句中添加注释内容
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">fetchSql</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>					<span class="c1">//etchSql用于直接返回SQL
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">force</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>						<span class="c1">//force 方法用于数据集的强制索引操作
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">partition</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$rule</span><span class="p">)</span>	<span class="c1">//partition 方法用于是数据库水平分表
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">failException</span><span class="p">()</span>					<span class="c1">//failException设置查询数据为空时是否需要抛出异常，如果不传入任何参数，默认为开启
+</span></code></pre></td></tr></table>
 </div>
 </div><h3 id="获取器">获取器</h3>
 <div class="highlight"><div class="chroma">
@@ -572,9 +572,9 @@ Db::table(&#39;think_user&#39;)
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Db::name(&#39;user&#39;)-&gt;withAttr(&#39;name&#39;, function($value, $data) {
-	return strtolower($value);
-})-&gt;select();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Db</span><span class="o">::</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withAttr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="事务">事务</h3>
@@ -597,21 +597,21 @@ Db::table(&#39;think_user&#39;)
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Db::transaction(function () {
-    Db::table(&#39;think_user&#39;)-&gt;find(1);
-    Db::table(&#39;think_user&#39;)-&gt;delete(1);
-});
-// 启动事务
-Db::startTrans();
-try {
-    Db::table(&#39;think_user&#39;)-&gt;find(1);
-    Db::table(&#39;think_user&#39;)-&gt;delete(1);
-    // 提交事务
-    Db::commit();
-} catch (\Exception $e) {
-    // 回滚事务
-    Db::rollback();
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Db</span><span class="o">::</span><span class="na">transaction</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// 启动事务
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">startTrans</span><span class="p">();</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// 提交事务
+</span><span class="c1"></span>    <span class="nx">Db</span><span class="o">::</span><span class="na">commit</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 回滚事务
+</span><span class="c1"></span>    <span class="nx">Db</span><span class="o">::</span><span class="na">rollback</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="模型">模型</h2>
@@ -627,13 +627,13 @@ try {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function getStatusAttr($value)
-{
-  $status = [-1=&gt;&#39;删除&#39;,0=&gt;&#39;禁用&#39;,1=&gt;&#39;正常&#39;,2=&gt;&#39;待审核&#39;];
-  return $status[$value];
-}
-// 获取原始字段数据
-echo $user-&gt;getData(&#39;status&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">getStatusAttr</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nv">$status</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s1">&#39;删除&#39;</span><span class="p">,</span><span class="mi">0</span><span class="o">=&gt;</span><span class="s1">&#39;禁用&#39;</span><span class="p">,</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s1">&#39;正常&#39;</span><span class="p">,</span><span class="mi">2</span><span class="o">=&gt;</span><span class="s1">&#39;待审核&#39;</span><span class="p">];</span>
+  <span class="k">return</span> <span class="nv">$status</span><span class="p">[</span><span class="nv">$value</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">// 获取原始字段数据
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="修改器setfieldnameattr">修改器—set<strong>FieldName</strong>Attr</h3>
@@ -645,10 +645,10 @@ echo $user-&gt;getData(&#39;status&#39;);
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function setNameAttr($value)
-{
-  return strtolower($value);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">setNameAttr</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="搜索器searchfieldnameattr">搜索器—search<strong>FieldName</strong>Attr</h3>
@@ -664,14 +664,14 @@ echo $user-&gt;getData(&#39;status&#39;);
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">public function searchNameAttr($query, $value, $data)
-{
-	$query-&gt;where(&#39;name&#39;,&#39;like&#39;, $value . &#39;%&#39;);
-}
-User::withSearch([&#39;name&#39;], [
-		&#39;name&#39;			=&gt;	&#39;think&#39;
-    ])
-	-&gt;select();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">searchNameAttr</span><span class="p">(</span><span class="nv">$query</span><span class="p">,</span> <span class="nv">$value</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="nv">$value</span> <span class="o">.</span> <span class="s1">&#39;%&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">User</span><span class="o">::</span><span class="na">withSearch</span><span class="p">([</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="p">[</span>
+		<span class="s1">&#39;name&#39;</span>			<span class="o">=&gt;</span>	<span class="s1">&#39;think&#39;</span>
+    <span class="p">])</span>
+	<span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="软删除">软删除</h3>
@@ -681,8 +681,8 @@ User::withSearch([&#39;name&#39;], [
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">use SoftDelete;
-protected $deleteTime = &#39;delete_time&#39;;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">SoftDelete</span><span class="p">;</span>
+<span class="k">protected</span> <span class="nv">$deleteTime</span> <span class="o">=</span> <span class="s1">&#39;delete_time&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="关联">关联</h3>
@@ -694,7 +694,7 @@ protected $deleteTime = &#39;delete_time&#39;;
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">hasOne(&#39;关联模型&#39;,&#39;外键&#39;,&#39;主键&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">hasOne</span><span class="p">(</span><span class="s1">&#39;关联模型&#39;</span><span class="p">,</span><span class="s1">&#39;外键&#39;</span><span class="p">,</span><span class="s1">&#39;主键&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -705,7 +705,7 @@ protected $deleteTime = &#39;delete_time&#39;;
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">hasMany(&#39;关联模型&#39;,&#39;外键&#39;,&#39;主键&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">hasMany</span><span class="p">(</span><span class="s1">&#39;关联模型&#39;</span><span class="p">,</span><span class="s1">&#39;外键&#39;</span><span class="p">,</span><span class="s1">&#39;主键&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -716,7 +716,7 @@ protected $deleteTime = &#39;delete_time&#39;;
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">hasManyThrough(&#39;关联模型&#39;,&#39;中间模型&#39;,&#39;外键&#39;,&#39;中间表关联键&#39;,&#39;主键&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">hasManyThrough</span><span class="p">(</span><span class="s1">&#39;关联模型&#39;</span><span class="p">,</span><span class="s1">&#39;中间模型&#39;</span><span class="p">,</span><span class="s1">&#39;外键&#39;</span><span class="p">,</span><span class="s1">&#39;中间表关联键&#39;</span><span class="p">,</span><span class="s1">&#39;主键&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -727,7 +727,7 @@ protected $deleteTime = &#39;delete_time&#39;;
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">belongsToMany(&#39;关联模型&#39;,&#39;中间表&#39;,&#39;外键&#39;,&#39;关联键&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">belongsToMany</span><span class="p">(</span><span class="s1">&#39;关联模型&#39;</span><span class="p">,</span><span class="s1">&#39;中间表&#39;</span><span class="p">,</span><span class="s1">&#39;外键&#39;</span><span class="p">,</span><span class="s1">&#39;关联键&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -740,9 +740,9 @@ protected $deleteTime = &#39;delete_time&#39;;
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-PHP" data-lang="PHP">$users = User::with([&#39;profile&#39;	=&gt; function($query) {
-	$query-&gt;field(&#39;name,email&#39;);
-}])-&gt;select();
+<pre class="chroma"><code class="language-PHP" data-lang="PHP"><span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;profile&#39;</span>	<span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nv">$query</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;name,email&#39;</span><span class="p">);</span>
+<span class="p">}])</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="视图">视图</h2>
@@ -754,9 +754,9 @@ protected $deleteTime = &#39;delete_time&#39;;
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">$this-&gt;assign(&#39;name&#39;,&#39;ThinkPHP&#39;);
-// 赋值全局模板变量
-View::share(&#39;name&#39;,&#39;value&#39;)
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assign</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;ThinkPHP&#39;</span><span class="p">);</span>
+<span class="c1">// 赋值全局模板变量
+</span><span class="c1"></span><span class="nx">View</span><span class="o">::</span><span class="na">share</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="模板">模板</h2>

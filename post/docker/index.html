@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/docker/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-08-18T16:44:13+08:00" />
 <meta itemprop="dateModified" content="2020-08-18T16:44:13+08:00" />
-<meta itemprop="wordCount" content="6402">
+<meta itemprop="wordCount" content="6406">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 6402 words </span>
+          <span class="more-meta"> 6406 words </span>
           <span class="more-meta"> 13 mins read </span>
         
       </div>
@@ -436,7 +436,7 @@ docker start <span class="o">[</span>docker i
 <li><strong>COPY</strong>
 <ul>
 <li>用于从docker 主机复制新文件或者目录至创建的新镜像指定路径中，<strong>建议<!-- raw HTML omitted -->使用绝对路径</strong></li>
-<li><strong><!-- raw HTML omitted -->是目录</strong>，则其<strong>内部文件或子目录会被递归复制</strong>，但<strong><!-- raw HTML omitted -->目录自身不会被复制</strong></li>
+<li><strong><!-- raw HTML omitted -->是目录</strong>，则其<strong>内部文件或子目录会被递归复制</strong>，但**<!-- raw HTML omitted -->目录自身不会被复制**</li>
 <li>如果指定了多个<!-- raw HTML omitted -->，则<!-- raw HTML omitted -->必须是一个目录，且<strong>必须以 / 结尾</strong></li>
 </ul>
 </li>
@@ -733,101 +733,101 @@ docker start <span class="o">[</span>docker i
 </span><span class="lnt">97
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.8&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">frontend</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">backend</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">frontend</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">db-data</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">db-data</span><span class="p">:</span><span class="w">
 </span><span class="w">  
-</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">redis</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>redis<span class="p">:</span>alpine<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;6379&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- frontend<span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">      </span><span class="k">update_config</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">        </span><span class="k">delay</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">      </span><span class="k">restart_policy</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>on-failure<span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">frontend</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">      </span><span class="nt">update_config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">        </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span><span class="w">      </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="kc">on</span>-<span class="l">failure</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">db</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>postgres<span class="p">:</span><span class="m">9.4</span><span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- db-data<span class="p">:</span>/var/lib/postgresql/data<span class="w">
-</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- backend<span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">placement</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">constraints</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">postgres:9.4</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">db-data:/var/lib/postgresql/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">backend</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">placement</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
 </span><span class="w">          </span>- <span class="s2">&#34;node.role==manager&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">vote</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>dockersamples/examplevotingapp_vote<span class="p">:</span>before<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">vote</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockersamples/examplevotingapp_vote:before</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;5000:80&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- frontend<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- redis<span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">      </span><span class="k">update_config</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">      </span><span class="k">restart_policy</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>on-failure<span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">frontend</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">redis</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">      </span><span class="nt">update_config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">      </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="kc">on</span>-<span class="l">failure</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">result</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>dockersamples/examplevotingapp_result<span class="p">:</span>before<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">result</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockersamples/examplevotingapp_result:before</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;5001:80&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- backend<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- db<span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">      </span><span class="k">update_config</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">        </span><span class="k">delay</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">      </span><span class="k">restart_policy</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>on-failure<span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">backend</span><span class="w">
+</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">db</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">      </span><span class="nt">update_config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">        </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span><span class="w">      </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="kc">on</span>-<span class="l">failure</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">worker</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>dockersamples/examplevotingapp_worker<span class="w">
-</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- frontend<span class="w">
-</span><span class="w">      </span>- backend<span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">mode</span><span class="p">:</span><span class="w"> </span>replicated<span class="w">
-</span><span class="w">      </span><span class="k">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">      </span><span class="k">labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>APP=VOTING<span class="p">]</span><span class="w">
-</span><span class="w">      </span><span class="k">restart_policy</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">condition</span><span class="p">:</span><span class="w"> </span>on-failure<span class="w">
-</span><span class="w">        </span><span class="k">delay</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">        </span><span class="k">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span><span class="w">        </span><span class="k">window</span><span class="p">:</span><span class="w"> </span>120s<span class="w">
-</span><span class="w">      </span><span class="k">placement</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">constraints</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">worker</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockersamples/examplevotingapp_worker</span><span class="w">
+</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">frontend</span><span class="w">
+</span><span class="w">      </span>- <span class="l">backend</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l">replicated</span><span class="w">
+</span><span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">APP=VOTING]</span><span class="w">
+</span><span class="w">      </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="kc">on</span>-<span class="l">failure</span><span class="w">
+</span><span class="w">        </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span><span class="w">        </span><span class="nt">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="w">        </span><span class="nt">window</span><span class="p">:</span><span class="w"> </span><span class="l">120s</span><span class="w">
+</span><span class="w">      </span><span class="nt">placement</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
 </span><span class="w">          </span>- <span class="s2">&#34;node.role==manager&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="k">visualizer</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>dockersamples/visualizer<span class="p">:</span>stable<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">visualizer</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">dockersamples/visualizer:stable</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;8080:8080&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">stop_grace_period</span><span class="p">:</span><span class="w"> </span>1m30s<span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">stop_grace_period</span><span class="p">:</span><span class="w"> </span><span class="l">1m30s</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;/var/run/docker.sock:/var/run/docker.sock&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">deploy</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">placement</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">constraints</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">placement</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
 </span><span class="w">          </span>- <span class="s2">&#34;node.role==manager&#34;</span><span class="w">
 </span><span class="w">
 </span></code></pre></td></tr></table>

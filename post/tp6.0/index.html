@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/tp6.0/" />
@@ -244,48 +244,48 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">www  WEB部署目录（或者子目录）							//多应用
-├─app           应用目录
-│  ├─app_name           应用目录
-│  │  ├─common.php      函数文件
-│  │  ├─controller      控制器目录
-│  │  ├─model           模型目录
-│  │  ├─view            视图目录
-│  │  ├─config          配置目录
-│  │  ├─route           路由目录
-│  │  └─ ...            更多类库目录
-│  │
-│  ├─common.php         公共函数文件
-│  └─event.php          事件定义文件
-│
-├─config                全局配置目录
-│  ├─app.php            应用配置
-│  ├─cache.php          缓存配置
-│  ├─console.php        控制台配置
-│  ├─cookie.php         Cookie配置
-│  ├─database.php       数据库配置
-│  ├─filesystem.php     文件磁盘配置
-│  ├─lang.php           多语言配置
-│  ├─log.php            日志配置
-│  ├─middleware.php     中间件配置
-│  ├─route.php          URL和路由配置
-│  ├─session.php        Session配置
-│  ├─trace.php          Trace配置
-│  └─view.php           视图配置
-│
-├─public                WEB目录（对外访问目录）
-│  ├─index.php          入口文件
-│  ├─router.php         快速测试文件
-│  └─.htaccess          用于apache的重写
-│
-├─extend                扩展类库目录
-├─runtime               应用的运行时目录（可写，可定制）
-├─vendor                Composer类库目录
-├─.example.env          环境变量示例文件
-├─composer.json         composer 定义文件
-├─LICENSE.txt           授权说明文件
-├─README.md             README 文件
-├─think                 命令行入口文件
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">www</span>  <span class="nx">WEB部署目录（或者子目录）</span>							<span class="c1">//多应用
+</span><span class="c1"></span><span class="nx">├─app</span>           <span class="nx">应用目录</span>
+<span class="nx">│</span>  <span class="nx">├─app_name</span>           <span class="nx">应用目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─common</span><span class="o">.</span><span class="nx">php</span>      <span class="nx">函数文件</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─controller</span>      <span class="nx">控制器目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─model</span>           <span class="nx">模型目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─view</span>            <span class="nx">视图目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─config</span>          <span class="nx">配置目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">├─route</span>           <span class="nx">路由目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>  <span class="nx">└─</span> <span class="o">...</span>            <span class="nx">更多类库目录</span>
+<span class="nx">│</span>  <span class="nx">│</span>
+<span class="nx">│</span>  <span class="nx">├─common</span><span class="o">.</span><span class="nx">php</span>         <span class="nx">公共函数文件</span>
+<span class="nx">│</span>  <span class="nx">└─event</span><span class="o">.</span><span class="nx">php</span>          <span class="nx">事件定义文件</span>
+<span class="nx">│</span>
+<span class="nx">├─config</span>                <span class="nx">全局配置目录</span>
+<span class="nx">│</span>  <span class="nx">├─app</span><span class="o">.</span><span class="nx">php</span>            <span class="nx">应用配置</span>
+<span class="nx">│</span>  <span class="nx">├─cache</span><span class="o">.</span><span class="nx">php</span>          <span class="nx">缓存配置</span>
+<span class="nx">│</span>  <span class="nx">├─console</span><span class="o">.</span><span class="nx">php</span>        <span class="nx">控制台配置</span>
+<span class="nx">│</span>  <span class="nx">├─cookie</span><span class="o">.</span><span class="nx">php</span>         <span class="nx">Cookie配置</span>
+<span class="nx">│</span>  <span class="nx">├─database</span><span class="o">.</span><span class="nx">php</span>       <span class="nx">数据库配置</span>
+<span class="nx">│</span>  <span class="nx">├─filesystem</span><span class="o">.</span><span class="nx">php</span>     <span class="nx">文件磁盘配置</span>
+<span class="nx">│</span>  <span class="nx">├─lang</span><span class="o">.</span><span class="nx">php</span>           <span class="nx">多语言配置</span>
+<span class="nx">│</span>  <span class="nx">├─log</span><span class="o">.</span><span class="nx">php</span>            <span class="nx">日志配置</span>
+<span class="nx">│</span>  <span class="nx">├─middleware</span><span class="o">.</span><span class="nx">php</span>     <span class="nx">中间件配置</span>
+<span class="nx">│</span>  <span class="nx">├─route</span><span class="o">.</span><span class="nx">php</span>          <span class="nx">URL和路由配置</span>
+<span class="nx">│</span>  <span class="nx">├─session</span><span class="o">.</span><span class="nx">php</span>        <span class="nx">Session配置</span>
+<span class="nx">│</span>  <span class="nx">├─trace</span><span class="o">.</span><span class="nx">php</span>          <span class="nx">Trace配置</span>
+<span class="nx">│</span>  <span class="nx">└─view</span><span class="o">.</span><span class="nx">php</span>           <span class="nx">视图配置</span>
+<span class="nx">│</span>
+<span class="nx">├─public</span>                <span class="nx">WEB目录（对外访问目录）</span>
+<span class="nx">│</span>  <span class="nx">├─index</span><span class="o">.</span><span class="nx">php</span>          <span class="nx">入口文件</span>
+<span class="nx">│</span>  <span class="nx">├─router</span><span class="o">.</span><span class="nx">php</span>         <span class="nx">快速测试文件</span>
+<span class="nx">│</span>  <span class="nx">└─</span><span class="o">.</span><span class="nx">htaccess</span>          <span class="nx">用于apache的重写</span>
+<span class="nx">│</span>
+<span class="nx">├─extend</span>                <span class="nx">扩展类库目录</span>
+<span class="nx">├─runtime</span>               <span class="nx">应用的运行时目录（可写，可定制）</span>
+<span class="nx">├─vendor</span>                <span class="nx">Composer类库目录</span>
+<span class="nx">├─</span><span class="o">.</span><span class="nx">example</span><span class="o">.</span><span class="nx">env</span>          <span class="nx">环境变量示例文件</span>
+<span class="nx">├─composer</span><span class="o">.</span><span class="nx">json</span>         <span class="nx">composer</span> <span class="nx">定义文件</span>
+<span class="nx">├─LICENSE</span><span class="o">.</span><span class="nx">txt</span>           <span class="nx">授权说明文件</span>
+<span class="nx">├─README</span><span class="o">.</span><span class="nx">md</span>             <span class="nx">README</span> <span class="nx">文件</span>
+<span class="nx">├─think</span>                 <span class="nx">命令行入口文件</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="配置">配置</h3>
@@ -366,23 +366,23 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">use think\Request;
-class Index
-{
-    public function index(Request $request)
-    {
-        echo $request-&gt;controller();
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">think\Request</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Index</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-use think\facade\Request;
-class Index
-{
-    public function index()
-    {
-        echo Request::controller();
-    }
-}
+<span class="k">use</span> <span class="nx">think\facade\Request</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Index</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">Request</span><span class="o">::</span><span class="na">controller</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="中间件">中间件</h3>
@@ -407,13 +407,13 @@ class Index
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class Error 
-{
-    public function __call($method, $args)
-    {
-        return &#39;error request!&#39;;
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">Error</span> 
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$method</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;error request!&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="请求">请求</h2>

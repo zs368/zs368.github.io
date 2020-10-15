@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/php%E5%87%BD%E6%95%B0%E5%8F%82%E8%80%83/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-07-11T12:12:20+08:00" />
 <meta itemprop="dateModified" content="2020-07-11T12:12:20+08:00" />
-<meta itemprop="wordCount" content="202">
+<meta itemprop="wordCount" content="201">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 202 words </span>
+          <span class="more-meta"> 201 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -166,18 +166,18 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function curl_get($url)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    //参数为1表示传输数据，为0表示直接输出显示。  
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //参数为0表示不带头文件，为1表示带头文件  
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    $output = curl_exec($ch);
-    curl_close($ch);
-    return $output;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">curl_get</span><span class="p">(</span><span class="nv">$url</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$ch</span> <span class="o">=</span> <span class="nx">curl_init</span><span class="p">();</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="c1">//参数为1表示传输数据，为0表示直接输出显示。  
+</span><span class="c1"></span>    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">//参数为0表示不带头文件，为1表示带头文件  
+</span><span class="c1"></span>    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_HEADER</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="nv">$output</span> <span class="o">=</span> <span class="nx">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+    <span class="nx">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="stream">stream</h4>
@@ -202,23 +202,23 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function post($url, $data)
-{
-    $postdata = http_build_query(
-        $data
-    );
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">post</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$postdata</span> <span class="o">=</span> <span class="nx">http_build_query</span><span class="p">(</span>
+        <span class="nv">$data</span>
+    <span class="p">);</span>
 
-    $opts = array(&#39;http&#39; =&gt;
-                      array(
-                          &#39;method&#39; =&gt; &#39;POST&#39;,
-                          &#39;header&#39; =&gt; &#39;Content-type: application/x-www-form-urlencoded&#39;,
-                          &#39;content&#39; =&gt; $postdata
-                      )
-    );
-    $context = stream_context_create($opts);
-    $result = file_get_contents($url, false, $context);
-    return $result;
-}
+    <span class="nv">$opts</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;http&#39;</span> <span class="o">=&gt;</span>
+                      <span class="k">array</span><span class="p">(</span>
+                          <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;header&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Content-type: application/x-www-form-urlencoded&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$postdata</span>
+                      <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nv">$context</span> <span class="o">=</span> <span class="nx">stream_context_create</span><span class="p">(</span><span class="nv">$opts</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="socket">socket</h4>
@@ -239,19 +239,19 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">$fp = fsockopen(&#34;www.example.com&#34;, 80, $errno, $errstr, 30);
-if (!$fp) {
-    echo &#34;$errstr ($errno)<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>\n&#34;;
-} else {
-    $out = &#34;GET / HTTP/1.1\r\n&#34;;
-    $out .= &#34;Host: www.example.com\r\n&#34;;
-    $out .= &#34;Connection: Close\r\n\r\n&#34;;
-    fwrite($fp, $out);
-    while (!feof($fp)) {
-        echo fgets($fp, 128);
-    }
-    fclose($fp);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$fp</span> <span class="o">=</span> <span class="nx">fsockopen</span><span class="p">(</span><span class="s2">&#34;www.example.com&#34;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nv">$errno</span><span class="p">,</span> <span class="nv">$errstr</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$fp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&#34;</span><span class="si">$errstr</span><span class="s2"> (</span><span class="si">$errno</span><span class="s2">)&lt;br /&gt;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$out</span> <span class="o">=</span> <span class="s2">&#34;GET / HTTP/1.1</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">;</span>
+    <span class="nv">$out</span> <span class="o">.=</span> <span class="s2">&#34;Host: www.example.com</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">;</span>
+    <span class="nv">$out</span> <span class="o">.=</span> <span class="s2">&#34;Connection: Close</span><span class="se">\r\n\r\n</span><span class="s2">&#34;</span><span class="p">;</span>
+    <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span> <span class="nv">$out</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">feof</span><span class="p">(</span><span class="nv">$fp</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="nx">fgets</span><span class="p">(</span><span class="nv">$fp</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div>

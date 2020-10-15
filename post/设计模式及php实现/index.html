@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8Aphp%E5%AE%9E%E7%8E%B0/" />
@@ -208,24 +208,24 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class DB
-{
-    private static $instance = null; //私有静态属性，存放该类的实例
-  
- 		//私有构造方法，防止在类的外部实例化
-    private function __construct() {}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">DB</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$instance</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> <span class="c1">//私有静态属性，存放该类的实例
+</span><span class="c1"></span>  
+ 		<span class="c1">//私有构造方法，防止在类的外部实例化
+</span><span class="c1"></span>    <span class="k">private</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span> <span class="p">{}</span>
  
-	  //私有克隆方法，防止克隆
-    private function __clone() { trigger_error(&#39;Clone is not allowed !&#39;);}
+	  <span class="c1">//私有克隆方法，防止克隆
+</span><span class="c1"></span>    <span class="k">private</span> <span class="k">function</span> <span class="fm">__clone</span><span class="p">()</span> <span class="p">{</span> <span class="nx">trigger_error</span><span class="p">(</span><span class="s1">&#39;Clone is not allowed !&#39;</span><span class="p">);}</span>
  
-    public static function getInstance() //公共的静态方法，实例化该类本身，只实例化一次
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-}
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getInstance</span><span class="p">()</span> <span class="c1">//公共的静态方法，实例化该类本身，只实例化一次
+</span><span class="c1"></span>    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="nx">instanceof</span> <span class="nx">self</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="简单工厂模式">简单工厂模式</h3>
@@ -290,46 +290,46 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">abstract class animals // 抽象产品类
-{
-    abstract public function animal();
-}
-class Cat extends animals // 具体产品类
-{
-    public function animal() { return &#34;猫猫&#34;;}
-}
-class Dog extends animals // 具体产品类
-{
-    public function animal() { return &#34;狗狗&#34;;}
-}
-interface Factory   // 抽象工厂类, 将对象的创建抽象成一个接口
-{
-    public function create();
-}
-class CatFactory implements Factory  // 继承工厂类, 用于实例化产品
-{
-    public function create() { return new Cat();}
-}
-class DogFactory implements Factory  // 继承工厂类, 用于实例化产品
-{
-    public function create() { return new Dog();}
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">abstract</span> <span class="k">class</span> <span class="nc">animals</span> <span class="c1">// 抽象产品类
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">animal</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Cat</span> <span class="k">extends</span> <span class="nx">animals</span> <span class="c1">// 具体产品类
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">animal</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;猫猫&#34;</span><span class="p">;}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">Dog</span> <span class="k">extends</span> <span class="nx">animals</span> <span class="c1">// 具体产品类
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">animal</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;狗狗&#34;</span><span class="p">;}</span>
+<span class="p">}</span>
+<span class="k">interface</span> <span class="nx">Factory</span>   <span class="c1">// 抽象工厂类, 将对象的创建抽象成一个接口
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">CatFactory</span> <span class="k">implements</span> <span class="nx">Factory</span>  <span class="c1">// 继承工厂类, 用于实例化产品
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">();}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">DogFactory</span> <span class="k">implements</span> <span class="nx">Factory</span>  <span class="c1">// 继承工厂类, 用于实例化产品
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">();}</span>
+<span class="p">}</span>
 
-class Client    // 具体操作类
-{
-    public function test()
-    {
-        $catResult = new CatFactory();
-        echo $catResult-&gt;create()-&gt;animal();
+<span class="k">class</span> <span class="nc">Client</span>    <span class="c1">// 具体操作类
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$catResult</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CatFactory</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="nv">$catResult</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">animal</span><span class="p">();</span>
 
-        $DogResult = new DogFactory();
-        echo $DogResult-&gt;create()-&gt;animal();
-    }
-}
+        <span class="nv">$DogResult</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DogFactory</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="nv">$DogResult</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">animal</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-$lala = new Client();
-$lala-&gt;test(); //  猫猫狗狗
-
+<span class="nv">$lala</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$lala</span><span class="o">-&gt;</span><span class="na">test</span><span class="p">();</span> <span class="c1">//  猫猫狗狗
+</span><span class="c1"></span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="抽象工厂模式">抽象工厂模式</h3>
@@ -406,68 +406,68 @@ $lala-&gt;test(); //  猫猫狗狗
 </span><span class="lnt">61
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">abstract class Cat  // 猫抽象
-{
-    abstract function getCat();
-}
-class ForeignCat extends Cat 
-{
-    public function getCat() { return &#34;外国布偶猫&#34;.PHP_EOL;}
-}
-class ChineseCat extends Cat
-{
-    public function getCat() { return &#34;华夏猫&#34;.PHP_EOL;}
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Cat</span>  <span class="c1">// 猫抽象
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">getCat</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">ForeignCat</span> <span class="k">extends</span> <span class="nx">Cat</span> 
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCat</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;外国布偶猫&#34;</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">ChineseCat</span> <span class="k">extends</span> <span class="nx">Cat</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCat</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;华夏猫&#34;</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;}</span>
+<span class="p">}</span>
 
-abstract class Dog	// 狗抽象
-{
-    abstract function getDog();
-}
-class ChineseDog extends Dog
-{
-    public function getDog() { return &#34;中华国犬&#34;.PHP_EOL;}
-}
-class ForeignDog extends Dog
-{
-    public function getDog() { return &#34;外国哈士奇&#34;.PHP_EOL;}
-}
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Dog</span>	<span class="c1">// 狗抽象
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">abstract</span> <span class="k">function</span> <span class="nf">getDog</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">ChineseDog</span> <span class="k">extends</span> <span class="nx">Dog</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDog</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;中华国犬&#34;</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">ForeignDog</span> <span class="k">extends</span> <span class="nx">Dog</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDog</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&#34;外国哈士奇&#34;</span><span class="o">.</span><span class="nx">PHP_EOL</span><span class="p">;}</span>
+<span class="p">}</span>
 
-interface AnimalsFactory // 抽象工厂
-{
-    public function createCat(); // 生产一尾猫
-    public function createDog(); // 生产一头狗 -_-
-}
+<span class="k">interface</span> <span class="nx">AnimalsFactory</span> <span class="c1">// 抽象工厂
+</span><span class="c1"></span><span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createCat</span><span class="p">();</span> <span class="c1">// 生产一尾猫
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">createDog</span><span class="p">();</span> <span class="c1">// 生产一头狗 -_-
+</span><span class="c1"></span><span class="p">}</span>
 
-class CreateChineseAnimalFactory implements AnimalsFactory 
-{
-    public function createCat()
-    {
-        return new ChineseCat();
-    }
-    public function createDog()
-    {
-        return new ChineseDog();
-    }
-}
-class CreateForeignAnimalFactory implements AnimalsFactory
-{
-    public function createCat()
-    {
-        return new ForeignCat();
-    }
-    public function createDog()
-    {
-        return new ForeignDog();
-    }
-}
+<span class="k">class</span> <span class="nc">CreateChineseAnimalFactory</span> <span class="k">implements</span> <span class="nx">AnimalsFactory</span> 
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createCat</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">ChineseCat</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createDog</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">ChineseDog</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">CreateForeignAnimalFactory</span> <span class="k">implements</span> <span class="nx">AnimalsFactory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createCat</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">ForeignCat</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createDog</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">ForeignDog</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-$result = new CreateForeignAnimalFactory();
-$ForeignCat = $result-&gt;createCat();
-echo $ForeignCat-&gt;getCat(); // 布偶猫
-
-$ForeignDog = $result-&gt;createDog();
-echo $ForeignDog-&gt;getDog(); // 哈士奇
-</code></pre></td></tr></table>
+<span class="nv">$result</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CreateForeignAnimalFactory</span><span class="p">();</span>
+<span class="nv">$ForeignCat</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">createCat</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$ForeignCat</span><span class="o">-&gt;</span><span class="na">getCat</span><span class="p">();</span> <span class="c1">// 布偶猫
+</span><span class="c1"></span>
+<span class="nv">$ForeignDog</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">createDog</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$ForeignDog</span><span class="o">-&gt;</span><span class="na">getDog</span><span class="p">();</span> <span class="c1">// 哈士奇
+</span></code></pre></td></tr></table>
 </div>
 </div><h3 id="原型模式">原型模式</h3>
 <blockquote>
@@ -502,27 +502,27 @@ echo $ForeignDog-&gt;getDog(); // 哈士奇
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">interface Prototype { public function copy();}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">interface</span> <span class="nx">Prototype</span> <span class="p">{</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">copy</span><span class="p">();}</span>
 
-class ConcretePrototype implements Prototype {
-    private  $_name;
-    public function __construct($name) { $this-&gt;_name = $name; } 
-	  //浅copy模式，拷贝了源对象的引用地址等，原来内容变化，新内容变化
-    public function copy() { return clone $this;}
-  	//深copy通过序列化和反序列化完成copy，原来的内容变化，新内容不变
-  	public function copy() {
-      	$serialize_obj = serialize($this);
-        $clone_obj = unserialize($serialize_obj);
-        return $clone_obj;
-    }
-}
+<span class="k">class</span> <span class="nc">ConcretePrototype</span> <span class="k">implements</span> <span class="nx">Prototype</span> <span class="p">{</span>
+    <span class="k">private</span>  <span class="nv">$_name</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span> <span class="p">}</span> 
+	  <span class="c1">//浅copy模式，拷贝了源对象的引用地址等，原来内容变化，新内容变化
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">copy</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">clone</span> <span class="nv">$this</span><span class="p">;}</span>
+  	<span class="c1">//深copy通过序列化和反序列化完成copy，原来的内容变化，新内容不变
+</span><span class="c1"></span>  	<span class="k">public</span> <span class="k">function</span> <span class="nf">copy</span><span class="p">()</span> <span class="p">{</span>
+      	<span class="nv">$serialize_obj</span> <span class="o">=</span> <span class="nx">serialize</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="nv">$clone_obj</span> <span class="o">=</span> <span class="nx">unserialize</span><span class="p">(</span><span class="nv">$serialize_obj</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$clone_obj</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Demo {}
+<span class="k">class</span> <span class="nc">Demo</span> <span class="p">{}</span>
 
-// client
-$demo = new Demo();
-$object1 = new ConcretePrototype($demo);
-$object2 = $object1-&gt;copy();
+<span class="c1">// client
+</span><span class="c1"></span><span class="nv">$demo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Demo</span><span class="p">();</span>
+<span class="nv">$object1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConcretePrototype</span><span class="p">(</span><span class="nv">$demo</span><span class="p">);</span>
+<span class="nv">$object2</span> <span class="o">=</span> <span class="nv">$object1</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">();</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="服务定位器">服务定位器</h3>
@@ -581,54 +581,54 @@ $object2 = $object1-&gt;copy();
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">interface ServiceLocatorInterface
-{
-    public function has($interface);
-    public function get($interface);
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">interface</span> <span class="nx">ServiceLocatorInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">has</span><span class="p">(</span><span class="nv">$interface</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$interface</span><span class="p">);</span>
+<span class="p">}</span>
 
-class ServiceLocator implements ServiceLocatorInterface
-{
-    private $services;
-    private $instantiated;
-    private $shared;
+<span class="k">class</span> <span class="nc">ServiceLocator</span> <span class="k">implements</span> <span class="nx">ServiceLocatorInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$services</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$instantiated</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$shared</span><span class="p">;</span>
 
-    public function __construct()
-    {
-        $this-&gt;services     = array();
-        $this-&gt;instantiated = array();
-        $this-&gt;shared       = array();
-    }
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span>     <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shared</span>       <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    public function add($interface, $service, $share = true)
-    {
-        if (is_object($service) <span class="err">&amp;&amp;</span> $share) {
-            $this-&gt;instantiated[$interface] = $service;
-        }
-        $this-&gt;services[$interface] = (is_object($service) ? get_class($service) : $service);
-        $this-&gt;shared[$interface]   = $share;
-    }
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nv">$interface</span><span class="p">,</span> <span class="nv">$service</span><span class="p">,</span> <span class="nv">$share</span> <span class="o">=</span> <span class="k">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">is_object</span><span class="p">(</span><span class="nv">$service</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$share</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span><span class="p">[</span><span class="nv">$interface</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$service</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">[</span><span class="nv">$interface</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">is_object</span><span class="p">(</span><span class="nv">$service</span><span class="p">)</span> <span class="o">?</span> <span class="nx">get_class</span><span class="p">(</span><span class="nv">$service</span><span class="p">)</span> <span class="o">:</span> <span class="nv">$service</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shared</span><span class="p">[</span><span class="nv">$interface</span><span class="p">]</span>   <span class="o">=</span> <span class="nv">$share</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    public function has($interface)
-    {
-        return (isset($this-&gt;services[$interface]) || isset($this-&gt;instantiated[$interface]));
-    }
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">has</span><span class="p">(</span><span class="nv">$interface</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">[</span><span class="nv">$interface</span><span class="p">])</span> <span class="o">||</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span><span class="p">[</span><span class="nv">$interface</span><span class="p">]));</span>
+    <span class="p">}</span>
 
-    public function get($interface)
-    {
-        if (isset($this-&gt;instantiated[$interface]) <span class="err">&amp;&amp;</span> $this-&gt;shared[$interface]) {
-            return $this-&gt;instantiated[$interface];
-        }
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$interface</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span><span class="p">[</span><span class="nv">$interface</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shared</span><span class="p">[</span><span class="nv">$interface</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span><span class="p">[</span><span class="nv">$interface</span><span class="p">];</span>
+        <span class="p">}</span>
 
-        $service = $this-&gt;services[$interface];
-        $object = new $service();
+        <span class="nv">$service</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">[</span><span class="nv">$interface</span><span class="p">];</span>
+        <span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nv">$service</span><span class="p">();</span>
 
-        if ($this-&gt;shared[$interface]) {
-            $this-&gt;instantiated[$interface] = $object;
-        }
-        return $object;
-    }
-}
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shared</span><span class="p">[</span><span class="nv">$interface</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instantiated</span><span class="p">[</span><span class="nv">$interface</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$object</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$object</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="依赖注入">依赖注入</h3>
@@ -795,7 +795,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">150
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">class</span> <span class="nc">Bim</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
@@ -1047,7 +1047,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">84
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Unit</span>
 <span class="p">{</span>
     <span class="k">function</span> <span class="nf">getComposite</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span> <span class="p">}</span>
@@ -1286,7 +1286,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">146
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">abstract</span> <span class="k">class</span> <span class="nc">CompanyBase</span>
 <span class="p">{</span>
     <span class="c1">//节点名称
@@ -1351,7 +1351,7 @@ class ServiceLocator implements ServiceLocatorInterface
     <span class="k">public</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">item</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;[</span><span class="si">{</span>$this-&gt;name<span class="si">}</span><span class="s2">]&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+            <span class="k">echo</span> <span class="nx">str_repeat</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="nv">$deep</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;[</span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="si">}</span><span class="s2">]&#34;</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
             <span class="nv">$value</span><span class="o">-&gt;</span><span class="na">work</span><span class="p">(</span><span class="nv">$deep</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -1520,7 +1520,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">78
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//装饰器接口
 </span><span class="c1"></span><span class="k">interface</span> <span class="nx">Decorator</span>
 <span class="p">{</span>
@@ -1650,7 +1650,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//区域抽象类
 </span><span class="c1"></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Area</span>
 <span class="p">{</span>    
@@ -1793,7 +1793,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">87
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">//医院医生员工系统
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">DoctorSystem</span>
 <span class="p">{</span>
@@ -1949,7 +1949,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">class</span> <span class="nc">Expression</span> <span class="p">{</span> <span class="c1">//抽象表示
 </span><span class="c1"></span>    <span class="k">function</span> <span class="nf">interpreter</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="p">{</span> 
         <span class="k">return</span> <span class="nv">$str</span><span class="p">;</span> 
@@ -2071,7 +2071,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">interface</span> <span class="nx">Strategy</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithmInterface</span><span class="p">();</span>
@@ -2204,7 +2204,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">69
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Subject</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="nv">$observers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
@@ -2387,7 +2387,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">104
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">interface</span> <span class="nx">Element</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">accept</span><span class="p">(</span><span class="nx">Visitor</span> <span class="nv">$visitor</span><span class="p">);</span>
@@ -2560,7 +2560,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Command</span>
 <span class="p">{</span>
     <span class="k">protected</span> <span class="nv">$receiver</span><span class="p">;</span>
@@ -2657,7 +2657,7 @@ class ServiceLocator implements ServiceLocatorInterface
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">class</span> <span class="nc">Person</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">code</span><span class="p">()</span>

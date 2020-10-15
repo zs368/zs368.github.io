@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/tp5.0/" />
@@ -298,21 +298,21 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Route::rule(&#39;new/[:id]$&#39;,&#39;News/update&#39;,&#39;GET|POST&#39;);
-Route::rule(&#39;new/[:id]$&#39;,&#39;News/update&#39;,[&#39;method&#39;=&gt;&#39;get|post&#39;]);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Route</span><span class="o">::</span><span class="na">rule</span><span class="p">(</span><span class="s1">&#39;new/[:id]$&#39;</span><span class="p">,</span><span class="s1">&#39;News/update&#39;</span><span class="p">,</span><span class="s1">&#39;GET|POST&#39;</span><span class="p">);</span>
+<span class="nx">Route</span><span class="o">::</span><span class="na">rule</span><span class="p">(</span><span class="s1">&#39;new/[:id]$&#39;</span><span class="p">,</span><span class="s1">&#39;News/update&#39;</span><span class="p">,[</span><span class="s1">&#39;method&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;get|post&#39;</span><span class="p">]);</span>
 
-Route::get(&#39;new/:id&#39;,&#39;News/read&#39;); // 定义GET请求路由规则
+<span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;new/:id&#39;</span><span class="p">,</span><span class="s1">&#39;News/read&#39;</span><span class="p">);</span> <span class="c1">// 定义GET请求路由规则
+</span><span class="c1"></span>
+<span class="nx">Route</span><span class="o">::</span><span class="na">rule</span><span class="p">([</span>
+<span class="s1">&#39;路由规则1&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;路由地址和参数&#39;</span><span class="p">,</span>
+<span class="s1">&#39;路由规则2&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;路由地址和参数&#39;</span><span class="p">,</span><span class="s1">&#39;匹配参数（数组）&#39;</span><span class="p">,</span><span class="s1">&#39;变量规则（数组）&#39;</span><span class="p">]</span>
+<span class="o">...</span>
+<span class="p">],</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;请求类型&#39;</span><span class="p">,</span><span class="s1">&#39;匹配参数（数组）&#39;</span><span class="p">,</span><span class="s1">&#39;变量规则&#39;</span><span class="p">);</span>
 
-Route::rule([
-&#39;路由规则1&#39;=&gt;&#39;路由地址和参数&#39;,
-&#39;路由规则2&#39;=&gt;[&#39;路由地址和参数&#39;,&#39;匹配参数（数组）&#39;,&#39;变量规则（数组）&#39;]
-...
-],&#39;&#39;,&#39;请求类型&#39;,&#39;匹配参数（数组）&#39;,&#39;变量规则&#39;);
-
-Route::group(&#39;blog&#39;,[
-    &#39;:id&#39;   =&gt; [&#39;Blog/read&#39;, [&#39;method&#39; =&gt; &#39;get&#39;], [&#39;id&#39; =&gt; &#39;\d+&#39;]],
-    &#39;:name&#39; =&gt; [&#39;Blog/read&#39;, [&#39;method&#39; =&gt; &#39;post&#39;]],
-]);
+<span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">(</span><span class="s1">&#39;blog&#39;</span><span class="p">,[</span>
+    <span class="s1">&#39;:id&#39;</span>   <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;Blog/read&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\d+&#39;</span><span class="p">]],</span>
+    <span class="s1">&#39;:name&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;Blog/read&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span><span class="p">]],</span>
+<span class="p">]);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="请求">请求</h2>
@@ -327,11 +327,11 @@ Route::group(&#39;blog&#39;,[
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">$request = Request::instance();  ===   $request = request();  
-$request-&gt;param();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">instance</span><span class="p">();</span>  <span class="o">===</span>   <span class="nv">$request</span> <span class="o">=</span> <span class="nx">request</span><span class="p">();</span>  
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">param</span><span class="p">();</span>
 
-input(&#39;get.id&#39;);		//助手函数获取参数
-</code></pre></td></tr></table>
+<span class="nx">input</span><span class="p">(</span><span class="s1">&#39;get.id&#39;</span><span class="p">);</span>		<span class="c1">//助手函数获取参数
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="控制器">控制器</h2>
 <blockquote>
@@ -358,10 +358,10 @@ input(&#39;get.id&#39;);		//助手函数获取参数
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Db::query(&#39;select * from think_user where id=?&#39;,[8]);		//参数绑定
-Db::execute(&#39;insert into think_user (id, name) values (?, ?)&#39;,[8,&#39;thinkphp&#39;]);
-Db::query(&#39;select * from think_user where id=:id&#39;,[&#39;id&#39;=&gt;8]);	//占位符绑定
-Db::execute(&#39;insert into think_user (id, name) values (:id, :name)&#39;,[&#39;id&#39;=&gt;8,&#39;name&#39;=&gt;&#39;thinkphp&#39;]);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Db</span><span class="o">::</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;select * from think_user where id=?&#39;</span><span class="p">,[</span><span class="mi">8</span><span class="p">]);</span>		<span class="c1">//参数绑定
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">execute</span><span class="p">(</span><span class="s1">&#39;insert into think_user (id, name) values (?, ?)&#39;</span><span class="p">,[</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;thinkphp&#39;</span><span class="p">]);</span>
+<span class="nx">Db</span><span class="o">::</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;select * from think_user where id=:id&#39;</span><span class="p">,[</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">]);</span>	<span class="c1">//占位符绑定
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">execute</span><span class="p">(</span><span class="s1">&#39;insert into think_user (id, name) values (:id, :name)&#39;</span><span class="p">,[</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;thinkphp&#39;</span><span class="p">]);</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -408,43 +408,43 @@ Db::execute(&#39;insert into think_user (id, name) values (:id, :name)&#39;,[&#3
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// table方法必须指定完整的数据表名
-Db::table(&#39;think_user&#39;)-&gt;where(&#39;id&#39;,1)-&gt;find(); ||  Db::name(&#39;user&#39;)  || -&gt;select(); || -&gt;value();  ||  -&gt;column();
-//插入数据
-Db::table(&#39;think_user&#39;)-&gt;insert($data);  ||  Db::name(&#39;user&#39;)...  ||  -&gt;insertAll($data);
-//更新数据
-Db::table(&#39;think_user&#39;)-&gt;where(&#39;id&#39;, 1)-&gt;update([&#39;name&#39; =&gt; &#39;thinkphp&#39;]);
-//删除数据
-Db::table(&#39;think_user&#39;)-&gt;where(&#39;id&#39;,&#39;<span class="err">&lt;</span>&#39;,10)-&gt;delete();
-//时间查询
-Db::table(&#39;think_blog&#39;)-&gt;whereTime(&#39;create_time&#39;,&#39;-2 hours&#39;)-&gt;select();
-//助手函数
-db(&#39;user&#39;)-&gt;where(&#39;id&#39;,1)-&gt;find();  db(&#39;user&#39;)-&gt;insert($data);
-db(&#39;user&#39;)-&gt;where(&#39;id&#39;,1)-&gt;update([&#39;&#39; =&gt; &#39;&#39;]);  db(&#39;user&#39;)-&gt;where(&#39;id&#39;,1)-&gt;delete();
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// table方法必须指定完整的数据表名
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span> <span class="o">||</span>  <span class="nx">Db</span><span class="o">::</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>  <span class="o">||</span> <span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span> <span class="o">||</span> <span class="o">-&gt;</span><span class="na">value</span><span class="p">();</span>  <span class="o">||</span>  <span class="o">-&gt;</span><span class="na">column</span><span class="p">();</span>
+<span class="c1">//插入数据
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>  <span class="o">||</span>  <span class="nx">Db</span><span class="o">::</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">...</span>  <span class="o">||</span>  <span class="o">-&gt;</span><span class="na">insertAll</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">//更新数据
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thinkphp&#39;</span><span class="p">]);</span>
+<span class="c1">//删除数据
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+<span class="c1">//时间查询
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_blog&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">whereTime</span><span class="p">(</span><span class="s1">&#39;create_time&#39;</span><span class="p">,</span><span class="s1">&#39;-2 hours&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
+<span class="c1">//助手函数
+</span><span class="c1"></span><span class="nx">db</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>  <span class="nx">db</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span><span class="s1">&#39;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">]);</span>  <span class="nx">db</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 
-//视图查询   多表查询
-Db::view(&#39;User&#39;,&#39;id,name&#39;)
-    -&gt;view(&#39;Profile&#39;,&#39;truename,phone,email&#39;,&#39;Profile.user_id=User.id&#39;)
-    -&gt;view(&#39;Score&#39;,&#39;score&#39;,&#39;Score.user_id=Profile.id&#39;)
-    -&gt;where(&#39;score&#39;,&#39;&gt;&#39;,80)
-    -&gt;select();
-Db::table(&#39;vhake_users&#39;)-&gt;alias(&#39;u&#39;)
-                        -&gt;join(&#39;vhake_users_wallet_log l&#39;,&#39;u.id = l.uid&#39;)
-                        -&gt;field(&#39;u.id as id, u.nickname as nickname&#39;)
-                        -&gt;group(&#39;l.uid&#39;)
-                        -&gt;paginate();
-//fetchSql方法表示不进行查询而只是返回构建的SQL语句
--&gt;fetchSql(true)
-//使用buildSql构造子查询  带括号的
--&gt;buildSql();
-//使用闭包构造子查询
--&gt;where(&#39;id&#39;,&#39;IN&#39;,function($query){
-    $query-&gt;table(&#39;think_profile&#39;)-&gt;where(&#39;status&#39;,1)-&gt;field(&#39;id&#39;);
-})
-//支持参数绑定  包括问号占位符或者命名占位符
-Db::query(&#34;select * from think_user where status=1&#34;);  //查询
-Db::execute(&#34;update think_user set name=&#39;thinkphp&#39; where status=1&#34;);  //更新
-
+<span class="c1">//视图查询   多表查询
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span><span class="s1">&#39;id,name&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;Profile&#39;</span><span class="p">,</span><span class="s1">&#39;truename,phone,email&#39;</span><span class="p">,</span><span class="s1">&#39;Profile.user_id=User.id&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span><span class="s1">&#39;score&#39;</span><span class="p">,</span><span class="s1">&#39;Score.user_id=Profile.id&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span>
+<span class="nx">Db</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;vhake_users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;vhake_users_wallet_log l&#39;</span><span class="p">,</span><span class="s1">&#39;u.id = l.uid&#39;</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;u.id as id, u.nickname as nickname&#39;</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">&#39;l.uid&#39;</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">paginate</span><span class="p">();</span>
+<span class="c1">//fetchSql方法表示不进行查询而只是返回构建的SQL语句
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">fetchSql</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+<span class="c1">//使用buildSql构造子查询  带括号的
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">buildSql</span><span class="p">();</span>
+<span class="c1">//使用闭包构造子查询
+</span><span class="c1"></span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;IN&#39;</span><span class="p">,</span><span class="k">function</span><span class="p">(</span><span class="nv">$query</span><span class="p">){</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;think_profile&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="c1">//支持参数绑定  包括问号占位符或者命名占位符
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">query</span><span class="p">(</span><span class="s2">&#34;select * from think_user where status=1&#34;</span><span class="p">);</span>  <span class="c1">//查询
+</span><span class="c1"></span><span class="nx">Db</span><span class="o">::</span><span class="na">execute</span><span class="p">(</span><span class="s2">&#34;update think_user set name=&#39;thinkphp&#39; where status=1&#34;</span><span class="p">);</span>  <span class="c1">//更新
+</span><span class="c1"></span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -495,42 +495,42 @@ Db::execute(&#34;update think_user set name=&#39;thinkphp&#39; where status=1&#3
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">namespace app\index\model;
-use think\Model;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">app\index\model</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">think\Model</span><span class="p">;</span>
 
-class User extends Model
-{
-    protected $pk = &#39;uid&#39;,$table = &#39;think_user&#39;;
-}
-// 静态调用  实例化模型  使用Loader 类实例化（单例） 使用助手函数`model`
-$user = User::get(1); ||  $user = new User;  ||  $user = model(&#39;User&#39;);
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$pk</span> <span class="o">=</span> <span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;think_user&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 静态调用  实例化模型  使用Loader 类实例化（单例） 使用助手函数`model`
+</span><span class="c1"></span><span class="nv">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">||</span>  <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">;</span>  <span class="o">||</span>  <span class="nv">$user</span> <span class="o">=</span> <span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span>
 
-$list = [
-    [&#39;name&#39;=&gt;&#39;thinkphp&#39;], //加上ID就是更新
-    [&#39;name&#39;=&gt;&#39;onethink&#39;]
-];
-$user-&gt;saveAll($list); || -&gt;save($list); || -&gt;isUpdate(false) || -&gt;allowField([&#39;name&#39;,&#39;email&#39;]) || -&gt;allowField(true)
-//静态方法新增  
-$user = User::create([
-    &#39;name&#39;  =&gt;  &#39;thinkphp&#39;,&#39;email&#39; =&gt;  &#39;thinkphp@qq.com&#39;
-]);
+<span class="nv">$list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;thinkphp&#39;</span><span class="p">],</span> <span class="c1">//加上ID就是更新
+</span><span class="c1"></span>    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;onethink&#39;</span><span class="p">]</span>
+<span class="p">];</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$list</span><span class="p">);</span> <span class="o">||</span> <span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$list</span><span class="p">);</span> <span class="o">||</span> <span class="o">-&gt;</span><span class="na">isUpdate</span><span class="p">(</span><span class="k">false</span><span class="p">)</span> <span class="o">||</span> <span class="o">-&gt;</span><span class="na">allowField</span><span class="p">([</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">])</span> <span class="o">||</span> <span class="o">-&gt;</span><span class="na">allowField</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+<span class="c1">//静态方法新增  
+</span><span class="c1"></span><span class="nv">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+    <span class="s1">&#39;name&#39;</span>  <span class="o">=&gt;</span>  <span class="s1">&#39;thinkphp&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span>  <span class="s1">&#39;thinkphp@qq.com&#39;</span>
+<span class="p">]);</span>
   
-$user-&gt;update([&#39;id&#39; =&gt; 1, &#39;name&#39; =&gt; &#39;thinkphp&#39;]); || User::update([&#39;id&#39; =&gt; 1, &#39;name&#39; =&gt; &#39;thinkphp&#39;]);
-User::destroy([1,2,3]);
-dump($user-&gt;toArray());dump($user-&gt;toJson());
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thinkphp&#39;</span><span class="p">]);</span> <span class="o">||</span> <span class="nx">User</span><span class="o">::</span><span class="na">update</span><span class="p">([</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thinkphp&#39;</span><span class="p">]);</span>
+<span class="nx">User</span><span class="o">::</span><span class="na">destroy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
+<span class="nx">dump</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">());</span><span class="nx">dump</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">());</span>
 
-public function getStatusAttr($value)
-{
-  $status = [-1=&gt;&#39;删除&#39;,0=&gt;&#39;禁用&#39;,1=&gt;&#39;正常&#39;,2=&gt;&#39;待审核&#39;];
-  return $status[$value];
-}
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getStatusAttr</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nv">$status</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s1">&#39;删除&#39;</span><span class="p">,</span><span class="mi">0</span><span class="o">=&gt;</span><span class="s1">&#39;禁用&#39;</span><span class="p">,</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s1">&#39;正常&#39;</span><span class="p">,</span><span class="mi">2</span><span class="o">=&gt;</span><span class="s1">&#39;待审核&#39;</span><span class="p">];</span>
+  <span class="k">return</span> <span class="nv">$status</span><span class="p">[</span><span class="nv">$value</span><span class="p">];</span>
+<span class="p">}</span>
 
-//模型关联
-hasOne(&#39;关联模型名&#39;,&#39;外键名&#39;,&#39;主键名&#39;,[&#39;模型别名定义&#39;],&#39;join类型&#39;);  //一对一关联
-hasMany(&#39;关联模型名&#39;,&#39;外键名&#39;,&#39;主键名&#39;,[&#39;模型别名定义&#39;]);	//一对多关联
-hasManyThrough(&#39;关联模型名&#39;,&#39;中间模型名&#39;,&#39;外键名&#39;,&#39;中间模型关联键名&#39;,&#39;当前模型主键名&#39;,[&#39;模型别名定义&#39;]);	//远程一对多
-belongsToMany(&#39;关联模型名&#39;,&#39;中间表名&#39;,&#39;外键名&#39;,&#39;当前模型关联键名&#39;,[&#39;模型别名定义&#39;]);	//多对多
-</code></pre></td></tr></table>
+<span class="c1">//模型关联
+</span><span class="c1"></span><span class="nx">hasOne</span><span class="p">(</span><span class="s1">&#39;关联模型名&#39;</span><span class="p">,</span><span class="s1">&#39;外键名&#39;</span><span class="p">,</span><span class="s1">&#39;主键名&#39;</span><span class="p">,[</span><span class="s1">&#39;模型别名定义&#39;</span><span class="p">],</span><span class="s1">&#39;join类型&#39;</span><span class="p">);</span>  <span class="c1">//一对一关联
+</span><span class="c1"></span><span class="nx">hasMany</span><span class="p">(</span><span class="s1">&#39;关联模型名&#39;</span><span class="p">,</span><span class="s1">&#39;外键名&#39;</span><span class="p">,</span><span class="s1">&#39;主键名&#39;</span><span class="p">,[</span><span class="s1">&#39;模型别名定义&#39;</span><span class="p">]);</span>	<span class="c1">//一对多关联
+</span><span class="c1"></span><span class="nx">hasManyThrough</span><span class="p">(</span><span class="s1">&#39;关联模型名&#39;</span><span class="p">,</span><span class="s1">&#39;中间模型名&#39;</span><span class="p">,</span><span class="s1">&#39;外键名&#39;</span><span class="p">,</span><span class="s1">&#39;中间模型关联键名&#39;</span><span class="p">,</span><span class="s1">&#39;当前模型主键名&#39;</span><span class="p">,[</span><span class="s1">&#39;模型别名定义&#39;</span><span class="p">]);</span>	<span class="c1">//远程一对多
+</span><span class="c1"></span><span class="nx">belongsToMany</span><span class="p">(</span><span class="s1">&#39;关联模型名&#39;</span><span class="p">,</span><span class="s1">&#39;中间表名&#39;</span><span class="p">,</span><span class="s1">&#39;外键名&#39;</span><span class="p">,</span><span class="s1">&#39;当前模型关联键名&#39;</span><span class="p">,[</span><span class="s1">&#39;模型别名定义&#39;</span><span class="p">]);</span>	<span class="c1">//多对多
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="验证">验证</h2>
 <blockquote>
@@ -555,17 +555,17 @@ belongsToMany(&#39;关联模型名&#39;,&#39;中间表名&#39;,&#39;外键名&#3
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">// 或者批量赋值
-$this-&gt;assign([
-    &#39;name&#39;  =&gt; &#39;ThinkPHP&#39;,
-    &#39;email&#39; =&gt; &#39;thinkphp@qq.com&#39;
-]);
-// 模板输出
-return $this-&gt;fetch(&#39;index&#39;);
-return view(&#39;index&#39;, [
-    &#39;name&#39;  =&gt; &#39;ThinkPHP&#39;,
-    &#39;email&#39; =&gt; &#39;thinkphp@qq.com&#39;
-]);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 或者批量赋值
+</span><span class="c1"></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assign</span><span class="p">([</span>
+    <span class="s1">&#39;name&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;ThinkPHP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thinkphp@qq.com&#39;</span>
+<span class="p">]);</span>
+<span class="c1">// 模板输出
+</span><span class="c1"></span><span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">);</span>
+<span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;name&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;ThinkPHP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thinkphp@qq.com&#39;</span>
+<span class="p">]);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="模板">模板</h3>
@@ -604,34 +604,34 @@ return view(&#39;index&#39;, [
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">return $view-&gt;fetch(&#39;user/add&#39;);	//跨控制器
-return $view-&gt;fetch(&#39;admin@user/add&#39;);	//跨模块
-return $view-&gt;fetch(APP_PATH.request()-&gt;module().&#39;/view/public/header.html&#39;);	//全路径模板调用
-{$data.name}{$Think.const.APP_PATH}	//变量输出
-{$data.name|substr=0,3} {$create_time|date=&#34;y-m-d&#34;,###}	//使用函数
-{:substr(strtoupper(md5($name)),0,3)}
-{$user.nickname|default=&#34;空&#34;}  ||  {$user.score+10}  ||  {$varname.aa ?? &#39;xxx&#39;}
-{literal}  //原样输出
-    Hello,{$name}！
-{/literal}
-{volist name=&#34;list&#34; id=&#34;vo&#34; key=&#34;k&#34; offset=&#34;5&#34; length=&#39;10&#39; empty=&#34;暂时没有数据&#34;}
-		{$vo.id}:{$vo.name}<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
-{/volist}
-{foreach $list as $vo} 
-    {$vo.id}:{$vo.name}
-{/foreach}
-{eq name=&#34;name&#34; value=&#34;value&#34;}
-		相等
-{else/}
-		不相等
-{/eq}
-{switch name=&#34;User.level&#34;}
-    {case value=&#34;1&#34;}value1{/case}
-    {case value=&#34;2&#34;}value2{/case}
-    {default /}default
-{/switch}
-{load href=&#34;/static/js/common.js&#34; /} 	//引入文件
-{load href=&#34;/static/css/style.css&#34; /}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;user/add&#39;</span><span class="p">);</span>	<span class="c1">//跨控制器
+</span><span class="c1"></span><span class="k">return</span> <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;admin@user/add&#39;</span><span class="p">);</span>	<span class="c1">//跨模块
+</span><span class="c1"></span><span class="k">return</span> <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">APP_PATH</span><span class="o">.</span><span class="nx">request</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">module</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/view/public/header.html&#39;</span><span class="p">);</span>	<span class="c1">//全路径模板调用
+</span><span class="c1"></span><span class="p">{</span><span class="nv">$data</span><span class="o">.</span><span class="nx">name</span><span class="p">}{</span><span class="nv">$Think</span><span class="o">.</span><span class="nx">const</span><span class="o">.</span><span class="nx">APP_PATH</span><span class="p">}</span>	<span class="c1">//变量输出
+</span><span class="c1"></span><span class="p">{</span><span class="nv">$data</span><span class="o">.</span><span class="nx">name</span><span class="o">|</span><span class="nx">substr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span> <span class="p">{</span><span class="nv">$create_time</span><span class="o">|</span><span class="nx">date</span><span class="o">=</span><span class="s2">&#34;y-m-d&#34;</span><span class="p">,</span><span class="c1">###}	//使用函数
+</span><span class="c1"></span><span class="p">{</span><span class="o">:</span><span class="nx">substr</span><span class="p">(</span><span class="nx">strtoupper</span><span class="p">(</span><span class="nx">md5</span><span class="p">(</span><span class="nv">$name</span><span class="p">)),</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)}</span>
+<span class="p">{</span><span class="nv">$user</span><span class="o">.</span><span class="nx">nickname</span><span class="o">|</span><span class="k">default</span><span class="o">=</span><span class="s2">&#34;空&#34;</span><span class="p">}</span>  <span class="o">||</span>  <span class="p">{</span><span class="nv">$user</span><span class="o">.</span><span class="nx">score</span><span class="o">+</span><span class="mi">10</span><span class="p">}</span>  <span class="o">||</span>  <span class="p">{</span><span class="nv">$varname</span><span class="o">.</span><span class="nx">aa</span> <span class="o">??</span> <span class="s1">&#39;xxx&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="nx">literal</span><span class="p">}</span>  <span class="c1">//原样输出
+</span><span class="c1"></span>    <span class="nx">Hello</span><span class="p">,{</span><span class="nv">$name</span><span class="p">}</span><span class="nx">！</span>
+<span class="p">{</span><span class="o">/</span><span class="nx">literal</span><span class="p">}</span>
+<span class="p">{</span><span class="nx">volist</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;list&#34;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&#34;vo&#34;</span> <span class="nx">key</span><span class="o">=</span><span class="s2">&#34;k&#34;</span> <span class="nx">offset</span><span class="o">=</span><span class="s2">&#34;5&#34;</span> <span class="nx">length</span><span class="o">=</span><span class="s1">&#39;10&#39;</span> <span class="k">empty</span><span class="o">=</span><span class="s2">&#34;暂时没有数据&#34;</span><span class="p">}</span>
+		<span class="p">{</span><span class="nv">$vo</span><span class="o">.</span><span class="nx">id</span><span class="p">}</span><span class="o">:</span><span class="p">{</span><span class="nv">$vo</span><span class="o">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">br</span><span class="o">/&gt;</span>
+<span class="p">{</span><span class="o">/</span><span class="nx">volist</span><span class="p">}</span>
+<span class="p">{</span><span class="k">foreach</span> <span class="nv">$list</span> <span class="k">as</span> <span class="nv">$vo</span><span class="p">}</span> 
+    <span class="p">{</span><span class="nv">$vo</span><span class="o">.</span><span class="nx">id</span><span class="p">}</span><span class="o">:</span><span class="p">{</span><span class="nv">$vo</span><span class="o">.</span><span class="nx">name</span><span class="p">}</span>
+<span class="p">{</span><span class="o">/</span><span class="k">foreach</span><span class="p">}</span>
+<span class="p">{</span><span class="nx">eq</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;name&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;value&#34;</span><span class="p">}</span>
+		<span class="nx">相等</span>
+<span class="p">{</span><span class="k">else</span><span class="o">/</span><span class="p">}</span>
+		<span class="nx">不相等</span>
+<span class="p">{</span><span class="o">/</span><span class="nx">eq</span><span class="p">}</span>
+<span class="p">{</span><span class="k">switch</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;User.level&#34;</span><span class="p">}</span>
+    <span class="p">{</span><span class="k">case</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;1&#34;</span><span class="p">}</span><span class="nx">value1</span><span class="p">{</span><span class="o">/</span><span class="k">case</span><span class="p">}</span>
+    <span class="p">{</span><span class="k">case</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;2&#34;</span><span class="p">}</span><span class="nx">value2</span><span class="p">{</span><span class="o">/</span><span class="k">case</span><span class="p">}</span>
+    <span class="p">{</span><span class="k">default</span> <span class="o">/</span><span class="p">}</span><span class="k">default</span>
+<span class="p">{</span><span class="o">/</span><span class="k">switch</span><span class="p">}</span>
+<span class="p">{</span><span class="nx">load</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;/static/js/common.js&#34;</span> <span class="o">/</span><span class="p">}</span> 	<span class="c1">//引入文件
+</span><span class="c1"></span><span class="p">{</span><span class="nx">load</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;/static/css/style.css&#34;</span> <span class="o">/</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="日志">日志</h2>
@@ -660,19 +660,19 @@ return $view-&gt;fetch(APP_PATH.request()-&gt;module().&#39;/view/public/header.
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Log::record(&#39;测试日志信息，这是警告级别&#39;,&#39;notice&#39;);
-Log::write(&#39;测试日志信息，这是警告级别，并且实时写入&#39;,&#39;notice&#39;);
-trace(&#39;错误信息&#39;,&#39;error&#39;);	//助手函数
-
-//首先需要在应用配置文件或者应用公共文件中添加当前访问的授权Key定义
-Log::key(Request::instance()-&gt;ip());
-//然后在日志配置参数中增加allow_key参数
-&#39;log&#39;   =&gt;  [
-    // 日志类型为File
-    &#39;type&#39;      =&gt;  &#39;File&#39;,
-    // 授权只有202.12.36.89 才能记录日志
-    &#39;allow_key&#39; =&gt;  [&#39;202.12.36.89&#39;],
-]
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Log</span><span class="o">::</span><span class="na">record</span><span class="p">(</span><span class="s1">&#39;测试日志信息，这是警告级别&#39;</span><span class="p">,</span><span class="s1">&#39;notice&#39;</span><span class="p">);</span>
+<span class="nx">Log</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;测试日志信息，这是警告级别，并且实时写入&#39;</span><span class="p">,</span><span class="s1">&#39;notice&#39;</span><span class="p">);</span>
+<span class="nx">trace</span><span class="p">(</span><span class="s1">&#39;错误信息&#39;</span><span class="p">,</span><span class="s1">&#39;error&#39;</span><span class="p">);</span>	<span class="c1">//助手函数
+</span><span class="c1"></span>
+<span class="c1">//首先需要在应用配置文件或者应用公共文件中添加当前访问的授权Key定义
+</span><span class="c1"></span><span class="nx">Log</span><span class="o">::</span><span class="na">key</span><span class="p">(</span><span class="nx">Request</span><span class="o">::</span><span class="na">instance</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ip</span><span class="p">());</span>
+<span class="c1">//然后在日志配置参数中增加allow_key参数
+</span><span class="c1"></span><span class="s1">&#39;log&#39;</span>   <span class="o">=&gt;</span>  <span class="p">[</span>
+    <span class="c1">// 日志类型为File
+</span><span class="c1"></span>    <span class="s1">&#39;type&#39;</span>      <span class="o">=&gt;</span>  <span class="s1">&#39;File&#39;</span><span class="p">,</span>
+    <span class="c1">// 授权只有202.12.36.89 才能记录日志
+</span><span class="c1"></span>    <span class="s1">&#39;allow_key&#39;</span> <span class="o">=&gt;</span>  <span class="p">[</span><span class="s1">&#39;202.12.36.89&#39;</span><span class="p">],</span>
+<span class="p">]</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="安全">安全</h2>
@@ -707,12 +707,12 @@ Log::key(Request::instance()-&gt;ip());
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Cache::set(&#39;name&#39;,$value,3600);		//设置缓存  || new DateTime(&#39;2017-10-1 12:00&#39;)
-Cache::get(&#39;name&#39;);		//获取缓存
-Cache::rm(&#39;name&#39;); 		//删除缓存
-Cache::pull(&#39;name&#39;);	//获取并删除缓存
-Cache::clear(); 			//清空缓存
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="nv">$value</span><span class="p">,</span><span class="mi">3600</span><span class="p">);</span>		<span class="c1">//设置缓存  || new DateTime(&#39;2017-10-1 12:00&#39;)
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>		<span class="c1">//获取缓存
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">::</span><span class="na">rm</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> 		<span class="c1">//删除缓存
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">::</span><span class="na">pull</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>	<span class="c1">//获取并删除缓存
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">::</span><span class="na">clear</span><span class="p">();</span> 			<span class="c1">//清空缓存
+</span></code></pre></td></tr></table>
 </div>
 </div><h3 id="session">session</h3>
 <div class="highlight"><div class="chroma">
@@ -730,18 +730,18 @@ Cache::clear(); 			//清空缓存
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">Session::set(&#39;name&#39;,&#39;thinkphp&#39;);		// 赋值（当前作用域）
-Session::set(&#39;name&#39;,&#39;thinkphp&#39;,&#39;think&#39;);		// 赋值think作用域
-Session::has(&#39;name&#39;);
-Session::get(&#39;name&#39;);
-Session::delete(&#39;name&#39;);
-Session::pull(&#39;name&#39;);		// 取值并删除
-Session::prefix(&#39;think&#39;);		// 指定当前作用域
-Session::clear();		// 清除session（当前作用域）
-Session::flash(&#39;name&#39;,&#39;value&#39;);		// 设置session 并且在下一次请求之前有效
-Session::flush();		// 清除当前请求有效的session
-//session支持二维数组操作
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">Session</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;thinkphp&#39;</span><span class="p">);</span>		<span class="c1">// 赋值（当前作用域）
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;thinkphp&#39;</span><span class="p">,</span><span class="s1">&#39;think&#39;</span><span class="p">);</span>		<span class="c1">// 赋值think作用域
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="nx">Session</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="nx">Session</span><span class="o">::</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="nx">Session</span><span class="o">::</span><span class="na">pull</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>		<span class="c1">// 取值并删除
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">prefix</span><span class="p">(</span><span class="s1">&#39;think&#39;</span><span class="p">);</span>		<span class="c1">// 指定当前作用域
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">clear</span><span class="p">();</span>		<span class="c1">// 清除session（当前作用域）
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>		<span class="c1">// 设置session 并且在下一次请求之前有效
+</span><span class="c1"></span><span class="nx">Session</span><span class="o">::</span><span class="na">flush</span><span class="p">();</span>		<span class="c1">// 清除当前请求有效的session
+</span><span class="c1">//session支持二维数组操作
+</span></code></pre></td></tr></table>
 </div>
 </div><h3 id="cookie">cookie</h3>
 <blockquote>
@@ -752,130 +752,130 @@ Session::flush();		// 清除当前请求有效的session
 <table>
 <thead>
 <tr>
-<th align="left">助手函数</th>
-<th align="left">描述</th>
+<th style="text-align:left">助手函数</th>
+<th style="text-align:left">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">abort</td>
-<td align="left">中断执行并发送HTTP状态码</td>
+<td style="text-align:left">abort</td>
+<td style="text-align:left">中断执行并发送HTTP状态码</td>
 </tr>
 <tr>
-<td align="left">action</td>
-<td align="left">调用控制器类的操作</td>
+<td style="text-align:left">action</td>
+<td style="text-align:left">调用控制器类的操作</td>
 </tr>
 <tr>
-<td align="left">cache</td>
-<td align="left">缓存管理</td>
+<td style="text-align:left">cache</td>
+<td style="text-align:left">缓存管理</td>
 </tr>
 <tr>
-<td align="left">config</td>
-<td align="left">获取和设置配置参数</td>
+<td style="text-align:left">config</td>
+<td style="text-align:left">获取和设置配置参数</td>
 </tr>
 <tr>
-<td align="left">controller</td>
-<td align="left">实例化控制器</td>
+<td style="text-align:left">controller</td>
+<td style="text-align:left">实例化控制器</td>
 </tr>
 <tr>
-<td align="left">cookie</td>
-<td align="left">Cookie管理</td>
+<td style="text-align:left">cookie</td>
+<td style="text-align:left">Cookie管理</td>
 </tr>
 <tr>
-<td align="left">db</td>
-<td align="left">实例化数据库类</td>
+<td style="text-align:left">db</td>
+<td style="text-align:left">实例化数据库类</td>
 </tr>
 <tr>
-<td align="left">debug</td>
-<td align="left">调试时间和内存占用</td>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">调试时间和内存占用</td>
 </tr>
 <tr>
-<td align="left">dump</td>
-<td align="left">浏览器友好的变量输出</td>
+<td style="text-align:left">dump</td>
+<td style="text-align:left">浏览器友好的变量输出</td>
 </tr>
 <tr>
-<td align="left">exception</td>
-<td align="left">抛出异常处理</td>
+<td style="text-align:left">exception</td>
+<td style="text-align:left">抛出异常处理</td>
 </tr>
 <tr>
-<td align="left">halt</td>
-<td align="left">变量调试输出并中断执行</td>
+<td style="text-align:left">halt</td>
+<td style="text-align:left">变量调试输出并中断执行</td>
 </tr>
 <tr>
-<td align="left">import</td>
-<td align="left">导入所需的类库</td>
+<td style="text-align:left">import</td>
+<td style="text-align:left">导入所需的类库</td>
 </tr>
 <tr>
-<td align="left">input</td>
-<td align="left">获取输入数据 支持默认值和过滤</td>
+<td style="text-align:left">input</td>
+<td style="text-align:left">获取输入数据 支持默认值和过滤</td>
 </tr>
 <tr>
-<td align="left">json</td>
-<td align="left">JSON数据输出</td>
+<td style="text-align:left">json</td>
+<td style="text-align:left">JSON数据输出</td>
 </tr>
 <tr>
-<td align="left">jsonp</td>
-<td align="left">JSONP数据输出</td>
+<td style="text-align:left">jsonp</td>
+<td style="text-align:left">JSONP数据输出</td>
 </tr>
 <tr>
-<td align="left">lang</td>
-<td align="left">获取语言变量值</td>
+<td style="text-align:left">lang</td>
+<td style="text-align:left">获取语言变量值</td>
 </tr>
 <tr>
-<td align="left">load_trait</td>
-<td align="left">快速导入Traits <code>PHP5.5</code>以上无需调用</td>
+<td style="text-align:left">load_trait</td>
+<td style="text-align:left">快速导入Traits <code>PHP5.5</code>以上无需调用</td>
 </tr>
 <tr>
-<td align="left">model</td>
-<td align="left">实例化Model</td>
+<td style="text-align:left">model</td>
+<td style="text-align:left">实例化Model</td>
 </tr>
 <tr>
-<td align="left">redirect</td>
-<td align="left">重定向输出</td>
+<td style="text-align:left">redirect</td>
+<td style="text-align:left">重定向输出</td>
 </tr>
 <tr>
-<td align="left">request</td>
-<td align="left">实例化Request对象</td>
+<td style="text-align:left">request</td>
+<td style="text-align:left">实例化Request对象</td>
 </tr>
 <tr>
-<td align="left">response</td>
-<td align="left">实例化Response对象</td>
+<td style="text-align:left">response</td>
+<td style="text-align:left">实例化Response对象</td>
 </tr>
 <tr>
-<td align="left">session</td>
-<td align="left">Session管理</td>
+<td style="text-align:left">session</td>
+<td style="text-align:left">Session管理</td>
 </tr>
 <tr>
-<td align="left">trace</td>
-<td align="left">记录日志信息</td>
+<td style="text-align:left">trace</td>
+<td style="text-align:left">记录日志信息</td>
 </tr>
 <tr>
-<td align="left">token</td>
-<td align="left">生成表单令牌输出</td>
+<td style="text-align:left">token</td>
+<td style="text-align:left">生成表单令牌输出</td>
 </tr>
 <tr>
-<td align="left">url</td>
-<td align="left">Url生成</td>
+<td style="text-align:left">url</td>
+<td style="text-align:left">Url生成</td>
 </tr>
 <tr>
-<td align="left">validate</td>
-<td align="left">实例化验证器</td>
+<td style="text-align:left">validate</td>
+<td style="text-align:left">实例化验证器</td>
 </tr>
 <tr>
-<td align="left">vendor</td>
-<td align="left">快速导入第三方框架类库</td>
+<td style="text-align:left">vendor</td>
+<td style="text-align:left">快速导入第三方框架类库</td>
 </tr>
 <tr>
-<td align="left">view</td>
-<td align="left">渲染模板输出</td>
+<td style="text-align:left">view</td>
+<td style="text-align:left">渲染模板输出</td>
 </tr>
 <tr>
-<td align="left">widget</td>
-<td align="left">渲染输出Widget</td>
+<td style="text-align:left">widget</td>
+<td style="text-align:left">渲染输出Widget</td>
 </tr>
 <tr>
-<td align="left">xml</td>
-<td align="left">XML数据输出</td>
+<td style="text-align:left">xml</td>
+<td style="text-align:left">XML数据输出</td>
 </tr>
 </tbody>
 </table>
