@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on OxO</title>
+    <link>https://zs368.github.io/tags/mysql/</link>
+    <description>Recent content in mysql on OxO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 24 Oct 2020 11:42:21 +0800</lastBuildDate><atom:link href="https://zs368.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL</title>
+      <link>https://zs368.github.io/post/mysql/</link>
+      <pubDate>Sat, 24 Oct 2020 11:42:21 +0800</pubDate>
+      
+      <guid>https://zs368.github.io/post/mysql/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,22 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zs368.github.io/categories/</loc>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/post/mysql/</loc>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/mysql/</loc>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://zs368.github.io/</loc>
-    <lastmod>2020-10-16T00:39:25+08:00</lastmod>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/post/</loc>
-    <lastmod>2020-10-16T00:39:25+08:00</lastmod>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/tags/sql/</loc>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zs368.github.io/tags/</loc>
-    <lastmod>2020-10-16T00:39:25+08:00</lastmod>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-10-24T11:42:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -44,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://zs368.github.io/categories/</loc>
-    <lastmod>2020-10-15T14:22:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://zs368.github.io/tags/laravel/</loc>
     <lastmod>2020-10-15T14:22:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -59,13 +87,6 @@
   
   <url>
     <loc>https://zs368.github.io/post/laravel8%E5%8F%82%E8%80%83%E4%B9%A6%E5%86%8C/</loc>
-    <lastmod>2020-10-15T14:22:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-10-15T14:22:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -241,13 +262,6 @@
   
   <url>
     <loc>https://zs368.github.io/post/sql/</loc>
-    <lastmod>2020-05-29T18:18:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zs368.github.io/tags/sql/</loc>
     <lastmod>2020-05-29T18:18:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
