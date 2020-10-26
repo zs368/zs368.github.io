@@ -173,7 +173,7 @@
 </div>
     <div class="post-content">
       <h2 id="整体架构">整体架构</h2>
-<p><!-- raw HTML omitted --></p>
+<p><img src="/img/mysql_arch.jpg" alt=""></p>
 <h3 id="mysql-数据库安装和服务端启动">MySQL 数据库安装和服务端启动</h3>
 <ul>
 <li>
@@ -396,7 +396,7 @@
 </ul>
 <h3 id="redo-日志保证事务的持久行">redo 日志保证事务的持久行</h3>
 <p>为了确保数据库事务的持久性，又不能将事务提交后更改的缓存页（脏页）立即同步到磁盘中， MySQL 提供了 redo 日志功能，作为折中方案，我们会将数据库某条记录的更改以 redo 日志的方式持久化到磁盘，之后需要进行数据恢复时，通过对应的 redo 日志来恢复数据即可。</p>
-<p><!-- raw HTML omitted --></p>
+<p><img src="/img/mysql_6.jpg" alt=""></p>
 <p><code>type</code>：类型、 <code>space ID</code>： 空间ID、<code>page number</code>：页号、<code>data</code>：具体修改的数据</p>
 <p><strong>redo 日志写入</strong></p>
 <ul>
