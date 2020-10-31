@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-10-29T11:54:51+08:00" />
 <meta itemprop="dateModified" content="2020-10-29T11:54:51+08:00" />
-<meta itemprop="wordCount" content="3442">
+<meta itemprop="wordCount" content="3542">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 3442 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 3542 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -142,6 +142,11 @@
         <li><a href="#进程线程协程">进程、线程、协程</a></li>
         <li><a href="#网络协议">网络协议</a></li>
         <li><a href="#crontab定时任务">crontab定时任务</a></li>
+      </ul>
+    </li>
+    <li><a href="#ide">IDE</a>
+      <ul>
+        <li><a href="#phpstorm">PHPstorm</a></li>
       </ul>
     </li>
     <li><a href="#web">web</a>
@@ -426,7 +431,45 @@ vim /etc/crontab
 <span class="m">0</span> <span class="m">4</span>  *  *  *  *  root php /www/wwwroot/应用名/think 自定义命令名称 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="web">web</h2>
+</div><h2 id="ide">IDE</h2>
+<h3 id="phpstorm">PHPstorm</h3>
+<h4 id="laravel项目代码提示">laravel项目代码提示</h4>
+<ul>
+<li>
+<p>通过安装 <code>laravel-ide-helper</code> 按照指令一步步走</p>
+</li>
+<li>
+<p>直接使用 <code>_ide_helper.php</code> （可以对模型类进行提示）</p>
+<ol>
+<li>
+<p>随便找个目录存放</p>
+</li>
+<li>
+<p>打开 PHPstorm &gt; 配置 PHP Include 路径 &gt; 将刚才的路径加入 Include Path</p>
+</li>
+<li>
+<p>在 Model 类 class 上方加注释，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="sd">/**
+</span><span class="sd"> * App\Model\Core
+</span><span class="sd"> *
+</span><span class="sd"> * @mixin \Eloquent
+</span><span class="sd"> */</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+</ul>
+<h2 id="web">web</h2>
 <h3 id="wget抓取整站">wget抓取整站</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
