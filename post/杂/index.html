@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.78.0 with theme even" />
+<meta name="generator" content="Hugo 0.78.2 with theme even" />
 
 
 <link rel="canonical" href="https://zs368.github.io/post/%E6%9D%82/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-10-29T11:54:51+08:00" />
 <meta itemprop="dateModified" content="2020-10-29T11:54:51+08:00" />
-<meta itemprop="wordCount" content="3542">
+<meta itemprop="wordCount" content="5037">
 
 
 
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 3542 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 5037 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
@@ -137,20 +137,16 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#计算机">计算机</a>
+    <li><a href="#计算机基础">计算机基础</a>
       <ul>
         <li><a href="#进程线程协程">进程、线程、协程</a></li>
         <li><a href="#网络协议">网络协议</a></li>
+        <li><a href="#认证机制">认证机制</a></li>
+      </ul>
+    </li>
+    <li><a href="#常用技巧">常用技巧</a>
+      <ul>
         <li><a href="#crontab定时任务">crontab定时任务</a></li>
-      </ul>
-    </li>
-    <li><a href="#ide">IDE</a>
-      <ul>
-        <li><a href="#phpstorm">PHPstorm</a></li>
-      </ul>
-    </li>
-    <li><a href="#web">web</a>
-      <ul>
         <li><a href="#wget抓取整站">wget抓取整站</a></li>
       </ul>
     </li>
@@ -159,7 +155,7 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="计算机">计算机</h2>
+      <h2 id="计算机基础">计算机基础</h2>
 <h3 id="进程线程协程">进程、线程、协程</h3>
 <blockquote>
 <p><a href="https://juejin.im/post/6844903607892967432">文章来源</a></p>
@@ -377,6 +373,92 @@
 <p>2、对于实时性，交互性要求较高，且team有过相关经验，可以优先选择websocket，其次TCP协议；</p>
 <p>3、对于实时性要求极高，且可达性要求一般可以选择UDP协议；</p>
 <p>4、局域网对战类，赛车类，直接来UDP协议吧（公网对战，P2P的UDP还得“打洞”处理）</p>
+<h3 id="认证机制">认证机制</h3>
+<h4 id="http-basic-auth">HTTP Basic Auth</h4>
+<p>HTTP Basic Auth 在HTTP中，基本认证是一种用来允许Web浏览器或其他客户端程序在请求时提供用户名和口令形式的身份凭证的一种登录验证方式，通常用户名和明码会通过HTTP头传递。</p>
+<ol>
+<li>在发送之前是以用户名追加一个冒号然后串接上口令，并将得出的结果字符串再用Base64算法编码。</li>
+<li>将Base64编码的字符串发送出去，由接收者解码得到一个由冒号分隔的用户名和口令的字符串。</li>
+</ol>
+<ul>
+<li><strong>优点</strong>
+<ul>
+<li>基本上所有流行的网页浏览器都支持基本认证</li>
+</ul>
+</li>
+<li><strong>缺点</strong>
+<ul>
+<li>Base64编码是可逆的，所以用户名和密码可以认为是明文，只有在客户端和服务器主机之间的连接是安全可信的前提下才可以使用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="oauth">OAuth</h4>
+<p>OAuth 是一个关于授权（authorization）的开放网络标准。允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。现在的版本是2.0版。严格来说，OAuth2不是一个标准协议，而是一个安全的授权框架。它详细描述了系统中不同角色、用户、服务前端应用（比如API），以及客户端（比如网站或移动App）之间怎么实现相互认证。</p>
+<ol>
+<li>用户打开客户端以后，客户端要求用户给予授权</li>
+<li>用户同意给予客户端授权</li>
+<li>客户端使用上一步获得的授权，向认证服务器申请令牌</li>
+<li>认证服务器对客户端进行认证以后，确认无误，同意发放令牌</li>
+<li>客户端使用令牌，向资源服务器申请获取资源</li>
+<li>资源服务器确认令牌无误，同意向客户端开放资源。</li>
+</ol>
+<ul>
+<li>Third-party application: 第三方应用程序，又称&quot;客户端&quot;（client）</li>
+<li>HTTP service：HTTP服务提供商</li>
+<li>Resource Owner：资源所有者，通常称&quot;用户&quot;（user）</li>
+<li>User Agent：用户代理，比如浏览器</li>
+<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器</li>
+<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器</li>
+</ul>
+<p><img src="../img/OAuth2.0.jpg" alt=""></p>
+<h4 id="jwt-认证">JWT 认证</h4>
+<p>Json web token (JWT), 根据官网的定义，是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519)。该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
+<ol>
+<li>头部（Header）：将头部进行 Base64URL 加密（该加密是可以对称解密的)
+<ul>
+<li>声明加密的算法，通常直接使用 HMAC SHA256</li>
+<li>声明类型，这里是jwt</li>
+</ul>
+</li>
+<li>载荷（payload）：将头部进行 Base64URL 加密（该加密是可以对称解密的)
+<ul>
+<li>标准中注册声明</li>
+<li>公共的声名：可以添加任何的信息（不建议存放敏感信息）</li>
+<li>私有的声明：提供者和消费者所共同定义的声明（不建议存放敏感信息）</li>
+</ul>
+</li>
+<li>签名（signature）：根据alg算法与私有秘钥进行加密得到的签名字串，只能在服务端解密   <code>HMACSHA256(base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),SECREATE_KEY)</code>
+<ul>
+<li>header (base64后的)</li>
+<li>payload (base64后的)</li>
+<li>secret</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>优点</strong>
+<ul>
+<li>体积小，因而传输速度快</li>
+<li>传输方式多样，可以通过URL/POST参数/HTTP头部等方式传输</li>
+<li>严格的结构化，自身（在 payload 中）就包含了所有与用户相关的验证消息，如用户可访问路由、访问有效期等信息，服务器无需再去连接数据库验证信息的有效性，并且 payload 支持为你的应用而定制化</li>
+<li>支持跨域验证，可以应用于单点登录</li>
+</ul>
+</li>
+<li><strong>缺点</strong>
+<ul>
+<li>最大缺点是，由于服务器不保存 session 状态，因此无法在使用过程中废止某个 token，或者更改 token 的权限。也就是说，一旦 JWT 签发了，在到期之前就会始终有效，除非服务器部署额外的逻辑</li>
+<li>本身包含了认证信息，一旦泄露，任何人都可以获得该令牌的所有权限。为了减少盗用，JWT 的有效期应该设置得比较短。对于一些比较重要的权限，使用时应该再次对用户进行认证</li>
+</ul>
+</li>
+<li><strong>规范</strong>
+<ul>
+<li>默认是不加密，但也是可以加密的。生成原始 Token 以后，可以用密钥再加密一次</li>
+<li>不加密的情况下，不能将秘密数据写入 JWT</li>
+<li>为了减少盗用，JWT 不应该使用 HTTP 协议明码传输，要使用 HTTPS 协议传输</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用技巧">常用技巧</h2>
 <h3 id="crontab定时任务">crontab定时任务</h3>
 <p><a href="https://crontab.guru/">crontab时间预览</a></p>
 <div class="highlight"><div class="chroma">
@@ -431,46 +513,7 @@ vim /etc/crontab
 <span class="m">0</span> <span class="m">4</span>  *  *  *  *  root php /www/wwwroot/应用名/think 自定义命令名称 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ide">IDE</h2>
-<h3 id="phpstorm">PHPstorm</h3>
-<h4 id="laravel项目代码提示">laravel项目代码提示</h4>
-<ul>
-<li>
-<p>通过安装 <code>laravel-ide-helper</code> 按照指令一步步走</p>
-</li>
-<li>
-<p>直接使用 <code>_ide_helper.php</code> （可以对模型类进行提示）</p>
-<ol>
-<li>
-<p>随便找个目录存放</p>
-</li>
-<li>
-<p>打开 PHPstorm &gt; 配置 PHP Include 路径 &gt; 将刚才的路径加入 Include Path</p>
-</li>
-<li>
-<p>在 Model 类 class 上方加注释，如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="sd">/**
-</span><span class="sd"> * App\Model\Core
-</span><span class="sd"> *
-</span><span class="sd"> * @mixin \Eloquent
-</span><span class="sd"> */</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ol>
-</li>
-</ul>
-<h2 id="web">web</h2>
-<h3 id="wget抓取整站">wget抓取整站</h3>
+</div><h3 id="wget抓取整站">wget抓取整站</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
