@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-10-26T23:24:31+08:00" />
 <meta itemprop="dateModified" content="2020-10-26T23:24:31+08:00" />
-<meta itemprop="wordCount" content="8711">
+<meta itemprop="wordCount" content="8656">
 
 
 
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             </div>
-          <span class="more-meta"> 8711 words </span>
+          <span class="more-meta"> 8656 words </span>
           <span class="more-meta"> 18 mins read </span>
         
       </div>
@@ -321,10 +321,10 @@
 <li><code>type</code>：SQL 查询优化的重要指标，表示执行计划用到的索引类型，性能由高到低依次为：<code>system</code> &gt; <code>const</code> &gt; <code>eq_ref</code> &gt; <code>ref</code> &gt; <code>range</code> &gt; <code>index</code> &gt; <code>ALL</code> （以下是常见的类型值，不是所有）：
 <ul>
 <li><code>system</code> 表示系统表查询或者 MyISAM、Memory 引擎表中只包含一条记录；</li>
-<li><code>const</code> 表示常量查询，通常主键索引或者唯一索引的单表等值匹配查询就是这种类型，比如上述第一个 <code>explain</code> 语句得到的执行计划就是；</li>
-<li><code>eq_ref</code> 在连接查询中，被驱动表的主键索索引或唯一索引等值匹配会使用这个类型，后面我们介绍连接查询时会演示；</li>
+<li><code>const</code> 表示常量查询，通常主键索引或者唯一索引的单表等值匹配查询就是这种类型；</li>
+<li><code>eq_ref</code> 在连接查询中，被驱动表的主键索索引或唯一索引等值匹配会使用这个类型；</li>
 <li><code>ref</code> 通常对应二级索引的等值匹配查询，比如 b = 10000；</li>
-<li><code>range</code> 表示范围匹配，比如上述第二个 <code>explain</code> 语句得到的执行计划就是；</li>
+<li><code>range</code> 表示范围匹配；</li>
 <li><code>index</code> 表示索引树扫描，通常 count 查询会应用这个计划；</li>
 <li><code>ALL</code> 表示全表扫描，性能最差，通过对于没有设置索引的列进行过滤就会进行全表扫描。</li>
 </ul>
