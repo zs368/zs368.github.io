@@ -49,7 +49,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-10-29T00:41:20+08:00" />
 <meta itemprop="dateModified" content="2020-10-29T00:41:20+08:00" />
-<meta itemprop="wordCount" content="456">
+<meta itemprop="wordCount" content="486">
 
 
 
@@ -127,7 +127,7 @@
             <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             <a href="/categories/%E5%9D%91/"> 坑 </a>
             </div>
-          <span class="more-meta"> 456 words </span>
+          <span class="more-meta"> 486 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -257,6 +257,7 @@ PHP_FPM_INSTALL_XDEBUG=true
 <li>选择 CLI Interpreter</li>
 <li>没有对应的就新增，从docker中选择workspace</li>
 <li>选择 PHP executable，测试OK</li>
+<li>路径映射要填</li>
 </ol>
 </li>
 <li>run &gt; edit configurations
@@ -268,6 +269,9 @@ PHP_FPM_INSTALL_XDEBUG=true
 </li>
 <li>run &gt; 选取刚才配置的（cli）&gt; 点击 Debug</li>
 </ol>
+<blockquote>
+<p>出现 <code>php_network_getaddresses</code> 错误时，可以将 <code>.env</code> 中的 DB_HOST 修改为 <code>host.docker.internal</code> 血泪经验啊 😞</p>
+</blockquote>
 </li>
 </ul>
 <h3 id="postman">Postman</h3>
